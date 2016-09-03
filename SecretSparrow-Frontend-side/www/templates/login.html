@@ -1,0 +1,42 @@
+<ion-modal-view>
+  
+  
+  <ion-content>
+    <h1 id="loginTitle" class="center">SIGN IN</h1>
+    <form ng-submit="doLogin()" id="backgroundLoginForm">
+      <div class="list" >
+        
+        
+        <label class="item item-input item-stacked-label top20">
+          <h2 class="centerH2">E-MAIL ADDRESS</p>
+          <input type="email" ng-model="loginData.username">
+        </label>
+
+        <label class="item item-input item-stacked-label top20 bot20">
+          <h2 class="centerH2">PASSWORD</h2>
+          
+          <input type="password" ng-model="loginData.password">
+          
+        </label>
+        
+      </div>
+    </form>
+    <div>
+      <div class="divButton">
+        <button class="button button-block button-assertive" id="submit" type="submit">SUBMIT</button>
+      </div>
+      <div class="divButton" id="forgotPassword">
+        <button class="button button-clear button-assertive" id="submit" type="submit">FORGOT PASSWORD</button> 
+      </div>
+      
+
+      
+      <hr>
+      <p id="dontHaveAccount">DON'T HAVE ACCOUNT?</p>
+      <div class="divButton loginSignUpButton">
+        <button class="button button-block button-assertive" type="submit" ng-click="doRegister()">SIGN UP</button>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-modal-view>

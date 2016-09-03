@@ -1,0 +1,155 @@
+/* In this file we have all of the file css*/
+
+
+/* universal style */
+
+.headerBar{
+	background-color: #ED5356; 
+	
+}
+
+
+
+.centerH2{
+	font-size: 22px !important;
+	color: #ED5356;
+	text-align: center;
+	
+
+}
+
+
+.divButton{
+	margin-left: 25%;
+	margin-right: 25%;
+	
+	width: 49%;
+}
+
+
+
+/* Style for starter.html */
+.registerButton{
+	position:absolute;
+	bottom:10%;
+	
+
+}
+
+.loginButton{
+	position:absolute;
+	bottom:20%;
+}
+
+
+
+#icon_title{
+	position: absolute;
+	margin-left: 10%;
+	margin-right: 10%;
+	top: 35%;
+	width: 80%;
+}
+
+/* Style for login.html */
+
+
+
+#loginTitle{
+	text-align: center;
+	margin-top: 50px;
+	color: black;
+}
+#register{
+	margin-top: 20px;
+	width: 200px;
+	text-align: center;
+}
+
+#backgroundLoginForm{
+	background: #D8D8D8;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+#backgroundLoginForm h2{
+	text-align: center;
+	
+}
+#backgroundLoginForm input{
+	background-color: #D8D8D8 !important;
+	text-align: center;
+	width: 60%;
+	margin-left: 20%;
+	margin-right:20%;
+	border-bottom: 1px solid #4D4D4D !important;
+
+
+	
+		
+}
+
+
+.top20{
+	margin-top: 20px;
+
+}
+.bot20{
+	margin-bottom: 20px;
+}
+#forgotPassword{
+	text-align: center;
+	width: 40%:
+	margin-left: 30%;
+	margin-right: 30%;
+
+}
+
+
+.centerH2{
+	font-size: 22px !important;
+	color: #ED5356;
+	text-align: center;
+	
+
+}
+.loginSignUpButton{
+	margin-top: 30px;
+}
+
+.inputCenter{
+	margin-left: 15%;
+	margin-right: 15%;
+	width: 70%;
+	text-align: left;
+
+}
+
+.submit{
+
+}
+
+#dontHaveAccount{
+	text-align: center;
+}
+
+/* css for registerRole.html    */
+.roles{
+	margin-left: 10%;
+	margin-right:10%;
+
+	
+}
+#roleCrowdie{
+	width: 80%;
+	height: 40%;
+}
+
+#roleBO{
+	width: 80%;
+	height: 40%;
+}
+
+#roleTitle{
+	font-size: 30px !important;
+	margin-top: 30px;
+}
