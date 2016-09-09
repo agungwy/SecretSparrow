@@ -264,6 +264,7 @@ class TwitterAPIController extends Controller
                     $temp1['id']=hash('crc32',$unique);
                     $temp1['handle']=strtolower($x);
                     $temp1['ids']=$id;
+                    $temp1['following_at']=$todos2->pluck('created_at')[0]; 
                     array_push($temp2,$temp1);
 //                    $num++;
                 }
@@ -275,5 +276,19 @@ class TwitterAPIController extends Controller
         // $temp['users']=$temp2; 
         return $temp2;  
   
+    }
+    public function refreshDatabase(Request $request){
+        $datas=$request->all();
+        foreach($datas as $data){
+            $todos=SentFollowingRequestModel::where('handle',$data['handle'])
+                                            ->where('twitter_id',$data['ids'])
+                                            ->where('followed_back',false);
+//                                            ->where('created_at',$data['following_at']);
+            if(count($todos->get())>0){
+                $todos->update(['followed_back'=>true]);
+            } 
+        }
+        return response()->json(["message"=>"Update Received","users"=>$data],201);
+
     }
 }

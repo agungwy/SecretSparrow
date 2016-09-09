@@ -52,7 +52,7 @@ class TwitterAuthController extends Controller
                   ->where('access_token_secret','=',$accessTokenSecret);
             if(count($todos->get())==0){
                 //existing user with different token, update them
-                $todos->update(["access_token"=>$access_token,"access_token_secret"=>$accessTokenSecret]);
+                $todos->update(["access_token"=>$accessToken,"access_token_secret"=>$accessTokenSecret]);
             }
         }
         

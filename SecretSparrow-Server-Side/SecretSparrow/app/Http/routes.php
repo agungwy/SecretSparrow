@@ -24,9 +24,10 @@ Route::get('home', array('as' => 'home', 'uses' => function(){
 
 Route::get('api/requests/all','TwitterAPIController@refreshStatus');
 Route::get('api/requests/sent','TwitterAPIController@getFriendshipsStatus');
+Route::put('api/requests/update','TwitterAPIController@refreshDatabase');
 Route::post('api/follow','TwitterAPIController@follow');//,'middleware'=>'auth:api']);
 Route::post('api/unfollow','TwitterAPIController@unfollow');//,'middleware'=>'auth:api']);
 Route::get('api/followers','TwitterAPIController@getFollowers');//,'middleware'=>'auth:api']);
 Route::get('api/friends','TwitterAPIController@getFollowing');
-Route::post('api/register','Auth\RegisterController@postRegister');
+Route::post('api/register','Auth\AuthController@postRegister');
 //Route::get('api/access_token','Auth\RegisterController@getPersonalAccessToken');
