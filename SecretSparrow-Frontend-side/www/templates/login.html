@@ -1,8 +1,8 @@
-<ion-modal-view name="login">
+<ion-modal-view name="login" id="login">
   
   
   <ion-content>
-    <h1 id="loginTitle" class="center">SIGN IN</h1>
+    <h1 id="loginTitle" class="centerTitle">SIGN IN</h1>
     <form ng-submit="doLogin()" id="backgroundLoginForm">
       <div class="list" >
         
@@ -23,10 +23,10 @@
     </form>
     <div>
       <div class="divButton">
-        <button class="button button-block button-assertive" id="submit" type="submit">SUBMIT</button>
+        <button class="button button-block button-assertive roundButton" id="submit" ng-click="login()" type="submit">SUBMIT</button>
       </div>
       <div class="divButton" id="forgotPassword">
-        <button class="button button-clear button-assertive" id="submit" type="submit">FORGOT PASSWORD</button> 
+        <button class="button button-clear button-assertive roundButton" id="submit" type="submit">FORGOT PASSWORD</button> 
       </div>
       
 
@@ -34,7 +34,7 @@
       <hr>
       <p id="dontHaveAccount">DON'T HAVE ACCOUNT?</p>
       <div class="divButton loginSignUpButton">
-        <button class="button button-block button-assertive" type="submit" ui-sref="register">REGISTER</button>
+        <button class="button button-block button-assertive roundButton" type="submit" ui-sref="register">REGISTER</button>
       </div>
     </div>
 

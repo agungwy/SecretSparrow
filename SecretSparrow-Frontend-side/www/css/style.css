@@ -2,10 +2,23 @@
 
 
 /* universal style */
+/* Design color
+	red = "#ED5456"
+	LIGHT GRAY = "#D8D8D8"
+	WHITE = "#FFFFFF"
+	DARK GRAY = "#4D4D4D"
+*/
 
-.headerBar{
-	background-color: #ED5356; 
-	
+.nav-bar-block, .bar {
+  background-color: #ED5356 !important;
+}
+
+.title-image{
+	margin-left: 30%;
+	margin-right: 50%;
+	margin-bottom: 10px;
+	width: 20%;
+	height: 50px;
 }
 
 .top20{
@@ -29,6 +42,11 @@
 	color: #ED5356;
 	text-align: center;
 	
+}
+.centerTitle{
+	text-align: center;
+	margin-top: 50px !important;
+	color: black;
 
 }
 
@@ -36,43 +54,33 @@
 .divButton{
 	margin-left: 25%;
 	margin-right: 25%;
-	
-	width: auto;
+	width: 49%;
 }
 
+.roundButton{
+	border-radius:100px 100px 100px 100px;
+
+}
 
 
 /* Style for starter.html */
 .starterButton{
-	position: absolute;
-	bottom:10%;
+	
+	margin-top:30%;
 }
 
 
 
 
 #icon_title{
-	position: absolute;
+	
 	margin-left: 10%;
 	margin-right: 10%;
-	top: 35%;
+	margin-top: 50%;
 	width: 80%;
 }
 
 /* Style for login.html */
-
-
-
-#loginTitle{
-	text-align: center;
-	margin-top: 50px;
-	color: black;
-}
-#register{
-	margin-top: 20px;
-	width: 200px;
-	text-align: center;
-}
 
 #backgroundLoginForm{
 	background: #D8D8D8;
@@ -90,13 +98,8 @@
 	margin-left: 20%;
 	margin-right:20%;
 	border-bottom: 1px solid #4D4D4D !important;
-
-
-	
 		
 }
-
-
 
 #forgotPassword{
 	text-align: center;
@@ -107,13 +110,6 @@
 }
 
 
-.centerH2{
-	font-size: 22px !important;
-	color: #ED5356;
-	text-align: center;
-	
-
-}
 .loginSignUpButton{
 	margin-top: 30px;
 }
@@ -122,7 +118,7 @@
 	margin-left: 15%;
 	margin-right: 15%;
 	width: 70%;
-	text-align: left;
+	text-align: center;
 
 }
 
@@ -132,6 +128,35 @@
 
 #dontHaveAccount{
 	text-align: center;
+}
+
+/* css for register.html */
+
+.spacer{
+	width: 300px; height: 0px;
+}
+.registerText{
+	color:#ED5356;font-weight:50%;text-align:center;
+}
+/*.inputRegister{
+	border-bottom-width:1px; 
+	border-style:solid;margin:auto;  
+	background-color:#D8D8D8;
+}*/
+#backgroundRegisterForm input{
+	background-color: #D8D8D8 !important;
+	
+	width: 60%;
+	margin-left: 20%;
+	margin-right:20%;
+	border-bottom: 1px solid #4D4D4D !important;
+		
+}
+#backgroundRegisterForm{
+	background: #D8D8D8;
+	margin-top: 40px;
+	width: 100%;
+	margin-bottom: 40px;
 }
 
 /* css for registerRole.html    */

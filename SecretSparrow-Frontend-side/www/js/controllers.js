@@ -141,6 +141,30 @@ app.controller('ChooseCategoriesCtrl', function($scope) {
   
 });
 
+app.controller('CrowdieHomeCtrl', function ($scope, $stateParams) {
+  
+});
+
+app.controller('LoginCtrl', function ($scope, $stateParams, $state) {
+  $scope.loginData = {
+    username: '',
+    password: ''
+  };
+  $scope.login = function() {
+    console.log($scope.loginData.username);
+    if($scope.loginData.username=='crowdie'){
+      $state.go('menu.crowdieHome');
+    }  
+    if($scope.loginData.username=='businessOwner'){
+      $state.go('menu.boHome');
+    }
+    else{
+      $state.go('menu.boHome');
+    }
+  }
+  
+
+});
 //   // Form data for the login modal
 //   $scope.loginData = {};
 

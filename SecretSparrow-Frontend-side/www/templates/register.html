@@ -1,15 +1,47 @@
-<ion-view view-title="Register">
-  <ion-content>
-  	
-    
-    <h1>Still in Progress</h1>
-    
+<ion-view id="register">
+    <ion-content>
+        <h1 id="registerTitle" class="centerTitle">REGISTER</h1>
+        
+            
 
-	  
-	<div class ="divButton">  
-	  <button class="button button-block button-assertive" type="submit" ui-sref="registerRole" id="register">CONTINUE</button>
-	</div>        
-	
-     
-  </ion-content>
+        <form id="backgroundRegisterForm">
+
+            <!-- <div class="spacer" style="width: 300px; height: 0px;"></div> -->
+            <div class="list">
+                <h4 class = "centerH2">FULL NAME</h4>
+                <div>
+                    <input type="text" placeholder="" class="inputRegister">
+                    <br>
+                </div>
+                <h4 class = "centerH2">EMAIL</h4>
+                <div>
+                    <!--<class="item item-input input" name="confirmPassword">-->
+                    <input type="email" placeholder="" class="inputRegister">
+                    <br>
+                </div>
+                <h4 class = "centerH2">PASSWORD</h4>
+                <div>
+                    <!--<class="item item-input input" name="password">-->
+                    <input type="password" placeholder="" class="inputRegister">
+                    <br>
+                </div>
+                <h4 class = "centerH2">CONFIRM PASSWORD</h4>
+                <div>
+                    <!--<class="item item-input input" name="confirmPassword">-->
+                    <input type="password" placeholder="" class="inputRegister">
+                    <br>
+                </div>
+            </div>
+        </form>
+
+            
+        <div></div>
+        <!-- <div class="spacer" style="width: 320px; height: 9px;"></div> -->
+        <div class="divButton">
+            <button class="button button-assertive  button-block roundButton" ui-sref="registerRole">SUBMIT</button>
+        </div>
+        <div class="divButton">
+            <button class="button button-assertive  button-block roundButton" ui-sref="login">LOGIN</button>
+        </div>
+    </ion-content>
 </ion-view>

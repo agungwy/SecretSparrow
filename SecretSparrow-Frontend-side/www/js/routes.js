@@ -32,58 +32,89 @@ angular.module('starter.routes', [])
   })
   .state('login', {
     url: '/login',
-    templateUrl: 'templates/login.html'
+    templateUrl: 'templates/login.html',
+    controller: 'LoginCtrl'
 
   })
   
+  // .state('crowdieHome', {
+  //   url: '/crowdieHome',
+  //   templateUrl: 'templates/crowdieHome.html'
+  // })
+
+  // .state('boHome', {
+  //   url: '/boHome',
+  //   templateUrl: 'templates/boHome.html'
+  // })
     
 
 
-   	.state('menu', {
-   		url: '/menu',
-   		abstract: true,
-   		templateUrl: 'templateUrl/menu.html',
-   		controller: 'AppCtrl'
+ 	.state('menu', {
+ 		url: '/menu',
+ 		abstract: true,
+ 		templateUrl: 'templates/menu.html',
+ 		
 
-   	})
+ 	})
   
-
-  .state('menu.search', {
-    url: '/search',
+  .state('menu.crowdieHome', {
+    url: '/menu_crowdieHome',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/crowdieHome.html',
+        AppCtrl: 'CrowdieHomeCtrl'
       }
     }
+    
   })
 
-  .state('menu.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('menu.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
-
-  .state('menu.single', {
-    url: '/playlists/:playlistId',
+  .state('menu.boHome', {
+    url: '/menu_boHome',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/boHome.html'
       }
     }
+    
   })
+
+  // .state('menu.search', {
+  //   url: '/search',
+  //   views: {
+  //     'menuContent': {
+  //       templateUrl: 'templates/search.html'
+  //     }
+  //   }
+  // })
+
+
+  // .state('menu.browse', {
+  //     url: '/browse',
+  //     views: {
+  //       'menuContent': {
+  //         templateUrl: 'templates/browse.html'
+  //       }
+  //     }
+  //   })
+  //   .state('menu.playlists', {
+  //     url: '/playlists',
+  //     views: {
+  //       'menuContent': {
+  //         templateUrl: 'templates/playlists.html',
+  //         controller: 'PlaylistsCtrl'
+  //       }
+  //     }
+  //   })
+
+  // .state('menu.single', {
+  //   url: '/playlists/:playlistId',
+  //   views: {
+  //     'menuContent': {
+  //       templateUrl: 'templates/playlist.html',
+  //       controller: 'PlaylistCtrl'
+  //     }
+  //   }
+  // })
   
   
   // if none of the above states are matched, use this as the fallback
