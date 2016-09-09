@@ -14,13 +14,15 @@ angular.module('starter.routes', [])
   // register linkage
   .state('register', {
     url: '/register',
-    templateUrl: 'templates/register.html'
+    templateUrl: 'templates/register.html',
+    controller: 'RegisterCtrl'
         
   })
   // choose role in registration
   .state('registerRole', {
     url: '/registerRole',
-    templateUrl: 'templates/registerRole.html'
+    templateUrl: 'templates/registerRole.html',
+    controller: 'RegisterRoleCtrl'
      
   })
   .state('chooseCategories', {

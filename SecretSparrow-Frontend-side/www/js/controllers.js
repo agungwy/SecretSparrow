@@ -1,4 +1,4 @@
-(function() {
+
 
 
 
@@ -15,7 +15,7 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
 
 });
 
-app.controller('ChooseCategoriesCtrl', function($scope) {
+app.controller('ChooseCategoriesCtrl', function($scope, $state, RegisterService) {
   $scope.iconColor1={"color":"black"};
   $scope.iconColor2={"color":"black"};
   $scope.iconColor3={"color":"black"};
@@ -138,6 +138,22 @@ app.controller('ChooseCategoriesCtrl', function($scope) {
       }
    
   };
+
+  $scope.submit = function() {
+    var role = RegisterService.getRole();
+    console.log(RegisterService.getRole());
+    if(role==1){
+      console.log(RegisterService.getRole());
+      $state.go('menu.crowdieHome');
+    }
+    else{
+      console.log(RegisterService.getRole());
+      $state.go('menu.boHome');
+    }
+
+  };
+
+  
   
 });
 
@@ -147,24 +163,53 @@ app.controller('CrowdieHomeCtrl', function ($scope, $stateParams) {
 
 app.controller('LoginCtrl', function ($scope, $stateParams, $state) {
   $scope.loginData = {
-    username: '',
-    password: ''
+    username: "",
+    password: ""
   };
+  console.log($scope.loginData);
+  console.log($scope.loginData.username);
   $scope.login = function() {
+    console.log($scope.loginData);
     console.log($scope.loginData.username);
-    if($scope.loginData.username=='crowdie'){
+    if($scope.loginData.username=="crowdie"){
+      console.log('crowdie');
       $state.go('menu.crowdieHome');
     }  
-    if($scope.loginData.username=='businessOwner'){
+    else if($scope.loginData.username=="businessOwner"){
+      console.log('bo');
       $state.go('menu.boHome');
     }
     else{
-      $state.go('menu.boHome');
+      console.log('else');
+      $state.go('login');
     }
   }
   
 
 });
+
+app.controller('RegisterCtrl', function($scope, $state, RegisterService) {
+  
+
+});
+
+app.controller('RegisterRoleCtrl', function($scope, $state, RegisterService) {
+  $scope.chooseCrowdie = function() {
+    console.log('pass choose role');
+    
+    RegisterService.changeRole(1);
+    console.log(RegisterService.getRole());
+  };
+
+  $scope.chooseBO = function() {
+    console.log('pass choose role');
+    
+    RegisterService.changeRole(2);
+    console.log(RegisterService.getRole());
+  };
+
+});
+
 //   // Form data for the login modal
 //   $scope.loginData = {};
 
@@ -214,4 +259,3 @@ app.controller('LoginCtrl', function ($scope, $stateParams, $state) {
 // app.controller('PlaylistCtrl', function($scope, $stateParams) {
 // });
 
-}());
