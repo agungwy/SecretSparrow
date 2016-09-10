@@ -29,14 +29,35 @@ angular.module('starter.routes', [])
     url: '/chooseCategories',
     templateUrl: 'templates/chooseCategories.html',
     controller: 'ChooseCategoriesCtrl'  
-    
-    
   })
+
+ 
+
+ 
+    
+  
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
 
+  })
+
+  .state('registerSuggestedCrowdie', {
+    url: '/registerSuggestedCrowdie',
+    templateUrl: 'templates/registerSuggestedCrowdie.html'
+
+  })
+
+  .state('registerDescribeBO',  {
+    url: '/registerDescribeBO',
+    templateUrl: 'templates/registerDescribeBO.html'
+
+  })
+
+  .state('connectToTwitter', {
+    url: '/connectToTwitter',
+    templateUrl: 'templates/connectToTwitter.html'
   })
   
   // .state('crowdieHome', {
@@ -58,6 +79,41 @@ angular.module('starter.routes', [])
  		
 
  	})
+   .state('menu.crowdieWorking', {
+    url: '/menu.crowdieWorking',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/crowdieWorking.html',
+        controller: 'CrowdieWorkingCtrl'
+      }
+    }
+    
+    
+    
+   
+  })
+
+    .state('menu.companyProfile', {
+    url: '/menu.companyProfile',
+    views: {
+      'menuContent':{
+      templateUrl: 'templates/companyProfile.html'  
+      }
+        
+    }
+    
+  })
+
+  .state('menu.companyProfileAccepted', {
+    url: '/menu.companyProfileAccepted',
+    views: {
+      'menuContent':{
+      templateUrl: 'templates/companyProfileAccepted.html'  
+      }
+        
+    }
+    
+  })
   
   .state('menu.crowdieHome', {
     url: '/menu_crowdieHome',

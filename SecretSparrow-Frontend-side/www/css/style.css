@@ -13,6 +13,11 @@
   background-color: #ED5356 !important;
 }
 
+.centerImage{
+	margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 .title-image{
 	margin-left: 30%;
 	margin-right: 50%;
@@ -20,6 +25,14 @@
 	width: 20%;
 	height: 50px;
 }
+
+.img-circle {
+	border-radius: 50%;
+	height:75px;
+	width:75px;
+}
+
+
 
 .top20{
 	margin-top: 20px;
@@ -45,7 +58,7 @@
 }
 .centerTitle{
 	text-align: center;
-	margin-top: 50px !important;
+	margin-top: 20px !important;
 	color: black;
 
 }
@@ -54,7 +67,7 @@
 .divButton{
 	margin-left: 25%;
 	margin-right: 25%;
-	width: 49%;
+	width: 50%;
 }
 
 .roundButton{
@@ -74,12 +87,17 @@
 
 #icon_title{
 	
-	margin-left: 10%;
-	margin-right: 10%;
+	
 	margin-top: 50%;
-	width: 79%;
+	
 }
 
+#icon_title img{
+	margin-left: 10%;
+	margin-right: 10%;
+	width: 79%;
+
+}
 /* Style for login.html */
 
 #backgroundLoginForm{
@@ -138,6 +156,11 @@
 .registerText{
 	color:#ED5356;font-weight:50%;text-align:center;
 }
+#haveAccount{
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
 /*.inputRegister{
 	border-bottom-width:1px; 
 	border-style:solid;margin:auto;  
@@ -193,8 +216,8 @@
 	margin-bottom: 20px;
 }
 #bodyChooseCategories{
-	margin-left: 7%;
-	margin-right: 7%;
+	/*margin-left: 7%;
+	margin-right: 7%;*/
 
 }
 
@@ -206,7 +229,7 @@
 }
 
 #bodyChooseCategories i{
-	color: black;
+	text-align: center;
 }
 
 #chooseCategoriesSubmit{
@@ -219,4 +242,84 @@
 .fa-5x{
 	font-size:70px;
 	text-align: center;
+}
+
+/*for home menu crowdieHome.html and boHome.html*/
+
+#findMoreCompaniesButton{
+	margin-right: 15%;
+	margin-left: 15%;
+	width: 70%;
+}
+.avatar{
+    margin-left:5%;
+    margin-right: 5%;
+    width: :90%;
+    margin-top: 20px;
+
+}
+.eachAvatar{
+    text-align:center;
+    margin-left:17px;
+}
+
+.section
+{float:left; width:50%;
+
+    
+}
+
+.box
+{display:block;
+padding-top:5px;
+    margin-left:5px;
+    margin-right:1px;
+    
+}
+
+
+.topRightContent {
+   border-left: 1px solid gray;
+   padding-top:5px;
+   padding-left:4px;
+   margin-left:3px;
+   
+}
+.bottomRightContent {
+   border-left: 1px solid gray;
+    padding-left:4px;
+   margin-left:3px;
+   
+}
+.utility
+{display:block;
+    
+    margin-left:4px;
+}
+
+/* css for companyProfile.html */
+
+
+
+#companyProfileName{
+	text-align: center;
+	font-size: 22px;
+	margin-top: 20px;
+}
+
+.companyProfilePictureDiv{
+	margin-top: 20px;
+}
+
+/*  for suggestion work in register registerSuggestedCrowdie*/
+#suggestedWorkRegister{
+	margin-right: 10%;
+	margin-left: 10%;
+	width: 80%;
+	margin-top: 30px;
+}
+.imageSuggestionCrowdie{
+	/*margin-left: 25%;
+	margin-right: 25%;
+	width: 50%;*/
 }

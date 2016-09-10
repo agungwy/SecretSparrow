@@ -21,42 +21,6 @@
 
         </div>
 
-        <style>
-        .section
-        {float:left; width:50%;
-        
-            
-        }
-        
-        .box
-        {display:block;
-        padding-top:5px;
-            margin-left:5px;
-            margin-right:1px;
-            
-        }
-        
-        
-        .topRightContent {
-           border-left: 1px solid gray;
-           padding-top:5px;
-           padding-left:4px;
-           margin-left:3px;
-           
-        }
-        .bottomRightContent {
-           border-left: 1px solid gray;
-            padding-left:4px;
-           margin-left:3px;
-           
-        }
-        .utility
-        {display:block;
-            
-            margin-left:4px;
-        }
-        </style>
-
 
     </div>
     <div>
@@ -69,8 +33,8 @@
                         <tr>
                             <td>
                                 <div class="eachAvatar">
-                                    <a href="#">
-                                        <img class="img-circle" src="https://lh4.googleusercontent.com/-uoR2ZCSA8VI/V8elfge6_9I/AAAAAAAAAD0/TDzyh9M_zPwiBldkMmeQCDnqyIzlFPtVACLIB/s203-k-no/">
+                                    <a ui-sref="menu.companyProfile">
+                                        <img class="img-circle centerImage" src="https://lh4.googleusercontent.com/-uoR2ZCSA8VI/V8elfge6_9I/AAAAAAAAAD0/TDzyh9M_zPwiBldkMmeQCDnqyIzlFPtVACLIB/s203-k-no/">
                                     </a>
                                     <p style="font-size:12px">
                                         <font color="white">WORKING
@@ -80,8 +44,8 @@
                             </td>
                             <td>
                                 <div class="eachAvatar">
-                                    <a href="#">
-                                        <img class="img-circle" src="https://lh3.googleusercontent.com/-Or10jKGeot4/AAAAAAAAAAI/AAAAAAAAG5E/4aBpiGWDirg/s0-c-k-no-ns/photo.jpg">
+                                    <a ui-sref="menu.companyProfile">
+                                        <img class="img-circle centerImage" src="https://lh3.googleusercontent.com/-Or10jKGeot4/AAAAAAAAAAI/AAAAAAAAG5E/4aBpiGWDirg/s0-c-k-no-ns/photo.jpg">
                                     </a>
 
                                     <p style="font-size:12px">
@@ -92,8 +56,8 @@
                             </td>
                             <td>
                                 <div class="eachAvatar">
-                                    <a href="#">
-                                        <img class="img-circle" src="https://lh6.googleusercontent.com/-LW9djoK42mc/AAAAAAAAAAI/AAAAAAAAAB8/fxvkQ2_GSdI/s0-c-k-no-ns/photo.jpg">
+                                    <a ui-sref="menu.companyProfile">
+                                        <img class="img-circle centerImage" src="https://lh6.googleusercontent.com/-LW9djoK42mc/AAAAAAAAAAI/AAAAAAAAAB8/fxvkQ2_GSdI/s0-c-k-no-ns/photo.jpg">
 
                                     </a>
 
@@ -110,8 +74,8 @@
                         <tr>
                             <td>
                                 <div class="eachAvatar">
-                                    <a href="#">
-                                        <img class="img-circle" src="http://www.newsroomdigital.com.au/wp-content/uploads/2016/05/default-600x400.jpg">
+                                    <a ui-sref="menu.companyProfile">
+                                        <img class="img-circle centerImage" src="http://www.newsroomdigital.com.au/wp-content/uploads/2016/05/default-600x400.jpg">
                                     </a>
                                     <p style="font-size:12px">
                                         <font color="white">MCDONALDS</font>
@@ -120,8 +84,8 @@
                             </td>
                             <td>
                                 <div class="eachAvatar">
-                                    <a href="#">
-                                        <img class="img-circle" src="https://lh6.ggpht.com/6yMSxzN389OKRG6iyAn58fZylJdWVxNLchTN-M4hf7xO4lATQgWMyA-Xj5aiA9OcOCc=w300">
+                                    <a ui-sref="menu.companyProfile">
+                                        <img class="img-circle centerImage" src="https://lh6.ggpht.com/6yMSxzN389OKRG6iyAn58fZylJdWVxNLchTN-M4hf7xO4lATQgWMyA-Xj5aiA9OcOCc=w300">
                                     </a>
 
 
@@ -133,8 +97,8 @@
                             </td>
                             <td>
                                 <div class="eachAvatar">
-                                    <a href="#">
-                                        <img class="img-circle" src="http://wallpaper.sc/en/iphone6plus/wp-content/uploads/2014/10/iphone6plus-2592x2592-wallpaper_00039.jpg">
+                                    <a ui-sref="menu.companyProfile">
+                                        <img class="img-circle centerImage" src="http://wallpaper.sc/en/iphone6plus/wp-content/uploads/2014/10/iphone6plus-2592x2592-wallpaper_00039.jpg">
 
 
                                     </a>
@@ -153,26 +117,9 @@
 
         </div>
 
-        <style>
-            .avatar{
-                margin-left:12px;
-            }
-            .eachAvatar{
-                text-align:center;
-                margin-left:17px;
-            }
-            .img-circle {
-            border-radius: 50%;
-            height:75px;
-            width:75px;
-        }
-        </style>
-
-
-
     </div>
-    <div>
-        <button style="font-size:14px;border-radius:100px 100px 100px 100px; margin-left:22%; display:inline-block; margin-bottom:7px;" class="button button-assertive submit_button">FIND MORE COMPANIES</button>
+    <div id="findMoreCompaniesButton">
+        <button class="button button-assertive button-block roundButton">FIND MORE COMPANIES</button>
 
     </div>
   </ion-content>

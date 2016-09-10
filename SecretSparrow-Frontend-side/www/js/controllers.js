@@ -144,7 +144,7 @@ app.controller('ChooseCategoriesCtrl', function($scope, $state, RegisterService)
     console.log(RegisterService.getRole());
     if(role==1){
       console.log(RegisterService.getRole());
-      $state.go('menu.crowdieHome');
+      $state.go('registerSuggestedCrowdie');
     }
     else{
       console.log(RegisterService.getRole());
@@ -161,6 +161,11 @@ app.controller('CrowdieHomeCtrl', function ($scope, $stateParams) {
   
 });
 
+app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $stateParams) {
+  $scope.goBack = function() {
+    $ionicHistory.goBack();
+  }
+});
 app.controller('LoginCtrl', function ($scope, $stateParams, $state) {
   $scope.loginData = {
     username: "",
@@ -171,11 +176,11 @@ app.controller('LoginCtrl', function ($scope, $stateParams, $state) {
   $scope.login = function() {
     console.log($scope.loginData);
     console.log($scope.loginData.username);
-    if($scope.loginData.username=="crowdie"){
+    if($scope.loginData.username=="crowdie@workingmouse.com"){
       console.log('crowdie');
       $state.go('menu.crowdieHome');
     }  
-    else if($scope.loginData.username=="businessOwner"){
+    else if($scope.loginData.username=="businessOwner@workingmouse.com"){
       console.log('bo');
       $state.go('menu.boHome');
     }
@@ -188,7 +193,35 @@ app.controller('LoginCtrl', function ($scope, $stateParams, $state) {
 
 });
 
-app.controller('RegisterCtrl', function($scope, $state, RegisterService) {
+app.controller('RegisterCtrl', function($scope,$http, $state, RegisterService) {
+  
+  // $scope.registerData = {
+  //   fullName:"",
+  //   email:"",
+  //   confirmPassword:"",
+  //   password:""
+
+  // };
+  // $scope.register = function() {
+  //   console.log($scope.registerData.email);
+  //   console.log($scope.registerData.fullName);
+  //   console.log($scope.registerData.password);
+  //   console.log($scope.registerData.confirmPassword);
+
+  //   $http({
+  //   method:'POST',
+  //   url:'https://incognito.uqcloud.net/api/register',
+  //   data:{"email":$scope.registerData.email,
+  //   "password":$scope.registerData.password,
+  //   "password_confirmation":$scope.registerData.confirmPassword,
+  //   "name":$scope.registerData.fullName}
+  // }).success(function(data,status,headers,config){
+  //   console.log(data);
+  //   $state.go('registerRole');
+  // }).error(function(data,status,headers,config){
+  //   console.log(data);
+  // });
+  // }
   
 
 });
