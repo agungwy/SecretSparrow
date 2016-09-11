@@ -10,7 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+// CORS
+ header('Access-Control-Allow-Origin: *');
+ header('Access-Control-Allow-Credentials: true');
+ header('Access-Control-Allow-Methods: POST,GET,PUT,DELETE');
+ header('Access-Control-Allow-Headers: Content-Type, Authorization');
+ 
 Route::get('/', function () {
     return view('welcome');
 });

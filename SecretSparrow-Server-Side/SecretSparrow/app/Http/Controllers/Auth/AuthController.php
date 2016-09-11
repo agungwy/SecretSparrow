@@ -68,6 +68,7 @@ class AuthController extends Controller
         }else{
             return response()->json(['message'=>'Not Found'],404);
         }
+    }
 
     /**
      * Create a new user instance after a valid registration.
