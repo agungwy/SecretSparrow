@@ -32,3 +32,5 @@ Route::get('api/friends','TwitterAPIController@getFollowing');
 Route::post('api/register','Auth\AuthController@postRegister');
 Route::put('api/role','Auth\AuthController@role');
 //Route::get('api/access_token','Auth\RegisterController@getPersonalAccessToken');
+Route::get('/api/categories', 'CategoryController@getCategory');
+Route::post('/api/categories', 'CategoryController@selectCategory');

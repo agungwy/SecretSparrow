@@ -1,3 +1,4 @@
+<!-- register page -->
 <ion-view id="register">
     <ion-content>
         <h1 id="registerTitle" class="centerTitle">REGISTER</h1>
@@ -10,25 +11,25 @@
             <div class="list">
                 <h4 class = "centerH2">FULL NAME</h4>
                 <div>
-                    <input type="text" placeholder="" class="inputRegister">
+                    <input type="text" placeholder="" ng-model="registerData.fullName" class="inputRegister">
                     <br>
                 </div>
                 <h4 class = "centerH2">EMAIL</h4>
                 <div>
                     <!--<class="item item-input input" name="confirmPassword">-->
-                    <input type="email" placeholder="" class="inputRegister">
+                    <input type="email" placeholder="" ng-model="registerData.email" class="inputRegister">
                     <br>
                 </div>
                 <h4 class = "centerH2">PASSWORD</h4>
                 <div>
                     <!--<class="item item-input input" name="password">-->
-                    <input type="password" placeholder="" class="inputRegister">
+                    <input type="password" placeholder="" ng-model="registerData.password" class="inputRegister">
                     <br>
                 </div>
                 <h4 class = "centerH2">CONFIRM PASSWORD</h4>
                 <div>
                     <!--<class="item item-input input" name="confirmPassword">-->
-                    <input type="password" placeholder="" class="inputRegister">
+                    <input type="password" placeholder="" ng-model="registerData.confirmPassword" class="inputRegister">
                     <br>
                 </div>
             </div>
@@ -38,10 +39,12 @@
         <div></div>
         <!-- <div class="spacer" style="width: 320px; height: 9px;"></div> -->
         <div class="divButton">
-            <button class="button button-assertive  button-block roundButton" ui-sref="registerRole">SUBMIT</button>
+            <button class="button button-assertive  button-block roundButton" ng-click="register()">SUBMIT</button>
         </div>
-        <div class="divButton">
-            <button class="button button-assertive  button-block roundButton" ui-sref="login">LOGIN</button>
+
+        <div class="divButton" id="haveAccount" >
+            <button class="button button-clear button-assertive" ui-sref="login">HAVE ACCOUNT?</button>
         </div>
+        
     </ion-content>
 </ion-view>
