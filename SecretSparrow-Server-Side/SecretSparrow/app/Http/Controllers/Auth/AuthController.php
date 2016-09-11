@@ -58,6 +58,16 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
     }
+    public function role(Request $request){
+        $data=$request->all();
+        $todos=User::find($data['user_id']);
+        if(count($todos)>0){
+            $todos->role=$data['role'];
+            $todos->save();
+            return response()->json(['message'=>'success'],201);
+        }else{
+            return response()->json(['message'=>'Not Found'],404);
+        }
 
     /**
      * Create a new user instance after a valid registration.

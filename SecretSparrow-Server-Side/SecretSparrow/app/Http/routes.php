@@ -30,4 +30,5 @@ Route::post('api/unfollow','TwitterAPIController@unfollow');//,'middleware'=>'au
 Route::get('api/followers','TwitterAPIController@getFollowers');//,'middleware'=>'auth:api']);
 Route::get('api/friends','TwitterAPIController@getFollowing');
 Route::post('api/register','Auth\AuthController@postRegister');
+Route::put('api/role','Auth\AuthController@role');
 //Route::get('api/access_token','Auth\RegisterController@getPersonalAccessToken');
