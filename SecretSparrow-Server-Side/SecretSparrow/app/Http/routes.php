@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('auth/twitter', 'TwitterAuthController@redirectToProvider');
+Route::get('auth/twitter', ['uses'=>'TwitterAuthController@redirectToProvider','middleware'=>'bo']);
 Route::get('auth/twitter/callback', 'TwitterAuthController@handleProviderCallback');
 
 Route::get('home', array('as' => 'home', 'uses' => function(){
@@ -33,9 +33,9 @@ Route::put('api/requests/update','TwitterAPIController@refreshDatabase');
 Route::post('api/follow','TwitterAPIController@follow');//,'middleware'=>'auth:api']);
 Route::post('api/unfollow','TwitterAPIController@unfollow');//,'middleware'=>'auth:api']);
 Route::get('api/followers','TwitterAPIController@getFollowers');//,'middleware'=>'auth:api']);
-Route::get('api/friends','TwitterAPIController@getFollowing');
+Route::get('api/friends',['uses'=>'TwitterAPIController@getFollowing','middleware'=>'crowdies']);
 Route::post('api/register','Auth\AuthController@postRegister');
-Route::put('api/role','Auth\AuthController@role');
+Route::put('api/role',['uses'=>'Auth\AuthController@role','middleware'=>'oauth']);
 //Route::get('api/access_token','Auth\RegisterController@getPersonalAccessToken');
 Route::get('/api/categories', 'CategoryController@getCategory');
 Route::post('/api/categories', 'CategoryController@selectCategory');
