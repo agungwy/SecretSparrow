@@ -11,11 +11,12 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $table='user';
+    protected $table='oauth_users';
     protected $primaryKey='user_id';
+    public $incrementing=false;
 
     protected $fillable = [
-        'name', 'email', 'password','user_id','role'
+        'name', 'email', 'password','user_id','role','created_at','updated_at'
     ];
 
     /**
