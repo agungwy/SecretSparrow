@@ -48,23 +48,16 @@ angular.module('starter.routes', [])
   // crowdie get suggestion of work in registration linkage
   .state('registerSuggestedCrowdie', {
     url: '/registerSuggestedCrowdie',
-    templateUrl: 'templates/registerSuggestedCrowdie.html'
+    templateUrl: 'templates/registerSuggestedCrowdie.html',
+    controller: 'RegisterSuggestedCrowdieCtrl'
 
   })
-
-
-  // business owner describe more of company linkage
-  .state('registerDescribeBO',  {
-    url: '/registerDescribeBO',
-    templateUrl: 'templates/registerDescribeBO.html'
-
-  })
-
 
   // business owner connect to twitter linkage
   .state('connectToTwitter', {
     url: '/connectToTwitter',
-    templateUrl: 'templates/connectToTwitter.html'
+    templateUrl: 'templates/connectToTwitter.html',
+    controller: 'ConnectToTwitterCtrl'
   })
   
     
@@ -74,6 +67,7 @@ angular.module('starter.routes', [])
  		url: '/menu',
  		abstract: true,
  		templateUrl: 'templates/menu.html',
+    controller: 'MenuCtrl'
  		
 
  	})
@@ -94,7 +88,8 @@ angular.module('starter.routes', [])
     url: '/menu.companyProfile',
     views: {
       'menuContent':{
-      templateUrl: 'templates/companyProfile.html'  
+      templateUrl: 'templates/companyProfile.html',
+      controller: 'CompanyProfileCtrl'
       }   
     }
   })
@@ -104,7 +99,8 @@ angular.module('starter.routes', [])
     url: '/menu.companyProfileAccepted',
     views: {
       'menuContent':{
-      templateUrl: 'templates/companyProfileAccepted.html'  
+      templateUrl: 'templates/companyProfileAccepted.html',  
+      controller: 'CompanyProfileAcceptedCtrl'
       }
         
     }
@@ -117,7 +113,7 @@ angular.module('starter.routes', [])
     views: {
       'menuContent': {
         templateUrl: 'templates/crowdieHome.html',
-        AppCtrl: 'CrowdieHomeCtrl'
+        controller: 'CrowdieHomeCtrl'
       }
     }
     
@@ -128,7 +124,8 @@ angular.module('starter.routes', [])
     url: '/menu_boHome',
     views: {
       'menuContent': {
-        templateUrl: 'templates/boHome.html'
+        templateUrl: 'templates/boHome.html',
+        controller: 'BoHomeCtrl'
       }
     }
     

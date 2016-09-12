@@ -4,11 +4,31 @@ var app= angular.module('starter.services', [])
 // data for user role 
 app.factory('RegisterService', function() {
 
-	var role = 0;
+	var role = "";
 
-	var changeRole = function(x) {
-		role = x;
+	var userId="";
+
+	var addCategories = function(list) {
+
+		$http({
+			method:'POST',
+			url: 'https://incognito.uqcloud.net/api/categories',
+			data: list
+		}).success(function(data, status, headers,config){
+			console.log(data);
+			
+		})
 	};
+
+	var changeRole = function(new_role){
+		role = new_role;
+	}
+
+	var setId = function(id){
+		userId = id;
+	}
+
+
 
 	var getRole = function(){
 		return role;
@@ -19,4 +39,5 @@ app.factory('RegisterService', function() {
 	getRole: getRole
 	};
 });
+
 
