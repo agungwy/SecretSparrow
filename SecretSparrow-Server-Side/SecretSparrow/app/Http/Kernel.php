@@ -49,8 +49,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'crowdies' => \App\Http\Middleware\Crowdies::class,
-        'bo' => \App\Http\Middleware\BO::class,
-        'oauth' => \App\Http\Middleware\OAuthMiddleware::class,
+        'crowdies' => \App\Http\Middleware\Crowdies::class, //register the middleware for Crowdies
+        'bo' => \App\Http\Middleware\BO::class, //register the middleware for BO
+        'oauth' => \App\Http\Middleware\OAuthMiddleware::class, //register the middleware for OAuthMiddleware
     ];
 }

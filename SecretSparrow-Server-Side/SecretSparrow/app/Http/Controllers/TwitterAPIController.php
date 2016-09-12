@@ -97,6 +97,7 @@ class TwitterAPIController extends Controller
         $temp=array();
         $temp1=array();
         foreach($results['users'] as $result){
+            //look for verified users from Twitter as high profiler
             if($result['verified']==true){
                     array_push($temp1,$result);          
             }
@@ -105,7 +106,7 @@ class TwitterAPIController extends Controller
         return $temp;  
     }
     public function follow(Request $request){
-//        for getting the list of specfic user's friends (declared as screen_name)
+//        for following someone in Twitter with screen_name and handle (business owner's username) as params
         $data= $request->all();
         $url = 'https://api.twitter.com/1.1/friendships/create.json';
         $postfields = array(
@@ -120,7 +121,7 @@ class TwitterAPIController extends Controller
         $results = $twitter->buildOauth($url, $requestMethod)
                        ->setPostfields($postfields)
                        ->performRequest(); 
-
+        //store to the database the work of the crowdies
         SentFollowingRequestModel::create([
                 'crowdies_id'=>$data['user_id'],
                 'handle'=>$data['handle'],
@@ -137,7 +138,7 @@ class TwitterAPIController extends Controller
         return $results;
     }
     public function unfollow(Request $request){
-//        for getting the list of specfic user's friends (declared as screen_name)
+//        for unfollowing someone in Twitter with screen_name and handle (business owner's username) as params
         $data= $request->all();
         $url = 'https://api.twitter.com/1.1/friendships/destroy.json';
         $postfields = array(
@@ -151,6 +152,7 @@ class TwitterAPIController extends Controller
         $results = $twitter->buildOauth($url, $requestMethod)
                        ->setPostfields($postfields)
                        ->performRequest();  
+        //delete from the database if the crowdies decide to unfollow a specific accounts
         $todos = SentFollowingRequestModel::where('crowdies_id',$data['user_id'])
                                            ->where('handle',$data['handle'])
                                            ->where('screen_name',$data['screen_name']);
@@ -158,7 +160,7 @@ class TwitterAPIController extends Controller
         return $results;
     }
     public function getFriendshipsStatus(Request $request){
-//        for getting the list of followers for specfic user (declared as screen_name)
+//        for getting the list of followings with date as the duration. 
         $data= $request->all();
         
         $todos2P= SentFollowingRequestModel::where('crowdies_id',$data['user_id']);
@@ -219,12 +221,12 @@ class TwitterAPIController extends Controller
             
     }
     public function refreshStatus(Request $request){
-//        for getting the list of followers for specfic user (declared as screen_name)
+//        this method should be called by webhook. It will poll this API and search for new entries.
         $data= $request->all();
         $url = 'https://api.twitter.com/1.1/followers/ids.json';
         
         $requestMethod = 'GET';
-
+        // get the whole business owners' twitter's account and check for the followers. It should be not followed_back yet.
         $getBOInWorks=SentFollowingRequestModel::where('followed_back',false)->get();
 
         $tmp=array();
@@ -245,6 +247,7 @@ class TwitterAPIController extends Controller
             $todos= TwitterModel::find($x);
             $getfield = '?screen_name='.$x.'&skip_status=1&count=20';
         //     // echo $todos['access_token'];
+            //this will retrieve a followers of a specific account
             $twitter = new TwitterAPIExchange($this->settings($todos['access_token'],$todos['access_token_secret']));
             $results = $twitter->setGetfield($getfield)
                                ->buildOauth($url, $requestMethod)
@@ -278,6 +281,7 @@ class TwitterAPIController extends Controller
   
     }
     public function refreshDatabase(Request $request){
+        // this function is for refreshing the database followed_back status. This function will be called from webhook service
         $datas=$request->all();
         foreach($datas as $data){
             $todos=SentFollowingRequestModel::where('handle',$data['handle'])

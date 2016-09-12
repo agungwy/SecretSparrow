@@ -20,7 +20,7 @@ class Crowdies
 //        return $next($request);
         $bridgedRequest  = Request::createFromRequest($request);
         $bridgedResponse = new Response();
-        $scopeRequired='crowdies';
+        $scopeRequired='crowdies'; //business owner role only
         if (App::make('oauth2')->verifyResourceRequest($bridgedRequest, $bridgedResponse,$scopeRequired)) {
       
             return $next($request);

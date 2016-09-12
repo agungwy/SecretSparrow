@@ -10,12 +10,14 @@ use App\CategoryUserModel;
 
 class CategoryController extends Controller
 {
-    //
-   public function getCategory(){
-	$categories = CategoryModel::all();
-	return $categories;
-	}
+    //this function is to retrieve the list of categories from the database
+  public function getCategory(){
+  	$categories = CategoryModel::all();
+  	return $categories; 
+  }
 
+  //for handling user's request on choosing interests or categories
+  //it accepts JSON array format.
   public function selectCategory(Request $request){
     $datas=$request->all();
     foreach($datas as $data){

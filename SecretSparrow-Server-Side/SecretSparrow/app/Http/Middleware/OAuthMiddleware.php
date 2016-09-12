@@ -20,6 +20,7 @@ class OAuthMiddleware
         $bridgedRequest  = Request::createFromRequest($request);
         $bridgedResponse = new Response();
         // $scopeRequired="bo";
+        //authenticated users only
         if (App::make('oauth2')->verifyResourceRequest($bridgedRequest, $bridgedResponse)) {
             return $next($request);
         }

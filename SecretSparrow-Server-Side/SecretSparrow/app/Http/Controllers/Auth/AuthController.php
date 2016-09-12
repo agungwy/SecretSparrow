@@ -58,6 +58,7 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
     }
+    //it is a function to choose role
     public function role(Request $request){
         $data=$request->all();
         $todos=User::find($data['user_id']);
@@ -85,6 +86,8 @@ class AuthController extends Controller
             'user_id' =>uniqid($data['email'],true),
         ]);
     }
+
+    //this is a function to handle the API request to make a new registration
     public function postRegister(Request $request)
     {
         $validator = $this->validator($request->all());

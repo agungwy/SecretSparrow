@@ -40,7 +40,7 @@ Route::put('api/role',['uses'=>'Auth\AuthController@role','middleware'=>'oauth']
 Route::get('/api/categories', 'CategoryController@getCategory');
 Route::post('/api/categories', 'CategoryController@selectCategory');
 
-
+//this bind the singleton object to the service (Register oauth2 to the Laravel service)
 App::singleton('oauth2', function() {
     
     $storage = new OAuth2\Storage\Pdo(array(
@@ -55,6 +55,7 @@ App::singleton('oauth2', function() {
     
     return $server;
 });
+//this route is for gaining the access token
 Route::post('oauth/token', function()
 {
     $bridgedRequest  = OAuth2\HttpFoundationBridge\Request::createFromRequest(Request::instance());
@@ -65,6 +66,7 @@ Route::post('oauth/token', function()
     return $bridgedResponse;
 });
 
+//this route is only for retreiving private data, such as user_id or scope
 Route::get('private', function()
 {
 	$bridgedRequest  = OAuth2\HttpFoundationBridge\Request::createFromRequest(Request::instance());

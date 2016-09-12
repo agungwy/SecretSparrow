@@ -14,14 +14,18 @@ class TwitterAuthController extends Controller
     //
     public function redirectToProvider()
     {
+        //this function will handle a redirection to Twitter for authentication
         return Socialite::driver('twitter')->redirect();
     }  
     public function handleProviderCallback()
     {
+        //this function will handle all the callback from the Twitter Authentication process.
         try {
+            //if authentication success
             $user = Socialite::driver('twitter')->user();
             
         } catch (Exception $e) {
+            //if it fails
             return redirect('auth/twitter');
         }
         
@@ -34,7 +38,7 @@ class TwitterAuthController extends Controller
         $accessTokenSecret = $user->tokenSecret; //to get token secret
         
         
-        
+        //check for the registered token in database
         $todos=TwitterModel::where('handle','=',$authUser->pluck('handle')[0]);
         
         if(count($todos->get())==0){
@@ -59,13 +63,14 @@ class TwitterAuthController extends Controller
 //        echo ($accessToken."<br>");
 //        echo ($accessTokenSecret."<br>");
 //        return redirect()->route('home');
-        
+        //do this for now
         return [
             "access_token"=>$accessToken,
             "token_secret"=>$accessTokenSecret,
             "auth_data"=>$authUser
         ];
     }
+    //this function will check if the authenticated twitter account is newly registered or not
     private function findOrCreateUser($twitterUser)
     {
         $authUser = TwitterAuthModel::where('twitter_id', $twitterUser->id)->first();
