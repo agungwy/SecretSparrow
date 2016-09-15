@@ -9,6 +9,9 @@ var app = angular.module('starter.controllers', [])
 // controller for starter.html
 app.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
 
+  localStorage.clear();
+  
+
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -232,12 +235,6 @@ app.controller('ChooseCategoriesCtrl', function($scope, $http, $state, RegisterS
   
 });
 
-// controller for crowdieHome.html
-
-app.controller('CrowdieHomeCtrl', function ($scope, $stateParams) {
-  
-});
-
 // controller for crowdieWorking.html
 app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $stateParams) {
   $scope.goBack = function() {
@@ -248,7 +245,7 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
 });
 
 //controller for login.html
-app.controller('LoginCtrl', function ($scope, $http, $stateParams, $state) {
+app.controller('LoginCtrl', function ($scope,$http, $stateParams, $state,$ionicPopup) {
   // variable for the login data
   $scope.loginData = {
     username: "",
@@ -256,9 +253,11 @@ app.controller('LoginCtrl', function ($scope, $http, $stateParams, $state) {
   };
   console.log($scope.loginData);
   console.log($scope.loginData.username);
+  console.log(localStorage);
 
   // function for getting the data from input and check it to the server
   $scope.login = function() {
+    
     console.log($scope.loginData);
     console.log($scope.loginData.username);
     $http({
@@ -277,12 +276,30 @@ app.controller('LoginCtrl', function ($scope, $http, $stateParams, $state) {
       localStorage.setItem('access_token', data.access_token);
       localStorage.setItem('refresh_token', data.refresh_token);
       localStorage.setItem('scope', data.scope);
-      if(data.scope=="crowdies"){
-        $state.go('menu.crowdieHome');
-      }
-      else{
-        $state.go('menu.boHome');
-      }
+      var config={
+        headers:{
+          "Authorization":"Bearer "+ data.access_token
+        }
+      };
+
+      $http.get("https://incognito.uqcloud.net/private",config)
+      .then(function(response){
+        console.log(response.data);
+        
+        localStorage.setItem("user_id",response.data.user_id);
+
+        // localStorage.setItem("email",response.data.username);
+        if(data.scope=="crowdies"){
+          $state.go('menu.crowdieHome', $stateParams, {notify: false});
+        }
+        else{
+          console.log('redirect');
+          // $state.transitionTo('menu.boHome', null, {'reload':true});
+          $state.go('menu.boHome');
+        }
+        
+      });
+      
 
     }).error(function(data,status,headers,config){
       console.log(data);
@@ -439,37 +456,231 @@ app.controller('RegisterRoleCtrl', function($scope, $state, $http, RegisterServi
 });
 
 // controller for connectToTwitter.html
-app.controller('ConnectToTwitterCtrl', function($scope, $state, $timeout){
-
-  $scope.connectTwitter = function(){
-    // var ref = window.open('https://incognito.uqcloud.net/auth/twitter', '_blank', 'location=yes');
-    // setTimeout(function() {
-    //   ref.close();
-      $state.go('chooseCategories');
-    // }, 5000);
-    // $timeout(function() {
-    //   ref.close();
-
-    // }, 1000);
-    // $state.go('chooseCategories');
+app.controller('ConnectToTwitterCtrl', function($scope, $http, $cordovaOauth,$ionicPopup, $state, $ionicPlatform, $ionicLoading, TwitterService){
+  $scope.show = function() {
+    $ionicLoading.show({
+      templateUrl: 'templates/loading.html'
+    });
   };
+  $scope.twitter=localStorage.getItem("STORAGE.TWITTER.KEY");
+  $scope.userID=localStorage.getItem("user_id");
+  $scope.hide = function(){
+        $ionicLoading.hide();
+  };
+  $scope.connectTwitter = function(){
+    console.log("clicked");
+    $scope.show($ionicLoading);
+    localStorage.removeItem("STORAGE.TWITTER.KEY");
+    $ionicPlatform.ready(function() {
+        console.log("platform");
+
+        if (TwitterService.isAuthenticated()) {
+            // $scope.showHomeTimeline();
+           var data={
+              "ss_user_id":localStorage.getItem("user_id"),
+              "twitter":JSON.parse(localStorage.getItem("STORAGE.TWITTER.KEY"))
+            };
+            
+            $http({
+              method:'POST',
+              url:'https://incognito.uqcloud.net/auth/twitter/callback',
+              data:data
+            }).success(function(data, status, headers,config){
+              console.log(data);
+              $state.go('chooseCategories');
+              $scope.hide($ionicLoading);
+            }).error(function(data, status, headers,config){
+              console.log(data);
+              try{
+                $scope.error=data.message;
+              }catch(err){
+                $scope.error=err;
+              }
+            });
+                
+            //   }
+            // });
+            // $state.go('chooseCategories');
+            console.log("authenticated");
+        } else {
+            TwitterService.initialize().then(function(result) {
+              console.log("init")
+                if(result === true) {
+                  var data={
+                    "ss_user_id":localStorage.getItem("user_id"),
+                    "twitter":JSON.parse(localStorage.getItem("STORAGE.TWITTER.KEY"))
+                  };
+                  
+                  $http({
+                    method:'POST',
+                    url:'https://incognito.uqcloud.net/auth/twitter/callback',
+                    data:data
+                  }).success(function(data, status, headers,config){
+                    console.log(data);
+                    $state.go('chooseCategories');
+                    $scope.hide($ionicLoading);
+                  }).error(function(data, status, headers,config){
+                    console.log(data);
+                    var popup = $ionicPopup.alert({
+                      title: data,
+                      template: "Please retry again",
+                      okType: 'button-assertive'
+                      });
+                    try{
+                      $scope.error=data.message;
+                    }catch(err){
+                      $scope.error=err;
+                    }
+                    // $scope.error=data;
+                  });
+                      // $state.go('chooseCategories');
+                  //   }
+                  // });
+
+                  
+                    // $scope.showHomeTimeline();
+                  console.log(true);
+                  console.log(result);
+                }
+            }, function(error){
+              $scope.hide($ionicLoading);
+              var popup = $ionicPopup.alert({
+              title: error,
+              template: "Please retry again",
+              okType: 'button-assertive'
+              });
+            });
+        }
+    });
+    
+    // // TwitterService.testTwitter();
+    // var api_key = "9uWtO2uAnwxzFhY3TafHF91M0"; //Enter your Consumer Key (API Key)
+    // var api_secret = "IRHZ5fawFHUkgrlkrBnBETDMNqgXxbhwN8di7BwXNnOiVPAY52"; // Enter your Consumer Secret (API Secret)
+    // console.log("twitterlogin function got called");
+    // $scope.show($ionicLoading);
+    // $cordovaOauth.twitter(api_key, api_secret).then(function(result) {
+    //   // var popup = $ionicPopup.alert({
+    //   // title: 'We already Synchronize your Twitter Account',
+    //   // okType: 'button-assertive'
+    //   // });
+    //   TwitterService.storeUserToken(result)
+    //   console.log(result); //ini hasilnya yg mana? denger suara gue? ga gw ga pake speaker
+    //   $scope.hide($ionicLoading);
+    //   $state.go("chooseCategories");
+      
+    // }, function(error) {
+    //   console.log(error);
+    //   $scope.hide($ionicLoading);
+    //   var popup = $ionicPopup.alert({
+    //   title: error,
+    //   template: "Please retry again",
+    //   okType: 'button-assertive'
+    //   });
+       
+    // });
+
+
+  };
+  
+  
+});
+
+// controller for crowdieHome.html
+
+app.controller('CrowdieHomeCtrl', function ($scope, $http, $stateParams) {
+    var userId=localStorage.getItem('user_id');
+    var access_token=localStorage.getItem('access_token');
+    var config={
+      headers:{
+        "Authorization":"Bearer "+ access_token
+      }
+    };
+
+    $http.get("https://incognito.uqcloud.net/api/user?user_id="+userId,config)
+    .then(function(response){
+      console.log(response.data);
+      $scope.name=response.data.name;
+    });
+  
 });
 
 // controller for boHome.html 
 
-app.controller('BoHomeCtrl', function($scope, $state){
+app.controller('BoHomeCtrl', function($scope, $http, $state, $ionicLoading){
+  
+  $scope.show = function() {
+    $ionicLoading.show({
+      templateUrl: 'templates/loading.html'
+    });
+  };
+  $scope.hide = function(){
+        $ionicLoading.hide();
+  };
+  console.log("not yet");
+  var userId=localStorage.getItem('user_id');
+  console.log(userId);
+  console.log("loading");
+  var access_token=localStorage.getItem('access_token');
+  var config={
+    headers:{
+      "Authorization":"Bearer "+ access_token
+    }
+  };
+  $scope.show($ionicLoading);
 
-});
 
-// controller for companyProfileAccepted.html
-app.controller('CompanyProfileAcceptedCtrl', function($scope, $state){
+  $http.get("https://incognito.uqcloud.net/api/user?user_id="+userId,config)
+  .then(function(response){
+    console.log(response.data);
+    console.log("almost");
+    localStorage.setItem("name",response.data.name);
+    localStorage.setItem("email",response.data.username);
+    $http.get("https://incognito.uqcloud.net/api/user/twitter?user_id="+userId,config)
+    .then(function(response){
+      console.log(response);
+      $scope.name=(response.data[0]).handle;
+      console.log('updated');
+      localStorage.setItem("twitter_id",(response.data[0]).twitter_id);
+      localStorage.setItem("handle",(response.data[0]).handle);
+      $scope.hide($ionicLoading);
+    }, function(error){
+    console.log('motherfucker failed');
+  });
+  }), function(error){
+    console.log('motherfucker');
+  };
 
 
 });
 
 // controller for companyProfile.html
-app.controller('CompanyProfileCtrl', function($scope, $state){
+app.controller('CompanyProfileCtrl', function($scope, $state, $ionicLoading){
   console.log($scope.companyProfileBody);
+  $scope.applyWork = true;
+  $scope.work=false;
+  $scope.show = function() {
+    $ionicLoading.show({
+      templateUrl: 'templates/loading.html'
+    });
+  };
+  $scope.hide = function(){
+        $ionicLoading.hide();
+  };
+  
+  $scope.applyJob = function(){
+    $scope.show($ionicLoading);
+    $scope.applyWork = false;
+    $scope.work=true;
+    $scope.hide($ionicLoading);
+
+  };
+  $scope.quitJob = function(){
+    $scope.show($ionicLoading);
+    $scope.applyWork = true;
+    $scope.work=false;
+    $scope.hide($ionicLoading);
+
+  };
 
 
 
@@ -478,14 +689,258 @@ app.controller('CompanyProfileCtrl', function($scope, $state){
 
 // controller for menu.html
 app.controller('MenuCtrl', function($scope, $state){
-
+  console.log('connect');
+  // $state.logout = function(){
+  //   console.log('succes');
+  //   localStorage.clear();
+  //   $state.go("starter");
+  // };
+  
 
 });
 
 // controller for registerSuggestedCrowdie.html
 
-app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state){
+app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state, $http, $ionicLoading){
+  $scope.bo1 = {"border": "5px solid white"};
+  $scope.bo2 = {"border": "5px solid white"};
+  $scope.bo3 = {"border": "5px solid white"};
+  $scope.bo4 = {"border": "5px solid white"};
+  $scope.bo5 = {"border": "5px solid white"};
+  $scope.bo6 = {"border": "5px solid white"};
+
+  $scope.companies1 = {};
+  $scope.companies2 = {};
+  $scope.companies3 = {};
+  $scope.companies4 = {};
+  $scope.companies5 = {};
+  $scope.companies6 = {};
 
 
+  
+
+  $scope.show = function() {
+    $ionicLoading.show({
+      templateUrl: 'templates/loading.html'
+    });
+  };
+  $scope.hide = function(){
+        $ionicLoading.hide();
+  };
+  var list = [];
+  $scope.show($ionicLoading);
+  $http({
+      method:'GET',
+      url:'https://incognito.uqcloud.net/api/recommended?user_id='+localStorage.getItem('user_id'),
+      
+  }).success(function(data, status, headers, config){
+    console.log(data);
+    console.log("passing");
+    // console.log(data.splice(0,1).name);
+    // console.log(data.splice(0,1));
+    var x = data.length;
+
+    $scope.companies1 = data[0];
+    $scope.companies2 = data[1];
+    $scope.companies3 = data[2];
+    $scope.companies4 = data[3];
+    $scope.companies5 = data[4];
+    $scope.companies6 = data[5];
+    console.log($scope.companies1.name);
+    console.log($scope.companies2);
+    console.log($scope.companies3);
+    console.log($scope.companies4);
+    console.log($scope.companies5);
+    console.log($scope.companies6);
+
+    if (x < 5 && x > 2 ){
+      $scope.list3 = false;
+      $scope.list2 = true;
+      $scope.list1 = true;
+    }
+    else if(x < 3 && x > 0){
+      $scope.list2 = false;
+      $scope.list3 = false;
+      $scope.list1 = true;
+    }
+    else{
+      $scope.list3 = true;
+      $scope.list2 = true;
+      $scope.list1 = true;
+    }
+    
+
+    $scope.bo1Click = function(){
+      console.log($scope.bo1);
+      if ($scope.bo1.border =="5px solid white"){
+        $scope.bo1.border = "5px solid #ED5356";
+        list.push({"handle":$scope.companies1.handle});
+        console.log(list);
+        console.log('red');
+      }
+      else{
+        $scope.bo1.border = "5px solid white";
+        var index= list.indexOf({"handle":$scope.companies1.handle});
+        list.splice(index,1);
+        console.log(list);
+        console.log('white')
+      }
+    };
+    $scope.bo2Click = function(){
+      console.log($scope.bo1);
+      if ($scope.bo2.border =="5px solid white"){
+        $scope.bo2.border = "5px solid #ED5356";
+        list.push({"handle":$scope.companies2.handle});
+        console.log(list);
+        console.log('red');
+      }
+      else{
+        $scope.bo2.border = "5px solid white";
+        var index= list.indexOf({"handle":$scope.companies2.handle});
+        list.splice(index,1);
+        console.log(list);
+        console.log('white')
+      }
+    };
+    $scope.bo3Click = function(){
+      console.log($scope.bo1);
+      if ($scope.bo3.border =="5px solid white"){
+        $scope.bo3.border = "5px solid #ED5356";
+        list.push({"handle":$scope.companies3.handle});
+        console.log(list);
+        console.log('red');
+      }
+      else{
+        $scope.bo3.border = "5px solid white";
+        var index= list.indexOf({"handle":$scope.companies3.handle});
+        list.splice(index,1);
+        console.log(list);
+        console.log('white')
+      }
+    };
+    $scope.bo4Click = function(){
+      console.log($scope.bo1);
+      if ($scope.bo4.border =="5px solid white"){
+        $scope.bo4.border = "5px solid #ED5356";
+        list.push({"handle":$scope.companies4.handle});
+        console.log(list);
+        console.log('red');
+      }
+      else{
+        $scope.bo4.border = "5px solid white";
+        var index= list.indexOf({"handle":$scope.companies4.handle});
+        list.splice(index,1);
+        console.log(list);
+        console.log('white')
+      }
+    };
+    $scope.bo5Click = function(){
+      console.log($scope.bo5);
+      if ($scope.bo5.border =="5px solid white"){
+        $scope.bo5.border = "5px solid #ED5356";
+        list.push({"handle":$scope.companies5.handle});
+        console.log(list);
+        console.log('red');
+      }
+      else{
+        $scope.bo5.border = "5px solid white";
+        var index= list.indexOf({"handle":$scope.companies5.handle});
+        list.splice(index,1);
+        console.log(list);
+        console.log('white')
+      }
+    };
+    $scope.bo6Click = function(){
+      console.log($scope.bo6);
+      if ($scope.bo6.border =="5px solid white"){
+        $scope.bo6.border = "5px solid #ED5356";
+        list.push({"handle":$scope.companies6.handle});
+        console.log(list);
+        console.log('red');
+      }
+      else{
+        $scope.bo6.border = "5px solid white";
+        var index= list.indexOf({"handle":$scope.companies6.handle});
+        list.splice(index,1);
+        console.log(list);
+        console.log('white')
+      }
+    };
+    
+    
+    $scope.hide($ionicLoading);
+
+
+    // var counter = 2;
+
+    // for(var i=0; i < counter; i++){
+    //   console.log(list);
+      
+    //   console.log(data[i]);
+    //   $scope.companies1.push(data[i]);
+    // };
+    // for(var i=0; i < counter; i++){
+    //   console.log(list);
+    //   console.log(x);
+    //   $scope.companies2.push(data[i]);
+    // };
+    // for(var i=0; i < counter; i++ ){
+    //   console.log(list);
+      
+    //   console.log(x);
+    //   $scope.companies3.push(data[i]);
+    // };
+    // $scope.bo1Click = function($index){
+    
+      // $index.border = ""
+       
+       
+      // console.log($scope.bo1);
+      // if ($scope.bo1.border =="5px solid white"){
+      //   $scope.bo1.border = "5px solid #ED5356";
+      //   console.log('red');
+      // }
+      // else{
+      //   $scope.bo1.border = "5px solid white";
+      //   console.log('white')
+      // }
+    // };
+
+    // $scope.data[0]
+  }).error(function(data,status,headers,config){
+    console.log(data);
+    
+  });
+
+  $scope.suggestedWorkApply = function(){
+    $scope.show($ionicLoading);
+    console.log(list);
+    $http({
+      method:'POST',
+      url:'https://incognito.uqcloud.net/api/work',
+      data:{
+        "crowdies_id":localStorage.getItem('user_id'),
+        "companies":list
+      }  
+      
+  }).success(function(data, status, headers, config){
+    $scope.hide($ionicLoading);
+    console.log(data);
+    $state.go('menu.crowdieHome');
+  }).error(function(data,status,headers,config){
+    $scope.hide($ionicLoading);
+    console.log(data);
+  });
+
+
+  }
+                  
+  
+
+
+
+  
+  
+  
 });
 

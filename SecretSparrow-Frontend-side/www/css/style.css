@@ -60,6 +60,27 @@
 	text-align: center;
 	
 }
+
+.centerH2RedBig{
+
+	font-size: 30px !important;
+	color: #ED5356;
+	text-align: center;
+	
+
+}
+.centerH2Black{
+	font-size: 22px !important;
+	color: black;
+	text-align: center;
+	
+}
+.centerH2White{
+	font-size: 22px !important;
+	color: white;
+	text-align: center;
+	
+}
 .centerTitle{
 	text-align: center;
 	margin-top: 20px !important;
@@ -78,6 +99,7 @@
 	border-radius:100px 100px 100px 100px;
 
 }
+
 
 
 /* Style for starter.html */
@@ -293,7 +315,9 @@ padding-top:5px;
 
 /* css for companyProfile.html */
 
+#applyButtonCompany{
 
+}
 
 #companyProfileName{
 	text-align: center;
@@ -306,9 +330,21 @@ padding-top:5px;
 }
 
 /*  for suggestion work in register registerSuggestedCrowdie*/
-#suggestedWorkRegister{
-	margin-right: 10%;
-	margin-left: 10%;
-	width: 80%;
-	margin-top: 30px;
+
+
+.borderColor{
+	border: 5px solid white;
+}
+
+/* loading.html */
+
+#loadingBody{
+	background-color: #ED5456
+}
+#titleLoading{
+	margin-top: 35%;
+}
+.spinner  {
+	
+	fill: #123 !important;
 }

@@ -11,6 +11,10 @@ angular.module('starter.routes', [])
     controller: 'AppCtrl'
 
   })
+  .state('loading', {
+    url: '/loading',
+    templateUrl: 'templates/loading.html'
+  })
 
   // register linkage
   .state('register', {
@@ -49,7 +53,8 @@ angular.module('starter.routes', [])
   .state('registerSuggestedCrowdie', {
     url: '/registerSuggestedCrowdie',
     templateUrl: 'templates/registerSuggestedCrowdie.html',
-    controller: 'RegisterSuggestedCrowdieCtrl'
+    controller: 'RegisterSuggestedCrowdieCtrl',
+    cache: false
 
   })
 
@@ -94,22 +99,11 @@ angular.module('starter.routes', [])
     }
   })
 
-  // child of menu, company profile while crowdie accepted linkage
-  .state('menu.companyProfileAccepted', {
-    url: '/menu.companyProfileAccepted',
-    views: {
-      'menuContent':{
-      templateUrl: 'templates/companyProfileAccepted.html',  
-      controller: 'CompanyProfileAcceptedCtrl'
-      }
-        
-    }
-    
-  })
   
   // child of menu, crowdie home linkage
   .state('menu.crowdieHome', {
     url: '/menu_crowdieHome',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/crowdieHome.html',
@@ -122,10 +116,14 @@ angular.module('starter.routes', [])
   // child of menu, business owner home linkage
   .state('menu.boHome', {
     url: '/menu_boHome',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/boHome.html',
         controller: 'BoHomeCtrl'
+        // parameter:[
+        //   "üser_id"
+        // ]
       }
     }
     

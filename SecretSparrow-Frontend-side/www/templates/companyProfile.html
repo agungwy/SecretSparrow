@@ -37,11 +37,20 @@
 
             </div>
 
-
-            <div ng-view="companyProfileBody" style="float:center; margin-top:30px;">
-                <p style="font-size:30px; color:#ED5356;text-align:center;">40</p>
-                <p style="font-size:16px; text-align:center;">POSITIONS AVAILABLE</p>
-                <button style="border-radius:100px 100px 100px 100px; width:50%; margin-left:25%;margin-right:25%; margin-top:6%;" class="button button-assertive  button-block" ng-click="applyWork()" ui-sref="menu.companyProfileAccepted">APPLY NOW</button>
+                
+            <div ng-show="applyWork" class="divButton top20">
+                <p class="centerH2RedBig">40</p>
+                <p class="centerH2Black">POSITIONS AVAILABLE</p>
+                <button class="button button-assertive  button-block roundButton" ng-click="applyJob()" id="applyButtonCompany">APPLY NOW</button>
+            </div>
+            <div ng-show="work" class="row">
+                <div class="col">
+                    <button class="button button-block button-positive roundButton" ui-sref="menu.crowdieWorking">WORK</button>
+                </div>
+                    
+                <div class="col">
+                    <button class="button button-block button-assertive roundButton" ng-click="quitJob()">QUIT JOB</button>
+                </div>
             </div>
 
             <hr width="70%" style="margin-top:30px;">
