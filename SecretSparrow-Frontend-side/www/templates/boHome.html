@@ -8,25 +8,25 @@
         <div>
             <h3 style="color:#000000;text-align:center;padding-top:6px;">@{{name}}</h3>
         </div>
-        <div>
+        <div ng-model="boData">
             <div class="item item-body" style="border:none;">
                 <div id="content">
                     <div class="section">
                         <div class="box">
-                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">53</h2>
+                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">{{boData.friends_count}}</h2>
                             <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">FOLLOWING</h2>
                             <hr>
                         </div>
 
                         <div class="utility">
-                            <h2 style="color:#ED5356;margin:0;font-size:30px;text-align:center;">0</h2>
+                            <h2 style="color:#ED5356;margin:0;font-size:30px;text-align:center;">{{listOfCrowdies}}</h2>
                             <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">Crowdies are
                                 <br>working for you</h2>
                         </div>
                     </div>
                     <div class="section">
                         <div class="topRightContent">
-                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">1</h2>
+                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">{{boData.followers_count}}</h2>
                             <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">FOLLOWERS</h2>
                             <hr>
                         </div>

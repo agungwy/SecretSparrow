@@ -91,12 +91,18 @@ angular.module('starter.routes', [])
    // child of menu, company profile in crowdie side linkage
     .state('menu.companyProfile', {
     url: '/menu.companyProfile',
+    cache: false,
+    params: {
+      hndl: ""
+    },
     views: {
       'menuContent':{
       templateUrl: 'templates/companyProfile.html',
-      controller: 'CompanyProfileCtrl'
+      controller: 'CompanyProfileCtrl',
+      
       }   
-    }
+    },
+
   })
 
   
