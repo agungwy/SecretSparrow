@@ -3,6 +3,7 @@
 	<head>
 		<!-- HTML Style -->
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.css"> -->
 
 		<!-- HELPERS -->
 		<link rel="stylesheet" type="text/css" href="helpers/boilerplate.css">
@@ -17,12 +18,12 @@
 		<link rel="stylesheet" type="text/css" href="elements/tables.css">
 		 
 		<!-- JS Core -->
-		<script type="text/javascript" src="js-core/jquery-core.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<!-- <script src="bootstrap/js/bootstrap.js"></script> -->
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript" src="barChart.js"></script>
 
-		<!-- Widget - Chart -->
-		<script type="text/javascript" src="widgets/charts/chart-js/chart-core.js"></script>
-		<script type="text/javascript" src="widgets/charts/chart-js/chart-doughnut.js"></script>
-		<script type="text/javascript" src="widgets/charts/chart-js/chart-demo-1.js"></script>
+
 
 		<!-- For Navigation Transition -->
 		<script>
@@ -59,9 +60,9 @@
 			<div class="navbar">
 				<br><br><br><br><br><br>
 				<center>
-					<h3><b>Welcome!</b></h3>
+					<h2><b>Welcome!</b></h3>
 					<br>
-					<h4>SecretSparrow Dashboard</h4>
+					<h2>SecretSparrow Dashboard</h4>
 				</center>
 				<!-- Menu Items -->
 				<div class="menulist">
@@ -69,7 +70,6 @@
 						<hr>
 						<a href="#daily"><h3 id="menuitem"><b>Today's Summary</b></h3></a>
 						<hr>
-						<br><br><br>
 						<hr>
 						<a href="#sub"><h3 id="menuitem"><b>View Subscribers</b></h3></a>
 						<hr>
@@ -95,92 +95,11 @@
 					<div class="dailytopcenter">
 						<div class="piechartdiv">
 							<!-- Store Pie Chart Here -->
-							<div class="content-box">
-								<!-- widgets\charts\chart-js -->
-					            <canvas id="chart-area" width="100" height="100"></canvas>
-					        </div>
+							<div id="columnchart_material" style="width: 100%; height: 100%;"></div>
 						</div>
 					</div>
 
-					<div class="dailytopright">
-						<div class="piechartinfo">
-							<!-- Pie Chart Info Here -->
-							<table class="table remove-background">
-			                    <tbody>
-				                    <tr>
-				                        <td class="text-left size-sm">
-				                            <div class="badge mrg10L badge-small mrg5R bg-purchase"></div>
-				                            Purchase Button
-				                        </td>
-				                    </tr>
-				                    <tr>
-				                        <td class="text-left size-sm">
-				                            <div class="badge mrg10L badge-small mrg5R bg-interested"></div>
-				                            I'm Interested Button
-				                        </td>
-				                    </tr>
-				                    <tr>
-				                        <td class="text-left size-sm">
-				                            <div class="badge mrg10L badge-small mrg5R bg-embedded"></div>
-				                            Video
-				                        </td>
-				                    </tr>
-				                   
-				                    <tr>
-				                        <td class="text-left size-sm">
-				                            <div class="badge mrg10L badge-small mrg5R bg-facebook"></div>
-				                            Facebook Social Button
-				                        </td>
-				                    </tr>
-
-				                    <tr>
-				                        <td class="text-left size-sm">
-				                            <div class="badge mrg10L badge-small mrg5R bg-twitter"></div>
-				                            Twitter Social Button
-				                        </td>
-				                    </tr>
-				                    <tr>
-				                        <td class="text-left size-sm">
-				                            <div class="badge mrg10L badge-small mrg5R bg-youtube"></div>
-				                            Youtube Social Button
-				                        </td>
-				                    </tr>
-				                	
-			                    </tbody>
-					        </table>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="dailybottom">
-					<div class="dailyinfo">
-						<!-- Daily Info Here -->
-						<div class="dailyinfoleft1">
-							<p id="dailyleft1">Number of visitors today:</p>
-							<p id="dailyleft1">Highest social media visited:</p>
-						</div>
-						<div class="dailyinfoleft2">
-							<p id="dailyleft2">value</p>
-							<p id="dailyleft2">value</p>
-						</div>
-						<div class="dailyinforight1">
-							<p id="dailyright1">Purchase Button:</p>
-							<p id="dailyright1">I'm Interested Button:</p>
-							<p id="dailyright1">Video:</p>
-							<p id="dailyright1">Facebook Social Button:</p>
-							<p id="dailyright1">Twitter Social Button:</p>
-							<p id="dailyright1">Youtube Social Button:</p>
-						</div>
-						<div class="dailyinforight2">
-							<p id="dailyright2">value</p>
-							<p id="dailyright2">value</p>
-							<p id="dailyright2">value</p>
-							<p id="dailyright2">value</p>
-							<p id="dailyright2">value</p>
-							<p id="dailyright2">value</p>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 
@@ -191,80 +110,35 @@
 					<div class="subtopleft">
 						<h2 class="sectionTitleSub"><b>View Subscribers:</b></h2>
 					</div>
+					<div class="subtopright">
+						<select id="select">
+						  <option value="subscriber">Subscriber</option>
+						  <option value="visitor">Visitor</option>
+						  
+						</select>
+					</div>
 
 				</div>
+
 
 				<div class="submid">
 					<div class="submidtable">
 						<!-- Subscriptions Table Here -->
 						<table class="tg">
-							<tr>
+							<!-- <tr>
 								<th class="tg-sd1">Number</th>
 								<th class="tg-sd2">Date Subscribed</th>
 								<th class="tg-sd3">Full Name</th>
 								<th class="tg-sd4">E-mail</th>
-							</tr>
-						  	<tr>
-						  		<td class="tg-sd">1</td>
-						  		<td class="tg-sd">17-09-2016</td>
-						  		<td class="tg-sd">Billy Bong</td>
-						  		<td class="tg-sd">bingbong@hotmail.com</td>
-						 	</tr>
-							<tr>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-							</tr>
-							<tr>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-							</tr>
-							<tr>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-							</tr>
-							<tr>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-							</tr>
-							<tr>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-							</tr>
-							<tr>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-							</tr>
-							<tr>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-							</tr>
-							<tr>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-								<td class="tg-sd"></td>
-							</tr>
+							</tr> -->
+							
 						</table>
 					</div>
 				</div>
 
 				<div class="subbottom">
 					<h3 id="totalsubscription">Total Subscribers: value</h3>
-					<button id="email"><strong>E-mail Subscribers</strong></button>
+					<!-- <button type="button" class="btn btn-default" id="email"><strong>E-mail Subscribers</strong></button> -->
 				</div>
 
 			</div>
