@@ -1,5 +1,5 @@
 body {
-	background-color: #F5BCA9;
+	background: #ED5356;
 	font-family:  ;
 	overflow: hidden;
 }
@@ -13,8 +13,9 @@ body {
 }
 
 .navbar {
-	background-color: #F8E6E0;
-	border: solid;
+
+	background: white;
+	
 	float: left;
 	position: fixed;
 	width: 20%;
@@ -24,6 +25,9 @@ body {
 	margin-bottom: 1%;
 }
 
+.navbar h1,h2{
+	color: #ED5356;
+}
 .menulist {
 
 	height: 80%;
@@ -43,19 +47,19 @@ body {
 }
 
 a:link {
-	color: blue;
+	color: #ED5356;
 }
 
 a:hover {
-	color: black;
+	color: #bdc3c7;
 }
 
 a:visited {
-	color: blue;
+	color: #bdc3c7;
 }
 
 a:active {
-	color: blue;
+	color: #ED5356;
 }
 
 .sectionTitle {
@@ -71,8 +75,8 @@ a:active {
 /* SECTION 1 - DAILY SUMMARY */
 
 .daily {
-	background-color: #E0ECF8;
-	border: solid;
+	background-color: white;
+	
 	float: left;
 	width: 75%;
 	height: 95%;
@@ -81,9 +85,13 @@ a:active {
 	margin-bottom: 1%;
 }
 
+.daily p,h1,h2,h3,h4{
+	color: #ED5356;
+}
+
 .dailytop {
 
-	height: 68%;
+	height: 90%;
 }
 
 .dailytopleft {
@@ -96,7 +104,7 @@ a:active {
 .dailytopcenter {
 
 	float: left;
-	width: 48%;
+	width: 70%;
 	height: 100%;
 }
 
@@ -104,8 +112,7 @@ a:active {
 
 	float: center;
 	height: 85%;
-	margin-left: 8%;
-	margin-right: 8%;
+	
 	margin-top: 5%;
 }
 
@@ -117,15 +124,19 @@ a:active {
 }
 
 .piechartinfo {
-	border: solid;
+	border: solid #ED5356;
 	height: 70%;
 	margin-left: 8%;
 	margin-right: 6%;
 	margin-top: 20%;
 }
 
+.table tr,td{
+	border:1px solid #ED5356;
+}
+
 .dailybottom {
-	border-top: solid;
+	border-top: solid #ED5356;
 	height: 35%;
 }
 
@@ -199,14 +210,18 @@ a:active {
 /* SECTION 2 - VIEW SUBSCRIPTIONS */
 
 .sub {
-	background-color: #E0ECF8;
-	border: solid;
+	background-color: white;
+	
 	float: left;
 	width: 75%;
 	height: 95%;
 	margin-left: 23%;
 	margin-top: 1%;
 	margin-bottom: 2%;
+}
+.sub h1,p,h2,h3{
+	color: #ED5356;
+
 }
 
 .subtopleft {
@@ -215,14 +230,29 @@ a:active {
 	height: 12%;
 }
 
+.subtopright{
+	margin-left: 80%;
+
+
+}
+#select{
+	border: solid #ED5356;
+	color: white;
+	background: #ED5356;
+	width: 100px;
+	height: 30px;
+}
+
 .submid {
 
 	width: 100%;
 	height: 65%;
+
+	overflow: hidden;
 }
 
 .submidtable {
-
+	overflow-y: scroll;
 	width: 95%;
 	height: 85%;
 	margin-left: 2%;
@@ -247,9 +277,12 @@ a:active {
 	height: 30%;
 	width: 20%;
 	margin-right: 5%;
+	
+	color: white;
 }
 
 .tg {
+
 	border-collapse: collapse;
 	border-spacing: 0;
 	width: 100%;
@@ -260,8 +293,8 @@ a:active {
 	font-family: Arial, sans-serif;
 	font-size: 12px;
 	padding: 10px 5px;
-	border-style: solid;
-	border-width: 1px;
+	color:#ED5356;
+	border:1px solid #ED5356;
 	overflow: hidden;
 	word-break: normal;
 	text-align: center;
@@ -271,9 +304,9 @@ a:active {
 	font-family: Arial, sans-serif;
 	font-size: 14px;
 	font-weight: bold;
+	color:#ED5356;
 	padding: 10px 5px;
-	border-style: solid;
-	border-width: 1px;
+	border:1px solid #ED5356;
 	overflow: hidden;
 	word-break: normal;
 	text-align: center;

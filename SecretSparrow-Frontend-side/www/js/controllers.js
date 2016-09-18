@@ -407,7 +407,7 @@ app.controller('RegisterCtrl', function($scope,$http, $state, $ionicPopup, Regis
       // console.log(data.email);
       console.log(data);
       var popup = $ionicPopup.alert({
-      title: 'The data is incorrect please retry',
+      title: data.email,
       okType: 'button-assertive'
       });
     });
@@ -806,7 +806,7 @@ app.controller('MenuCtrl', function($scope, $state){
   console.log('connect');
 
   var role = localStorage.getItem('scope');
-
+  
   if (role =="crowdies"){
     $scope.crowdie_Role = true;
     $scope.bo_Role = false;
