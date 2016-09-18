@@ -337,22 +337,22 @@ $(document).ready(function(){
 
     /*Map JS*/
 	
-   var map;
-    map = new GMaps({
-        el: '#map',
-        lat: 21.2334329,
-        lng: 72.86372,
-        scrollwheel: false
-    });
+   // var map;
+   //  map = new GMaps({
+   //      el: '#map',
+   //      lat: 21.2334329,
+   //      lng: 72.86372,
+   //      scrollwheel: false
+   //  });
 
-    map.addMarker({
-        lat: 21.2334329,
-        lng: 72.86372,
-        title: 'Marker with InfoWindow',
-        infoWindow: {
-            content: '<p>Phoenix app landing page <br/> Buy Now at <a href="">Themeforest</a></p>'
-        }
-    });
+   //  map.addMarker({
+   //      lat: 21.2334329,
+   //      lng: 72.86372,
+   //      title: 'Marker with InfoWindow',
+   //      infoWindow: {
+   //          content: '<p>Phoenix app landing page <br/> Buy Now at <a href="">Themeforest</a></p>'
+   //      }
+   //  });
 	
     /*Map JS Ends*/
     
@@ -420,35 +420,35 @@ $(function(){
 /* Subscriber mail chimp */
 
 
-$(".btn-subscribe").on("click", function(e){
+// $(".btn-subscribe").on("click", function(e){
 	
-	//Subscriber email address
-	var subscriber_email = $("input#subscriber_email").val();
-		if (subscriber_email == "") {
-		$("input#subscriber_email").focus();
-		return false;
-	}
-	else
-	{
-		var atpos = subscriber_email.indexOf("@");
-		var dotpos = subscriber_email.lastIndexOf(".");
-		if (atpos<1 || dotpos<atpos+2 || dotpos+2>=subscriber_email.length) {
-			alert("Not a valid e-mail address");
-	    return false;
-		}
-	}
+// 	//Subscriber email address
+// 	var subscriber_email = $("input#subscriber_email").val();
+// 		if (subscriber_email == "") {
+// 		$("input#subscriber_email").focus();
+// 		return false;
+// 	}
+// 	else
+// 	{
+// 		var atpos = subscriber_email.indexOf("@");
+// 		var dotpos = subscriber_email.lastIndexOf(".");
+// 		if (atpos<1 || dotpos<atpos+2 || dotpos+2>=subscriber_email.length) {
+// 			alert("Not a valid e-mail address");
+// 	    return false;
+// 		}
+// 	}
 	
-	//Datastring pass to mail.php
-	var dataString = '&subscriber_email=' + subscriber_email;
-	var form = $(this);
-	var str = form.serialize(); 
-	$.ajax({
-	type: "POST", url: "mail/mailchimp.php",	data: dataString, success: function() {
-		alert('You are subscribe with our newsletter');
-		$(".btn-subscribe").attr('disabled','true');
-		}
-	});
-});
+// 	//Datastring pass to mail.php
+// 	var dataString = '&subscriber_email=' + subscriber_email;
+// 	var form = $(this);
+// 	var str = form.serialize(); 
+// 	$.ajax({
+// 	type: "POST", url: "mail/mailchimp.php",	data: dataString, success: function() {
+// 		alert('You are subscribe with our newsletter');
+// 		$(".btn-subscribe").attr('disabled','true');
+// 		}
+// 	});
+// });
 
 
 /* Contact form */
