@@ -36,11 +36,11 @@ class ProductPageController extends Controller
 			]);
 
 			// echo(public_path().'/adroid-debug.apk');
-			// Mail::send('emails.SecretSparrow', ['user' => $todos], function ($m) use ($todos) {
-	  //           $m->from('teamincognito@sparkpostbox.com', 'SecretSparrow');
+			Mail::send('emails.SecretSparrow', ['user' => $todos], function ($m) use ($todos) {
+	            $m->from('teamincognito@sparkpostbox.com', 'SecretSparrow');
 
-	  //           $m->to($todos->email, $todos->name)->subject('Testing Application Request');
-	  //       });
+	            $m->to($todos->email, $todos->name)->subject('Testing Application Request');
+	        });
             return response()->json([ 'message' => 'Registration Complete!' ], 201);
         }
     }

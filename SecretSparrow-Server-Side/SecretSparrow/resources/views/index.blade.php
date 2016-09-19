@@ -145,7 +145,7 @@
                         </p>
                         <div class="row text-center">
                             <div class="col-md-7 hidden-xs hidden-sm os-animation animated fadeInLeft" data-os-animation="fadeInLeft" data-os-animation-delay="0.5s" style="animation-delay: 0.5s;" data-os-animation-duration="2.5s">
-                                <img class="img img-responsive" src="assets/images/home_mob.png" alt="Home-Mobile">
+                                <img class="img img-responsive" src="assets/images/android/home_mob.png" alt="Home-Mobile">
                             </div>
                             <div class="col-md-5">
                                 <div class="btn-wrap">
@@ -245,8 +245,8 @@
                 <div class="row valign-wrapper set-wrapper">
                     <div class="col-md-6">
                         <div class="choose_phone hidden-xs hidden-sm">
-                            <img class="img img-responsive phone1" src="assets/images/BO_1.png" alt="Phone1" />
-                            <img class="img img-responsive phone2" src="assets/images/crowdie_2.png" alt="Phone1" />
+                            <img class="img img-responsive phone1" src="assets/images/android/amazing-features1.png" alt="Phone1" />
+                            <img class="img img-responsive phone2" src="assets/images/android/amazing-features2.png" alt="Phone1" />
                         </div>
                     </div>
                     <div class="col-md-6 choose_us_txt">
@@ -352,7 +352,7 @@
             <div class="container">
                 <div class="row">
                     <h2 class="mb40">Introduction <span class="bolder">Video</span></h2>
-                        <p class="mb40 col-md-10 col-md-offset-1">Secret Sparrow is a clean, modern landing page for showcase your elegant app along its Video. Showup your elegant app video to your precious users</p>
+                        
                        <iframe width="75%" height="480" src="https://www.youtube.com/embed/cjYJnLFy2Ps" frameborder="0" allowfullscreen></iframe>
 
                     
@@ -449,8 +449,8 @@
                     <h2 class="mb40">Sign Up To Our <span class="bolder">Waiting List</span></h2>
 
                     <p class="col-md-10 col-md-offset-1 text-center title-para mb30">
-                        Enter your email address into our subscribe form to be on our waiting list. <br>
-                        You can get the link to download our application in your email soon - Subscribe with us.
+                        Enter your e-mail address into the subscribption form below to stay updated. <br> 
+                        You will be able to get our application's download link in your e-mail - Subscribe with us!
                     </p>
                   
 
