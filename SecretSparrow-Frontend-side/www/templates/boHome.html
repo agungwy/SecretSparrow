@@ -1,0 +1,216 @@
+<!-- Page for business Owner Home menu -->
+<ion-view id="menu.boHome">
+    <!-- SecretSparrow Logo -->
+    <ion-nav-title>
+        <img class="title-image" src="img/logo.png">    
+    </ion-nav-title>
+    <ion-content padding="false" class="has-header">
+        <div>
+            <h3 style="color:#000000;text-align:center;padding-top:6px;">@{{name}}</h3>
+        </div>
+        <div ng-model="boData">
+            <div class="item item-body" style="border:none;">
+                <div id="content">
+                    <div class="section">
+                        <div class="box">
+                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">{{boData.friends_count}}</h2>
+                            <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">FOLLOWING</h2>
+                            <hr>
+                        </div>
+
+                        <div class="utility">
+                            <h2 style="color:#ED5356;margin:0;font-size:30px;text-align:center;">{{listOfCrowdies}}</h2>
+                            <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">Crowdies are
+                                <br>working for you</h2>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="topRightContent">
+                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">{{boData.followers_count}}</h2>
+                            <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">FOLLOWERS</h2>
+                            <hr>
+                        </div>
+                        
+
+                        <div class="bottomRightContent">
+                            <h2 style="color:#ED5356;margin:0;font-size:30px;text-align:center;">0</h2>
+                            <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">Accounts followed you this week</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div>
+            <div style="background-color:#4D4D4D; overflow: auto;" class="list card manual-card-fullwidth">
+                <h4 style="color:#FFFFFF;text-align:center;">YOUR TOP CROWDIES</h4>
+                <div class="centerDiv" >
+                <div class="row">
+                    <div class="col">
+                        <a href="#">
+                            <img class="img-circle center" src="http://img.wennermedia.com/620-width/cole-sadie-robertson-3f20049b-abfc-495d-bc49-70cd3ed8999b.jpg">
+                        </a>
+
+                        <p style="font-size:14px;">
+                            <font color="white">FAN
+                                <br>100</font>
+                        </p>
+                        
+
+                    </div>
+
+                    <div class="col">
+                        <a href="#">
+                            <img class="img-circle center" src="https://www.daad.de/medien/der-daad/unsere-aufgaben/alumniarbeit/portraits/daad_alumni-galerie_david_toscana.jpg">
+                        </a>
+                        <p style="font-size:12px">
+                            <font color="white">JOHN
+                                <br>80</font>
+                        </p>
+
+
+                    </div>
+
+                    <div class="col">
+                        <a href="#">
+                            <img class="img-circle center" src="http://thenewcode.com/assets/images/thumbnails/sarah-parmenter.jpeg">
+                        </a>
+
+
+                        <p style="font-size:12px">
+                            <font color="white">JO
+                                <br>85</font>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a href="#">
+                            <img class="center img-circle" src="https://a.wattpad.com/useravatar/ElizabethEulberg.128.968957.jpg">
+                        </a>
+                        <p style="font-size:14px">
+                            <font color="white">JANE
+                                <br>95</font>
+                        </p>
+                        
+
+                    </div>
+
+                    <div class="col">
+                        <a href="#">
+                            <img class="img-circle center" src="http://www.smh.com.au/content/dam/images/g/j/6/1/7/1/image.related.articleLeadNarrow.300x0.gj611y.png/1440376144277.jpg">
+                        </a>
+                        <p style="font-size:14px">
+                            <font color="white">IAN
+                                <br>90
+                                <br>
+                            </font>
+                        </p>
+
+                    </div>
+
+                    <div class="col">
+                        <a href="#">
+                            <img class="img-circle center" src="http://carbonwho.com/wp-content/uploads/2011/11/d-d2.jpg?f44bb7">
+                        </a>
+                        <p style="font-size:14px">
+                            <font color="white">Dean
+                                <br>120</font>
+                        </p>
+
+                    </div>
+                </div>
+                <!-- <div class="avatar"> -->
+
+                    <!-- <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="eachAvatar">
+                                        <a href="#">
+                                            <img class="img-circle center" src="http://carbonwho.com/wp-content/uploads/2011/11/d-d2.jpg?f44bb7">
+                                        </a>
+                                        <p style="font-size:14px">
+                                            <font color="white">Dean
+                                                <br>120</font>
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="eachAvatar">
+                                        <a href="#">
+                                            <img class="img-circle center" src="http://img.wennermedia.com/620-width/cole-sadie-robertson-3f20049b-abfc-495d-bc49-70cd3ed8999b.jpg">
+                                        </a>
+
+                                        <p style="font-size:14px;">
+                                            <font color="white">FAN
+                                                <br>100</font>
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="eachAvatar">
+                                        <a href="#">
+                                            <img class="center img-circle" src="https://a.wattpad.com/useravatar/ElizabethEulberg.128.968957.jpg">
+                                        </a>
+                                        <p style="font-size:14px">
+                                            <font color="white">JANE
+                                                <br>95</font>
+                                        </p>
+                                        <div class="eachAvatar">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="eachAvatar">
+                                        <a href="#">
+                                            <img class="img-circle center" src="http://www.smh.com.au/content/dam/images/g/j/6/1/7/1/image.related.articleLeadNarrow.300x0.gj611y.png/1440376144277.jpg">
+                                        </a>
+                                        <p style="font-size:14px">
+                                            <font color="white">IAN
+                                                <br>90
+                                                <br>
+                                            </font>
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="eachAvatar">
+                                        <a href="#">
+                                            <img class="img-circle center" src="http://thenewcode.com/assets/images/thumbnails/sarah-parmenter.jpeg">
+                                        </a>
+
+
+                                        <p style="font-size:12px">
+                                            <font color="white">JO
+                                                <br>85</font>
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="eachAvatar">
+                                        <a href="#">
+                                            <img class="img-circle center" src="https://www.daad.de/medien/der-daad/unsere-aufgaben/alumniarbeit/portraits/daad_alumni-galerie_david_toscana.jpg">
+                                        </a>
+                                        <p style="font-size:12px">
+                                            <font color="white">JOHN
+                                                <br>80</font>
+                                        </p>
+                                        <div class="eachAvatar">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+                <!-- </div> -->
+                
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

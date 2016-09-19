@@ -1,0 +1,119 @@
+<!-- the first page of crowdie after login and register -->
+<ion-view id="crowdieHome">
+  <ion-nav-title>
+    <img class="title-image" src="img/logo.png">    
+  </ion-nav-title>
+  <ion-content padding="false" scroll="false" class="has-header">    <h4 id="secretSparrow2-heading3" style="color:#000000;text-align:center;">WELCOME, {{name}}</h4>
+    <div>
+        <div class="item item-body" style="border:none;" padding-bot="">
+
+            <div id="content">
+                <div class="box">
+                    <h3 style="color:#000000;margin:0;font-size:15px;text-align:center;">YOU ARE A</h3>
+                    <h3 style="color:#FFC300;margin:0;font-size:20px;text-align:center;">NEWBIE</h3>
+
+                    <hr>
+                </div>
+
+                <div class="utility">
+                    <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">125/2000 points</h2>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div>
+        <div style="background-color:#4D4D4D; overflow: auto;" class="list card manual-card-fullwidth">
+            <h4 style="color:#FFFFFF;text-align:center;">COMPANIES I WORK FOR</h4>
+
+            <div class="centerDiv" >
+                <div class="row">
+                    
+                    <div class="col" ng-repeat="company in companiesWork">
+                        <a ng-click="workAt(company.handle)">
+                            <img class="img-circle" src={{company.avatar}}>
+                        </a>
+                        <p class="center" style="font-size:12px">
+                            <font color="white">{{company.name}}</font>
+                        
+
+                    </div>
+
+                    <!-- <div class="col">
+                        <a ui-sref="menu.companyProfile">
+                            <img class="img-circle" src="https://lh6.googleusercontent.com/-LW9djoK42mc/AAAAAAAAAAI/AAAAAAAAAB8/fxvkQ2_GSdI/s0-c-k-no-ns/photo.jpg">
+
+                        </a>
+
+
+                        <p style="font-size:12px">
+                            <font color="white">EVENT
+                                <br>CINEMAS</font>
+                        </p>
+
+
+                    </div>
+
+                    <div class="col">
+                        <a ui-sref="menu.companyProfile">
+                            <img class="img-circle" src="http://www.newsroomdigital.com.au/wp-content/uploads/2016/05/default-600x400.jpg">
+                        </a>
+                        <p style="font-size:12px">
+                            <font color="white">MCDONALDS</font>
+                        </p>
+
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="col" ng-repeat="company in companiesWork2">
+                        <a ng-click="workAt(company.handle)">
+                            <img class="img-circle" src={{company.avatar}}>
+
+
+                        </a>
+
+                        <p style="font-size:12px">
+                            <font color="white">{{company.name}}</font>
+                        </p>
+                        
+
+                    </div>
+
+                    <!-- <div class="col">
+                        <a ui-sref="menu.companyProfile">
+                            <img class="img-circle" src="./img/sunnyBank.jpg">
+                        </a>
+
+                        <p style="font-size:12px">
+                            <font color="white">SUNNY
+                                <br>HOTEL</font>
+                        </p>
+
+                    </div>
+
+                    <div class="col">
+                        <a ui-sref="menu.companyProfile">
+                            <img class="img-circle" src="https://lh6.ggpht.com/6yMSxzN389OKRG6iyAn58fZylJdWVxNLchTN-M4hf7xO4lATQgWMyA-Xj5aiA9OcOCc=w300">
+                        </a>
+
+
+                        <p style="font-size:12px">
+                            <font color="white">HUNGRY
+                                <br>JACKS</font>
+                        </p>
+
+                    </div> -->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div id="findMoreCompaniesButton">
+        <button class="button button-assertive button-block roundButton">FIND MORE COMPANIES</button>
+
+    </div>
+  </ion-content>
+</ion-view>
