@@ -40,6 +40,35 @@ Route::put('api/role',['uses'=>'Auth\AuthController@role','middleware'=>'oauth']
 Route::get('/api/categories', 'CategoryController@getCategory');
 Route::post('/api/categories', 'CategoryController@selectCategory');
 
+/*
+	For Product Page
+*/
+
+Route::post('product/register','ProductPageController@registerTester');
+Route::get('download/{user_id}','ProductPageController@getFile');
+Route::get('stat/tester','ProductPageController@getTesters');
+Route::get('stat/counter','ProductPageController@getVisitors');
+Route::post('social','ProductPageController@setSocialNetwork');
+Route::get('stat/social','ProductPageController@getSocial');
+Route::get('dashboard', function(){
+	return view('dashboard');
+});
+Route::get('logout',function(){
+
+	//echo($_COOKIE['EAIT_WEB']);
+	print_r($_SESSION);
+	unset($_COOKIE['EAIT_WEB']);
+	setcookie("EAIT_WEB", "", time() - 3600);
+	echo($_COOKIE['EAIT_WEB']);
+
+	header("Location: https://api.uqcloud.net/logout");
+});
+// Route::get('youtube','ProductPageController@getYoutube');
+/*
+	End Product Page
+*/
+
+
 //this bind the singleton object to the service (Register oauth2 to the Laravel service)
 App::singleton('oauth2', function() {
     

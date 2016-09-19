@@ -39,24 +39,27 @@ class TwitterAuthController extends Controller
         
         
         //check for the registered token in database
-        $todos=TwitterModel::where('handle','=',$authUser->pluck('handle')[0]);
+        $todos=TwitterModel::where('handle',$authUser->handle);
         
         if(count($todos->get())==0){
             //new user
             TwitterModel::create([
-                'user_id' => $authUser->pluck('user_id')[0],
-                'handle'=>$authUser->pluck('handle')[0],
+                'handle'=>$authUser->handle,
                 'access_token' => $accessToken,
                 'access_token_secret' => $accessTokenSecret,
             ]);
         }else{
             //existing user
             //check if the stored token still the same or not with the generated token from Twitter
-            $todos->where('access_token','=',$accessToken)
-                  ->where('access_token_secret','=',$accessTokenSecret);
+            $todos->where('access_token',$accessToken)
+                  ->where('access_token_secret',$accessTokenSecret);
             if(count($todos->get())==0){
                 //existing user with different token, update them
-                $todos->update(["access_token"=>$accessToken,"access_token_secret"=>$accessTokenSecret]);
+                $todos2=TwitterModel::where('handle',$authUser->handle)
+                                    ->update([
+                                        "access_token"=>$accessToken,
+                                        "access_token_secret"=>$accessTokenSecret
+                                        ]);
             }
         }
         
@@ -80,7 +83,7 @@ class TwitterAuthController extends Controller
         }
  
         return TwitterAuthModel::create([
-            'user_id' => uniqid($twitterUser->nickname,true),
+            'username' => $twitterUser->getEmail(),
             'name' => $twitterUser->name,
             'handle' => $twitterUser->nickname,
             'twitter_id' => $twitterUser->id,
