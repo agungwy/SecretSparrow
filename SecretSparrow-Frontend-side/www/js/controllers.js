@@ -407,7 +407,11 @@ app.controller('RegisterCtrl', function($scope,$http, $state, $ionicPopup, Regis
       // console.log(data.email);
       console.log(data);
       var popup = $ionicPopup.alert({
+<<<<<<< HEAD
       title: 'The data is incorrect please retry',
+=======
+      title: data.email,
+>>>>>>> 861ab3c2f7cab6a5283354e767ec5b4688b6df25
       okType: 'button-assertive'
       });
     });
@@ -806,7 +810,11 @@ app.controller('MenuCtrl', function($scope, $state){
   console.log('connect');
 
   var role = localStorage.getItem('scope');
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 861ab3c2f7cab6a5283354e767ec5b4688b6df25
   if (role =="crowdies"){
     $scope.crowdie_Role = true;
     $scope.bo_Role = false;
