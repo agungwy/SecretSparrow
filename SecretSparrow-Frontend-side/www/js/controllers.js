@@ -236,10 +236,75 @@ app.controller('ChooseCategoriesCtrl', function($scope, $http, $state, RegisterS
 });
 
 // controller for crowdieWorking.html
-app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $stateParams) {
+app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $stateParams, $http, $state, $ionicLoading) {
   $scope.goBack = function() {
     $ionicHistory.goBack();
   };
+  var handle= localStorage.getItem('handle');
+  $scope.show = function() {
+      $ionicLoading.show({
+        templateUrl: 'templates/loading.html'
+      });
+    };
+  $scope.hide = function(){
+          $ionicLoading.hide();
+    };
+  $scope.accounts = [];
+  var config={
+  headers:{
+   
+        "Authorization":"Bearer "+ localStorage.getItem('access_token')
+      }         
+    };
+  $scope.follow = function follow(screen_name, number){
+      console.log(number);
+      var data = {
+          "screen_name":screen_name,
+          "user_id":localStorage.getItem("user_id"),
+          "handle": localStorage.getItem("handle")
+      }
+      $http.post("https://incognito.uqcloud.net/api/follow", data)
+      .then(function(response){
+          console.log(response.data);
+          $scope.accounts.splice(number, 1);
+      }), function(error){
+          console.error(error);
+      }
+  }
+  $http.get("https://incognito.uqcloud.net/api/friends?screen_name="+handle+"&handle="+handle, config)
+  .then(function(response){
+      console.log(response.data);
+      $scope.show($ionicLoading);
+      var numHp = Math.floor(Math.random() * (response.data.users.length-1));
+      var hp = response.data.users[numHp];
+      $http.get("https://incognito.uqcloud.net/api/followers?screen_name="+hp.screen_name+"&handle="+handle+"&crowdies_id="+localStorage.getItem("user_id"), config)
+      .then(function(response2){
+
+          console.log(response2.data);
+          var users = response2.data.users;
+          console.log(users);
+
+          for (var i=0; i < users.length; i++){
+            users[i]["number"]=i;
+            $scope.accounts.push(users[i]);
+            
+          }
+          $scope.hide($ionicLoading);
+
+
+      }), function(error){
+        $scope.hide($ionicLoading);
+        console.log(error);
+      }
+
+
+
+  }), function(error){
+      
+      console.log(error);
+      $scope.hide($ionicLoading);
+    }
+
 
 
 });
@@ -617,6 +682,7 @@ app.controller('CrowdieHomeCtrl', function ($scope, $http, $state) {
     $http.get("https://incognito.uqcloud.net/api/user?user_id="+userId,config)
     .then(function(response){
       console.log(response.data);
+
       $scope.name=response.data.name;
 
     });
@@ -740,47 +806,73 @@ app.controller('BoHomeCtrl', function($scope, $http, $state, $ionicLoading){
 // controller for companyProfile.html
 app.controller('CompanyProfileCtrl', function($scope, $state, $ionicLoading, $stateParams,$http){
   console.log("stateParams");
-  $scope.applyWork = true;
-  $scope.work=false;
-  console.log($stateParams.hndl);
-  $scope.show = function() {
-    $ionicLoading.show({
-      templateUrl: 'templates/loading.html'
-    });
-  };
-  $scope.hide = function(){
-        $ionicLoading.hide();
-  };
-  var config={
-        headers:{
-          "Authorization":"Bearer "+ localStorage.getItem('access_token')
-        }
-      };
-  $scope.show($ionicLoading);
-  $http.get("https://incognito.uqcloud.net/api/twitter?handle="+$stateParams.hndl)
+
+  
+  $http.get("https://incognito.uqcloud.net/api/work/show/crowdies?crowdies_id="+localStorage.getItem("user_id"))
   .then(function(response){
     console.log(response.data);
-    // var data = response.data;
-    $scope.companyData = response.data;
-    // $scope.companyName = data.name;
-    $http.get("https://incognito.uqcloud.net/api/user/twitter?handle="+$stateParams.hndl, config)
+    for (var i = 0; i < response.data.data.length; i++){
+        if (response.data.data[i].handle == $stateParams.hndl){
+          console.log(response.data.data[i]);
+          $scope.applyWork = false;
+          $scope.work=true;
+          console.log("success");
+          break;
+        }
+        else{
+            $scope.applyWork = true;
+            $scope.work=false;
+            console.log("wrong");
+
+        }
+
+    }
+    
+    console.log($stateParams.hndl);
+    $scope.show = function() {
+      $ionicLoading.show({
+        templateUrl: 'templates/loading.html'
+      });
+    };
+    $scope.hide = function(){
+          $ionicLoading.hide();
+    };
+    var config={
+          headers:{
+            "Authorization":"Bearer "+ localStorage.getItem('access_token')
+          }
+        };
+    $scope.show($ionicLoading);
+    $http.get("https://incognito.uqcloud.net/api/twitter?handle="+$stateParams.hndl)
     .then(function(response){
       console.log(response.data);
-      $scope.listOfCrowdies = response.data[0].crowdies;
-      $scope.hide($ionicLoading);
-      // $scope
+      // var data = response.data;
+      localStorage.setItem("handle", $stateParams.hndl);
+      $scope.companyData = response.data;
+      // $scope.companyName = data.name;
+      $http.get("https://incognito.uqcloud.net/api/user/twitter?handle="+$stateParams.hndl, config)
+      .then(function(response){
+        console.log(response.data);
+        $scope.listOfCrowdies = response.data[0].crowdies;
+        $scope.hide($ionicLoading);
+        // $scope
+
+      }), function(error){
+        $scope.hide($ionicLoading);
+        console.log(error);
+      };
+      
+
 
     }), function(error){
       $scope.hide($ionicLoading);
       console.log(error);
-    };
-    
-
+    }
 
   }), function(error){
-    $scope.hide($ionicLoading);
-    console.log(error);
+    console.error(error);
   }
+  
   $scope.applyJob = function(){
     $scope.show($ionicLoading);
     $scope.applyWork = false;
