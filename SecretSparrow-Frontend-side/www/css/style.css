@@ -353,8 +353,44 @@ padding-top:5px;
 	fill: #123 !important;
 }
 
+
 /* crowdieWorking.html */
 
 .greyBgBody{
 	background: #D8D8D8;
 }
+
+/* explore */
+#profileimage {
+  max-height:60px;
+  max-width:60px; 
+  margin-left:1%;
+  margin-top:2%;
+}
+
+.companyfollowing, 
+.companyposition {
+  margin-left: 7%; 
+  margin-top: 1%;
+}
+
+#companyname {
+  margin-left: 7%; 
+  margin-top: 1%;
+  font-weight: bold;
+}
+
+#exploretitle {
+	float: center; 
+	color: white; 
+	margin-top: 4%; 
+	margin-left:-3%;
+}
+
+#exploresearch {
+	float: right;
+}
+
+/* end of explore */
+
+

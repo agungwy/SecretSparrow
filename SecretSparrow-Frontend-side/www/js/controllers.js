@@ -305,8 +305,6 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
       $scope.hide($ionicLoading);
     }
 
-
-
 });
 
 //controller for login.html
@@ -682,7 +680,6 @@ app.controller('CrowdieHomeCtrl', function ($scope, $http, $state) {
     $http.get("https://incognito.uqcloud.net/api/user?user_id="+userId,config)
     .then(function(response){
       console.log(response.data);
-
       $scope.name=response.data.name;
 
     });
@@ -807,8 +804,9 @@ app.controller('BoHomeCtrl', function($scope, $http, $state, $ionicLoading){
 app.controller('CompanyProfileCtrl', function($scope, $state, $ionicLoading, $stateParams,$http){
   console.log("stateParams");
 
+    $http.get("https://incognito.uqcloud.net/api/work/show/crowdies?crowdies_id="+localStorage.getItem("user_id"))
+
   
-  $http.get("https://incognito.uqcloud.net/api/work/show/crowdies?crowdies_id="+localStorage.getItem("user_id"))
   .then(function(response){
     console.log(response.data);
     for (var i = 0; i < response.data.data.length; i++){
@@ -846,7 +844,7 @@ app.controller('CompanyProfileCtrl', function($scope, $state, $ionicLoading, $st
     $http.get("https://incognito.uqcloud.net/api/twitter?handle="+$stateParams.hndl)
     .then(function(response){
       console.log(response.data);
-      // var data = response.data;
+    // var data = response.data;
       localStorage.setItem("handle", $stateParams.hndl);
       $scope.companyData = response.data;
       // $scope.companyName = data.name;
@@ -863,14 +861,12 @@ app.controller('CompanyProfileCtrl', function($scope, $state, $ionicLoading, $st
       };
       
 
-
     }), function(error){
       $scope.hide($ionicLoading);
       console.log(error);
     }
-
   }), function(error){
-    console.error(error);
+	  console.error(error);
   }
   
   $scope.applyJob = function(){
@@ -915,6 +911,30 @@ app.controller('MenuCtrl', function($scope, $state){
   // };
   
 
+});
+
+// explore more companies controller (explore.html)
+
+
+app.controller('ExploreCtrl', function($scope) {
+  
+  $scope.items = [
+    { imgurl: "http://www.queenslandleaders.com.au/media/website_posts/328/workingmouseNEW.jpg",
+          id: "WORKING MOUSE" , following: "364", follower: "5.37K", position: "50"},
+    { imgurl: "https://lh6.ggpht.com/4XCF6-CyKE-mEkZXF0vWWi3pjhPc3VgeRRQJg1JeuhnUzFte9yD8dshDF9GYjB1NIik=w300",
+          id: "COMMONWEALTH BANK", following: "400", follower: "44K", position: "45"},
+    { imgurl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Hungry_Jack's.svg/2000px-Hungry_Jack's.svg.png",
+          id: "HUNGRY JACK'S", following: "907", follower: "468", position: "30"},
+    { imgurl: "http://myfonts-wtf.s3.amazonaws.com/63/63d9062d94f3a5f31f66d42ddb33cb69.539939.png",
+          id: "K MART", following: "652", follower: "576", position: "53"},
+    { imgurl: "https://upload.wikimedia.org/wikipedia/commons/2/28/Coles_logo.svg",
+          id: "COLES", following: "459", follower: "7K", position: "58"},
+    { imgurl: "https://www.karrinyupcentre.com.au/Karrinyup/media/contents/04_Stores/01_Store_Logos/Logo_David_Jones_1.jpg?width=640&height=350&ext=.jpg",
+          id: "DAVID JONES", following: "558", follower: "1.3M", position: "80"},
+    { imgurl: "https://upload.wikimedia.org/wikipedia/en/thumb/7/7d/Woolworths_logo_2014.svg/1122px-Woolworths_logo_2014.svg.png",
+          id: "WOOLWORTHS", following: "848", follower: "4.37K", position: "30"}
+  ];
+  
 });
 
 // controller for registerSuggestedCrowdie.html
@@ -1154,7 +1174,7 @@ app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state, $http, $
   }
                   
   
-
+  
 
 
   
