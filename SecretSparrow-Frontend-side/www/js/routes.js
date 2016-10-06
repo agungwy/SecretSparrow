@@ -88,6 +88,17 @@ angular.module('starter.routes', [])
     } 
   })
 
+   // child of menu, explore more companies (explore.html)
+   .state('menu.explore', {
+    url: 'menu.explore',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/explore.html',
+        controller: 'ExploreCtrl'
+      }
+    } 
+  })
+
    // child of menu, company profile in crowdie side linkage
     .state('menu.companyProfile', {
     url: '/menu.companyProfile',
