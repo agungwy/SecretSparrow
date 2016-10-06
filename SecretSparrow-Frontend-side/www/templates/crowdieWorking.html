@@ -1,7 +1,12 @@
 <!-- page for crowdie to working -->
-<ion-view title="Working Mouse" >
+<ion-view title={{title_name}} >
     
     <ion-content padding="true" class="has-header">
+
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="refresh()">
+    </ion-refresher>
         <div>
             <div class="list card" ng-repeat="account in accounts">
                 
@@ -81,7 +86,7 @@
 
                     <div class="col">
 
-                        <button class="button button-balanced button-outline" ng-click="follow(account.screen_name, account.number)" >
+                        <button class="button button-balanced button-outline" ng-click="follow(account.screen_name, $index)" >
                             FOLLOW
                         </button>
                     </div>

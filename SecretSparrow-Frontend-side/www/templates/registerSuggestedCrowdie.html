@@ -9,18 +9,18 @@
         <div>
             <h1 class="centerTitle">BUSINESS FOR YOU</h1>
             <div id="suggestedWorkRegister">
-                <div class="row" ng-show="list1">
-                    <div class="col" ng-model="companies1" >
+                <div class="row">
+                    <div class="col" ng-model="companies1" ng-show="list1" >
                         <div class="row" >
-                            <img class = "img-circle center" src=img/logo.png ng-style="bo1" ng-click="bo1Click()">
+                            <img class = "img-circle center" src={{companies1.avatar}} ng-style="bo1" ng-click="bo1Click()">
                         </div>
                         
                         <p style="text-align:center; font-size:16px;">{{companies1.name}}</p>
                     </div>
 
-                    <div class="col" ng-model="companies2">
+                    <div class="col" ng-model="companies2" ng-show="list2">
                         <div class="row" >
-                            <img class = "img-circle center" src=img/logo.png ng-style="bo2" ng-click="bo2Click()">
+                            <img class = "img-circle center" src={{companies2.avatar}} ng-style="bo2" ng-click="bo2Click()">
                         </div>
                         
                         <p style="text-align:center; font-size:16px;">{{companies2.name}}</p>
@@ -53,36 +53,36 @@
                     
                 </div> -->
 
-                <div class="row" ng-show="list2" >
-                    <div class="col" ng-model="companies3">
+                <div class="row"  >
+                    <div class="col" ng-model="companies3" ng-show="list3">
                         <div class="row">
-                            <img class = "img-circle center" src="img/logo.png" ng-style="bo3" ng-click="bo3Click()">
+                            <img class = "img-circle center" src={{companies3.avatar}} ng-style="bo3" ng-click="bo3Click()">
                         </div>
                     
-                        <p style="text-align:center; font-size:16px;">{{company.name}}</p>
+                        <p style="text-align:center; font-size:16px;">{{companies3.name}}</p>
                     </div>
                     <div class="col" ng-model="companies4">
                         <div class="row">
-                            <img class = "img-circle center" src="img/logo.png" ng-style="bo4" ng-click="bo4Click()">
+                            <img class = "img-circle center" src={{companies4.avatar}} ng-style="bo4" ng-click="bo4Click()">
                         </div>
-                        <p style="text-align:center; font-size:16px;">{{company.name}}</p>
+                        <p style="text-align:center; font-size:16px;">{{companies4.name}}</p>
                     </div>
 
                 </div>
 
-                <div class="row" ng-show="list3">
+                <div class="row" >
                     <div class="col" ng-model="companies5">
                         <div class="row">
-                            <img class = "img-circle center"  src="img/logo.png" ng-style="bo5" ng-click="bo5Click()">
+                            <img class = "img-circle center"  src={{companies5.avatar}} ng-style="bo5" ng-click="bo5Click()">
                         </div>
-                        <p style="text-align:center; font-size:16px;">{{company.name}}</p>
+                        <p style="text-align:center; font-size:16px;">{{companies5.name}}</p>
                     </div>
 
                     <div class="col" ng-model="companies6">
                         <div class="row">
-                            <img class = "img-circle center" src="img/logo.png" ng-style="bo6" ng-click="bo6Click()">
+                            <img class = "img-circle center" src={{companies6.avatar}} ng-style="bo6" ng-click="bo6Click()">
                         </div>
-                        <p style="text-align:center; font-size:16px;">{{company.name}}</p>
+                        <p style="text-align:center; font-size:16px;">{{companies6.name}}</p>
                     </div>
 
                 </div>

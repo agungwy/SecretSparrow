@@ -250,14 +250,53 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
           $ionicLoading.hide();
     };
   $scope.accounts = [];
+  $scope.title_name = "";
   var config={
   headers:{
    
         "Authorization":"Bearer "+ localStorage.getItem('access_token')
       }         
     };
-  $scope.follow = function follow(screen_name, number){
-      console.log(number);
+
+  $scope.refresh = function() {
+    $scope.accounts = [];
+    $http.get("https://incognito.uqcloud.net/api/friends?screen_name="+handle+"&handle="+handle, config)
+    .then(function(response){
+        console.log(response.data);
+        $scope.show($ionicLoading);
+        var numHp = Math.floor(Math.random() * (response.data.users.length-1));
+        var hp = response.data.users[numHp];
+        $http.get("https://incognito.uqcloud.net/api/followers?screen_name="+hp.screen_name+"&handle="+handle+"&crowdies_id="+localStorage.getItem("user_id"), config)
+        .then(function(response2){
+
+            console.log(response2.data);
+            var users = response2.data.users;
+            console.log(users);
+
+            for (var i=0; i < users.length; i++){
+              // users[i]["number"]=i;
+              $scope.accounts.push(users[i]);
+              
+            }
+            $scope.hide($ionicLoading);
+
+
+        }), function(error){
+          $scope.hide($ionicLoading);
+          console.log(error);
+        }
+
+
+
+    }), function(error){
+        
+        console.log(error);
+        $scope.hide($ionicLoading);
+      }
+  };
+  $scope.follow = function follow(screen_name, $index){
+      
+      $scope.show($ionicLoading);
       var data = {
           "screen_name":screen_name,
           "user_id":localStorage.getItem("user_id"),
@@ -266,15 +305,20 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
       $http.post("https://incognito.uqcloud.net/api/follow", data)
       .then(function(response){
           console.log(response.data);
-          $scope.accounts.splice(number, 1);
+          // var index = $scope.accounts.indexOf(item);
+          console.log($index);
+          $scope.accounts.splice($index, 1);
+          $scope.hide($ionicLoading);
       }), function(error){
           console.error(error);
+          $scope.hide($ionicLoading);
       }
   }
   $http.get("https://incognito.uqcloud.net/api/friends?screen_name="+handle+"&handle="+handle, config)
   .then(function(response){
       console.log(response.data);
       $scope.show($ionicLoading);
+      $scope.title_name = handle;
       var numHp = Math.floor(Math.random() * (response.data.users.length-1));
       var hp = response.data.users[numHp];
       $http.get("https://incognito.uqcloud.net/api/followers?screen_name="+hp.screen_name+"&handle="+handle+"&crowdies_id="+localStorage.getItem("user_id"), config)
@@ -285,7 +329,7 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
           console.log(users);
 
           for (var i=0; i < users.length; i++){
-            users[i]["number"]=i;
+            // users[i]["number"]=i;
             $scope.accounts.push(users[i]);
             
           }
@@ -958,13 +1002,14 @@ app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state, $http, $
     // console.log(data.splice(0,1));
     var x = data.length;
 
+
     $scope.companies1 = data[0];
     $scope.companies2 = data[1];
     $scope.companies3 = data[2];
     $scope.companies4 = data[3];
     $scope.companies5 = data[4];
     $scope.companies6 = data[5];
-    console.log($scope.companies1.name);
+    console.log($scope.companies1);
     console.log($scope.companies2);
     console.log($scope.companies3);
     console.log($scope.companies4);
@@ -975,16 +1020,27 @@ app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state, $http, $
       $scope.list3 = false;
       $scope.list2 = true;
       $scope.list1 = true;
+      if (data[3] == null){
+        $scope.companies4 = "";
+        console.log("null");
+      }
     }
     else if(x < 3 && x > 0){
       $scope.list2 = false;
       $scope.list3 = false;
       $scope.list1 = true;
+      if (data[1] == null){
+        console.log("null");
+        $scope.companies1 = "";
+      }
     }
     else{
       $scope.list3 = true;
       $scope.list2 = true;
       $scope.list1 = true;
+      if (data[5] == null){
+        $scope.companies5 = "";
+      }
     }
     
 
