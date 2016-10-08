@@ -1288,143 +1288,163 @@ app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state, $http, $
 
 //controller for twitterAccount.html
 
-app.controller("TwitterAccountCtrl", function($scope) {
+app.controller("TwitterAccountCtrl", function($scope,$http) {
   console.log("twitter");
-  $scope.records = [
-    {
-      "Image": "https://pbs.twimg.com/profile_images/685334484661616640/ytU4pnkW.png",
-      "Name" : "Jack",
-      "Description" : "Has not followed back in",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    },
-    {
-      "Image": "cover.jpg",
-      "Name" : "Twitter Name",
-      "Description" : "Description",
-      "NumOfDays" : "8",
-      "Days"  : "days"
-    }
-  ]
+  $http.get("https://incognito.uqcloud.net/api/requests/sent?handle=sunnyhotelbne&user_id="+localStorage.getItem("user_id"))
+    .then(function(response){
+      console.log(response.data);
+      $scope.records = response.data;
+
+    }), function(error){
+          console.error(error);
+    };
+
+      $scope.removeTwitterAccount = function removeTwitterAccount($index,screen_name,handle){
+          $http.post("https://incognito.uqcloud.net/api/unfollow?handle=sunnyhotelbne&user_id="+localStorage.getItem("user_id")+"&screen_name="+screen_name+"&handle="+handle)
+          .then(function(response2){
+            $scope.records.splice($index, 1);
+          }),function(error2){
+            console.log(error2);
+          }
+          
+      }
+    
+
+  // $scope.records = [
+  //   {
+  //     "Image": "https://pbs.twimg.com/profile_images/685334484661616640/ytU4pnkW.png",
+  //     "Name" : "Jack",
+  //     "Description" : "Has not followed back in",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   },
+  //   {
+  //     "Image": "cover.jpg",
+  //     "Name" : "Twitter Name",
+  //     "Description" : "Description",
+  //     "NumOfDays" : "8",
+  //     "Days"  : "days"
+  //   }
+  // ]
 });
 
 // controller for dashboard.html

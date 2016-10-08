@@ -3,10 +3,10 @@
       <div class ="list" id="listTwitterAccount">
         <div ng-repeat="x in records">
           <div class="item item-avatar item-button-right">
-            <img ng-src="img/{{x.Image}}.png">      
-            <h2>{{x.Name}}</h2>
-                <p id="description">{{x.Description}}</p>
-              <button class="button button-outline button-positive">
+            <img ng-src="{{x.profile_image_url}}">      
+            <h2>{{x.name}}</h2>
+                <p id="description">Has not followed back in {{x.days}} days</p>
+              <button class="button button-outline button-positive" id="removeButton" ng-click="removeTwitterAccount($index,x.screen_name,x.handle)">
               Remove
             </button>
             </div>
@@ -53,9 +53,9 @@
 <div class ="list" ng-controller="myCtrl">
 <div ng-repeat="x in records">
   <div class="item item-avatar item-button-right">
-		<img ng-src="img/{{x.Image}}.png">      
-		<h2>{{x.Name}}</h2>
-      	<p id="description">{{x.Description}}</p>
+    <img ng-src="img/{{x.Image}}.png">      
+    <h2>{{x.Name}}</h2>
+        <p id="description">{{x.Description}}</p>
       <button class="button button-outline button-positive">
       Remove
     </button>
