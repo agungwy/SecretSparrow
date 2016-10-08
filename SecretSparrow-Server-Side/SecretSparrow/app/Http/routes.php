@@ -15,7 +15,7 @@
  header('Access-Control-Allow-Credentials: true');
  header('Access-Control-Allow-Methods: POST,GET,PUT,DELETE');
  header('Access-Control-Allow-Headers: Content-Type, Authorization');
- 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -40,19 +40,24 @@ Route::put('api/role',['uses'=>'Auth\AuthController@role','middleware'=>'oauth']
 Route::get('/api/categories', 'CategoryController@getCategory');
 Route::post('/api/categories', 'CategoryController@selectCategory');
 
+Route::get('/api/follow/total_all/{bo}', 'FollowController@getTotalAll');
+Route::get('/api/follow/total_followed/{bo}', 'FollowController@getTotalFollowed');
+Route::get('/api/follow/crowdie_all/{bo}/{cr}', 'FollowController@getCrowdieAll');
+Route::get('/api/follow/crowdie_followed/{bo}/{cr}', 'FollowController@getCrowdieFollowed');
+
 //this bind the singleton object to the service (Register oauth2 to the Laravel service)
 App::singleton('oauth2', function() {
-    
+
     $storage = new OAuth2\Storage\Pdo(array(
-        'dsn' => 'mysql:dbname=SecretSparrow;host=127.0.0.1:8889', 
-        'username' => 'root', 
+        'dsn' => 'mysql:dbname=SecretSparrow;host=127.0.0.1:8889',
+        'username' => 'root',
         'password' => 'root'));
-    
+
     $server = new OAuth2\Server($storage);
-    
+
     $server->addGrantType(new OAuth2\GrantType\ClientCredentials($storage));
     $server->addGrantType(new OAuth2\GrantType\UserCredentials($storage));
-    
+
     return $server;
 });
 //this route is for gaining the access token
@@ -60,9 +65,9 @@ Route::post('oauth/token', function()
 {
     $bridgedRequest  = OAuth2\HttpFoundationBridge\Request::createFromRequest(Request::instance());
     $bridgedResponse = new OAuth2\HttpFoundationBridge\Response();
-    
+
     $bridgedResponse = App::make('oauth2')->handleTokenRequest($bridgedRequest, $bridgedResponse);
-    
+
     return $bridgedResponse;
 });
 
@@ -74,9 +79,9 @@ Route::get('private', function()
 	$bridgedResponse = new OAuth2\HttpFoundationBridge\Response();
 //	print_r(App);
 	if (App::make('oauth2')->verifyResourceRequest($bridgedRequest, $bridgedResponse)) {
-		
+
 		$token = App::make('oauth2')->getAccessTokenData($bridgedRequest);
-		
+
 		return response()->json(array(
 			'private' => 'stuff',
 			'user_id' => $token['user_id'],
