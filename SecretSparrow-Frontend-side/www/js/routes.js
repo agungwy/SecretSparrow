@@ -130,7 +130,7 @@ angular.module('starter.routes', [])
   
   // child of menu, crowdie home linkage
   .state('menu.crowdieHome', {
-    url: '/menu_crowdieHome',
+    url: '/menu.crowdieHome',
     cache: false,
     views: {
       'menuContent': {
@@ -143,7 +143,7 @@ angular.module('starter.routes', [])
 
   // child of menu, business owner home linkage
   .state('menu.boHome', {
-    url: '/menu_boHome',
+    url: '/menu.boHome',
     cache: false,
     views: {
       'menuContent': {
@@ -159,7 +159,7 @@ angular.module('starter.routes', [])
 
   // child of menu, business owner home linkage
   .state('menu.twitterAccount', {
-    url: '/menu_twitterAccount',
+    url: '/menu.twitterAccount',
     views: {
       'menuContent': {
         templateUrl: 'templates/twitterAccount.html',
