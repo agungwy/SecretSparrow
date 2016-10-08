@@ -7,16 +7,27 @@
             <canvas height="300" id="doughnut" class="chart chart-doughnut" chart-data="chartData" chart-labels="chartLabels" chart-colors="chartColors" chart-options="chartOptions"> 
             </canvas> 
 
-            <div id="chartTextDiv" >
-                <h1 id="chartText">80%</h1>
+            <!-- <div id="chartTextDiv" >
+                <h1 id="chartText">{{percentage}}%</h1>
                 <h2 class="centerH2">Followed Back</h2>
-            </div>
+            </div> -->
+            <lable id="chartTextDiv">
+                <h1 id="chartText">{{percentage}}%</h1>
+                <h2 class="centerH2">Followed You Back</h2>
+            </lable>
            
         </div>
         
         <div class="bar bar-footer bar-assertive">
+<<<<<<< HEAD
            <button class="button buttonDashboard">Summary</button>
            <button class="button buttonDashboard" ui-serf="menu.boCrowdieList">Crowdies Performance</button>
+=======
+
+           <button class="button buttonDashboard">Summary Data</button>
+           <button class="button buttonDashboard">Weekly Data</button>
+           <button class="button buttonDashboard">Crowdies Data</button>
+>>>>>>> 03d43a8b263a24f43c36521e07f937168a9b2d99
            
         </div>
 
