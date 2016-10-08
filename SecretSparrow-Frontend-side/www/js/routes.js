@@ -134,6 +134,21 @@ angular.module('starter.routes', [])
     }
     
   })
+
+  // child of menu, business owner home linkage
+  .state('menu.twitterAccount', {
+    url: '/menu_twitterAccount',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/twitterAccount.html',
+        controller: 'TwitterAccountCtrl'
+        // parameter:[
+        //   "üser_id"
+        // ]
+      }
+    }
+    
+  })
   
   
   // if none of the above states are matched, use this as the fallback

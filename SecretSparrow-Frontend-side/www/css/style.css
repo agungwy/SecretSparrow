@@ -352,3 +352,14 @@ padding-top:5px;
 	
 	fill: #123 !important;
 }
+
+/* twitterAccount.html */
+
+#listTwitterAccount{
+	overflow-y: scroll;
+	height: 92.5%;
+}
+
+#description{
+  color:red;
+}

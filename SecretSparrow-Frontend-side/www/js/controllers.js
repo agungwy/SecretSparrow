@@ -1070,3 +1070,107 @@ app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state, $http, $
   
 });
 
+app.controller("TwitterAccountCtrl", function($scope) {
+  console.log("twitter");
+  $scope.records = [
+    {
+      "Image": "cover.jpg",
+      "Name" : "Jack",
+      "Description" : "Has not followed back in 5 days"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    },
+    {
+      "Image": "cover.jpg",
+      "Name" : "Twitter Name",
+      "Description" : "Description"
+    }
+  ]
+});
+
+
+
+
