@@ -554,6 +554,7 @@ app.controller('RegisterRoleCtrl', function($scope, $state, $http, RegisterServi
     .then(function(response){
       console.log(data);
       RegisterService.changeRole('crowdies');
+      localStorage.setItem('scope', 'crowdies');
       $state.go('chooseCategories');
     });
     
@@ -569,6 +570,7 @@ app.controller('RegisterRoleCtrl', function($scope, $state, $http, RegisterServi
     .then(function(response){
       console.log(data);
       RegisterService.changeRole('business owner');
+      localStorage.setItem('scope', 'bo');
       $state.go('connectToTwitter');
     });
     
@@ -1039,32 +1041,82 @@ app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state, $http, $
     console.log($scope.companies5);
     console.log($scope.companies6);
 
-    if (x < 5 && x > 2 ){
-      $scope.list3 = false;
-      $scope.list2 = true;
+    if (x == 1){
       $scope.list1 = true;
-      if (data[3] == null){
-        $scope.companies4 = "";
-        console.log("null");
-      }
-    }
-    else if(x < 3 && x > 0){
       $scope.list2 = false;
       $scope.list3 = false;
-      $scope.list1 = true;
-      if (data[1] == null){
-        console.log("null");
-        $scope.companies1 = "";
-      }
+      $scope.list4 = false;
+      $scope.list5 = false;
+      $scope.list6 = false;
     }
-    else{
-      $scope.list3 = true;
+
+    else if (x == 2){
+      $scope.list1 = true;
       $scope.list2 = true;
-      $scope.list1 = true;
-      if (data[5] == null){
-        $scope.companies5 = "";
-      }
+      $scope.list3 = false;
+      $scope.list4 = false;
+      $scope.list5 = false;
+      $scope.list6 = false;
     }
+    else if (x == 3){
+      $scope.list1 = true;
+      $scope.list2 = true;
+      $scope.list3 = true;
+      $scope.list4 = false;
+      $scope.list5 = false;
+      $scope.list6 = false;
+    }
+    else if (x == 4){
+      $scope.list1 = true;
+      $scope.list2 = true;
+      $scope.list3 = true;
+      $scope.list4 = false;
+      $scope.list5 = false;
+      $scope.list6 = false;
+    }
+    else if (x == 5){
+      $scope.list1 = true;
+      $scope.list2 = true;
+      $scope.list3 = true;
+      $scope.list4 = true;
+      $scope.list5 = true;
+      $scope.list6 = false;
+    }
+    else if (x == 6){
+      $scope.list1 = true;
+      $scope.list2 = true;
+      $scope.list3 = true;
+      $scope.list4 = true;
+      $scope.list5 = true;
+      $scope.list6 = true;
+    }
+
+    // if (x < 5 && x > 2 ){
+    //   $scope.list3 = false;
+    //   $scope.list2 = true;
+    //   $scope.list1 = true;
+    //   if (data[3] == null){
+    //     $scope.companies4 = "";
+    //     console.log("null");
+    //   }
+    // }
+    // else if(x < 3 && x > 0){
+    //   $scope.list2 = false;
+    //   $scope.list3 = false;
+    //   $scope.list1 = true;
+    //   if (data[1] == null){
+    //     console.log("null");
+    //     $scope.companies1 = "";
+    //   }
+    // }
+    // else{
+    //   $scope.list3 = true;
+    //   $scope.list2 = true;
+    //   $scope.list1 = true;
+    //   if (data[5] == null){
+    //     $scope.companies5 = "";
+    //   }
+    // }
     
 
     $scope.bo1Click = function(){
@@ -1391,7 +1443,7 @@ app.controller('DashboardCtrl', function($scope, $state,$http){
           var follow = response2.data.followed_count;
           var not_follow = total - follow;
           $scope.chartData = [follow,not_follow];
-          var x = (follow/total)*100;
+          $scope.percentage = ((follow/total)*100).toFixed(2);
           console.log('test');
           $scope.chartColors = ["#ED5456", "#D8D8D8"];
           $scope.chartOptions = {

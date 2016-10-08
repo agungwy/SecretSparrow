@@ -395,10 +395,20 @@ padding-top:5px;
 
 /* style for dashboard.html */
 
+#chartDiv {
+  position: relative;
+}
+
 #chartTextDiv{
-	position: absolute;;
-	top: 30%;
-	left: 35%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+
 }
 
 #chartText{
@@ -407,6 +417,6 @@ padding-top:5px;
 }
 
 .buttonDashboard{
-	width: 49%;
+	width: 33%;
 	height: inherit;
 }
