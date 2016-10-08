@@ -847,6 +847,19 @@ app.controller('BoHomeCtrl', function($scope, $http, $state, $ionicLoading){
 
 });
 
+// controller for boCrowdieList.html
+app.controller('BoCrowdieListCtrl', function($scope,$state,$http){
+    $http.get("http://private-251c0-secretsparrow.apiary-mock.com/api/follow/total_all/bo")
+     .then(function(response){
+       console.log(response.data);
+       $scope.crowdieList=response.data;
+       for (var i=0; i < response.data.length; i++){
+        $scope.crowdieList[i]['percent'] = ($scope.crowdieList[i].followed_back/$scope.crowdieList[i].following)*100;
+       }
+
+  });
+
+});
 // controller for companyProfile.html
 app.controller('CompanyProfileCtrl', function($scope, $state, $ionicLoading, $stateParams,$http){
   console.log("stateParams");

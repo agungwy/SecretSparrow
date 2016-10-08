@@ -171,7 +171,34 @@ angular.module('starter.routes', [])
     }
     
   })
+
+  .state('menu.boCrowdieList', {
+    url: '/menu.boCrowdieList',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/boCrowdieList.html',
+        controller: 'BoCrowdieListCtrl'
+        // parameter:[
+        //   "üser_id"
+        // ]
+      }
+    }
+    
+  })
   
+  .state('menu.statistic', {
+    url: '/menu.statistic',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/statistic.html',
+        controller: 'StatisticCtrl'
+        // parameter:[
+        //   "üser_id"
+        // ]
+      }
+    }
+    
+  })
   
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/starter');

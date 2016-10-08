@@ -353,6 +353,41 @@ padding-top:5px;
 	fill: #123 !important;
 }
 
+/*boCrowdieList.html */
+.stable-bg {
+  background-color: white; }
+
+
+.divider{
+    left:50%;
+    top:10%;
+    bottom:10%;
+    border-left:1px solid grey;
+}
+#trashcan{
+	color:red;
+	float:right;
+    color: inherit;
+    text-decoration: none;
+
+}
+
+#efficiency{
+	font-weight:500;
+	color:#4D4D4D;
+}
+
+#nav2 li {
+    display: inline-block;
+}
+
+#nav2 li + li:before {
+    content: " | ";
+    padding: 0 10px;
+}
+#followback{
+	color:#4d4d4d;
+}
 
 /* crowdieWorking.html */
 

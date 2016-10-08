@@ -1,0 +1,49 @@
+<ion-view id="boCrowdieList">
+  <ion-nav-title>
+    <img class="title-image" src="img/logo.png">    
+  </ion-nav-title>
+  <ion-content class="stable-bg" scroll="false">
+   <ion-content padding="false" scroll="false" class="has-header">    <h4 id="secretSparrow2-heading3" style="color:#000000;text-align:center;">{{number}} Crowdies are working for you</h4>
+   <ion-list>
+            <div>
+                <ion-item class="item item-avatar item-icon-right assertive" ng-repeat="c in crowdieList" ui-sref="statistic">
+
+                    <img ng-src="img/logo.png">
+
+                    <h2assertive>{{c.name}}
+                        <ul id="nav2">
+                        <a href=""  class="fa fa-trash-o fa-2x" id="trashcan"></a>
+                          <li ><a id="followback">{{c.following}} Following</a></li>
+                          <li><a id="followback">{{c.followed_back}} Followed Back</a></li>
+                        </ul>
+                          <a id="efficiency">{{c.percent}}% Efficiency</a>
+
+                        
+                    </h2assertive>
+                    
+                </ion-item>
+            </div>
+
+        </ion-list>
+
+
+   <!--ion-slide-box on-slide-changed="slideHasChanged($index)">
+  <ion-slide>
+  <div>
+  <div style="background-color:#4D4D4D; overflow: auto;" class="list card manual-card-fullwidth">
+    <div class="row flex-wrap list-crowdies padding-top">
+      <div class="col-33 text-center" ng-repeat="crowdie in crowdies">
+        <a href="#statistic">
+          <img src="{{ crowdies.face }}" alt="" class="circle"/>
+          <h5 class="dark">{{ crowdies.name }}</h5><br>
+          <h5 class="dark">{{ crowdies.score}}</h5>
+        </a>
+      </div>
+    </div>
+    </div>
+    </div>
+    </ion-slide>
+    </ion-slide-box-->
+  </ion-content>
+
+</ion-view>
