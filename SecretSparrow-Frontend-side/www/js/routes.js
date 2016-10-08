@@ -172,15 +172,13 @@ angular.module('starter.routes', [])
     
   })
 
-  .state('menu.boCrowdieList', {
-    url: '/menu.boCrowdieList',
+  .state('boCrowdieList', {
+    url: '/boCrowdieList',
     views: {
-      'menuContent': {
+      'dashboardView': {
         templateUrl: 'templates/boCrowdieList.html',
         controller: 'BoCrowdieListCtrl'
-        // parameter:[
-        //   "üser_id"
-        // ]
+
       }
     }
     
@@ -192,9 +190,7 @@ angular.module('starter.routes', [])
       'menuContent': {
         templateUrl: 'templates/statistic.html',
         controller: 'StatisticCtrl'
-        // parameter:[
-        //   "üser_id"
-        // ]
+
       }
     }
     
