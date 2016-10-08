@@ -410,3 +410,10 @@ padding-top:5px;
 	width: 49%;
 	height: inherit;
 }
+
+/* Follwed Twitter Account */
+
+#removeButton{
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
