@@ -1,211 +1,63 @@
 <!-- page for crowdie to working -->
-<ion-view title="Working Mouse" >
+<ion-view title={{title_name}} >
     
     <ion-content padding="true" class="has-header">
+
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="refresh()">
+    </ion-refresher>
         <div>
-            <div class="list card">
-                <ion-item class="item-avatar" style="border-bottom: 0px;border-top: 0px;">
-                    <img src="https://pbs.twimg.com/profile_images/633647916171726848/tCS7Msjb.png" style="position: absolute;top: 1; bottom:0; left: 0; right:0;margin: auto; max-height: 60px; max-width: 60px;">
-                </ion-item>
+            <div class="list card" ng-repeat="account in accounts">
+                
+                <img class="img-circle center" src={{account.profile_image_url}} >
+                
 
-                <div >
+                
 
-                    <h4 style="text-align: center;">ALEX BOND</h4>
+                <h4 class="centerH2Black">{{account.name}}</h4>
 
-                    <div style="margin: 0px; line-height: 90px; text-align: center; background-color: rgb(232, 235, 239);">
+                <div class="greyBgBody">
 
-                        <div style="margin: 0px; line-height: 8px; text-align: center; background-color: rgb(232, 235, 239);">
-                            <br>
-                            <br>
-                            <div style="float:left;padding-left:50px;">
-                                <p style="font-size:18px; color:#ED5356">1500</p>
-                                <p style="font-size:13px ">FOLLOWING</p>
-                                <br>
-                            </div>
-                            <div style="float:left;padding-left:40px;">
-                                <p style="font-size:18px; color:#ED5356;">2.7K</p>
-                                <p style="font-size:13px">FOLLOWERS</p>
-                            </div>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <hr>
-                            <br>
-                            <div align="center" style="background-color: rgb(232, 235, 239);">
-                                <p style="font-size:13px;text-align:center;font-weight: bold;">CURRENTLY FOLLOWING</p>
-                                <br>
+                    <div class="row centerDiv">
+                        
+                        <div class="col">
 
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:11px;background-color : transparent;margin-top:-17px;border-top: 0px;">
-                                    <img src="https://pbs.twimg.com/profile_images/378800000483764274/ebce94fb34c055f3dc238627a576d251_normal.jpeg">
-                                </ion-item>
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-20px;background-color : transparent;margin-top:-17px;border-top: 0px;">
-                                    <img src="https://at-cdn-s01.audiotool.com/2014/04/04/documents/IUm5qDouo3d3NNj38qXwqTXWvGT7GK/0/cover256x256-5bd860c5e4144edeb507058bc68ab29f.jpg">
-                                </ion-item>
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-20px;background-color : transparent;margin-top:-17px;border-top: 0px;">
-                                    <img src="https://pbs.twimg.com/profile_images/620072913698328577/gOT7Sc6U.jpg">
-                                </ion-item>
-
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-23px;background-color : transparent;margin-top:-17px;border-top: 0px;">
-                                    <img src="https://pbs.twimg.com/profile_images/738742694525210624/qrdHX75X.jpg">
-                                </ion-item>
-
-
-
-                                <p style="font-size:13px;text-align:center;font-weight: bold;">INTERESTED IN</p>
-                                <br>
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:11px;background-color: transparent;margin-top:-23px;border-top: 0px;">
-
-                                    <img src="http://icons.iconarchive.com/icons/icons-land/points-of-interest/128/Restaurant-Blue-icon.png">
-
-                                </ion-item>
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-20px;background-color: transparent;margin-top:-23px;border-top: 0px;">
-                                    <img src="http://png.clipart.me/graphics/thumbs/112/illustration-of-a-lcd-tv-with-a-blue-screen-and-silver-surround_11286145.jpg">
-                                </ion-item>
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-20px;background-color: transparent;margin-top:-23px;border-top: 0px;">
-                                    <img src="http://wapkaimage.com/400714/400714804_88ac6931cd.png">
-                                </ion-item>
-
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-23px;background-color: transparent;margin-top:-23px;border-top: 0px;">
-                                    <img src="https://dyzmn8020x6cd.cloudfront.net/sys-master/products/h25/h9c/8964111958046/SCT03XXZBK-Product-H116-Front_SMALLER">
-                                </ion-item>
-
-                                <p style="float:left; padding-left:30px; font-size:11px;">FOOD</p>
-                                <p style="float:left; padding-left:13px;font-size:11px;">TECHNOLOGY</p>
-                                <p style="float:left; padding-left:11px;font-size:11px;">GAME</p>
-                                <p style="float:left; padding-left:21px;font-size:11px;">FASHION</p>
-
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-
-                            </div>
+                            <p style="font-size:18px; color:#ED5356">{{account.friends_count}}</p>
+                            <p style="font-size:13px ">FOLLOWING</p>
+                            
                         </div>
+                        <div class="col">
+                            <p style="font-size:18px; color:#ED5356;">{{account.followers_count}}</p>
+                            <p style="font-size:13px">FOLLOWERS</p>
+                        </div>
+
                     </div>
+                    <hr class="top20">
+                
+
                 </div>
-                <div class="item item-body">
-                    <div style="margin-top:0px;color:#000000;">
-                        <button class="button button-assertive button-outline" style="margin-left:30px;">
+                      
+                
+                <div class="row centerDiv">
+                    <!-- <div class="col">
+                    
+                        <button class="button button-assertive button-outline" >
                             SKIP
                         </button>
+                    </div> -->
 
-                        <button class="button button-assertive button-outline " style="margin-left:47px;color:#248f24;border-color:#248f24;">
+                    <div class="col">
+
+                        <button class="button button-balanced button-outline" ng-click="follow(account.screen_name, $index)" >
                             FOLLOW
                         </button>
                     </div>
+                    
                 </div>
             </div>
-            <div class="list card">
-                <ion-item class="item-avatar" style="border-bottom: 0px;border-top: 0px;">
-                    <img src="https://pbs.twimg.com/profile_images/633647916171726848/tCS7Msjb.png" style="position: absolute;top: 1; bottom:0; left: 0; right:0;margin: auto; max-height: 60px; max-width: 60px;">
-                </ion-item>
-
-                <div>
-
-                    <h4 style="text-align: center;">ALEX BOND</h4>
-
-                    <div style="margin: 0px; line-height: 90px; text-align: center; background-color: rgb(232, 235, 239);">
-
-                        <div style="margin: 0px; line-height: 8px; text-align: center; background-color: rgb(232, 235, 239);">
-                            <br>
-                            <br>
-                            <div style="float:left;padding-left:50px;">
-                                <p style="font-size:18px; color:#ED5356">1500</p>
-                                <p style="font-size:13px ">FOLLOWING</p>
-                                <br>
-                            </div>
-                            <div style="float:left;padding-left:40px;">
-                                <p style="font-size:18px; color:#ED5356;">2.7K</p>
-                                <p style="font-size:13px">FOLLOWERS</p>
-                            </div>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <hr>
-                            <br>
-                            <div align="center" style="background-color: rgb(232, 235, 239);">
-                                <p style="font-size:13px;text-align:center;font-weight: bold;">CURRENTLY FOLLOWING</p>
-                                <br>
-
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:11px;background-color : transparent;margin-top:-17px;border-top: 0px;">
-                                    <img src="https://pbs.twimg.com/profile_images/378800000483764274/ebce94fb34c055f3dc238627a576d251_normal.jpeg">
-                                </ion-item>
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-20px;background-color : transparent;margin-top:-17px;border-top: 0px;">
-                                    <img src="https://at-cdn-s01.audiotool.com/2014/04/04/documents/IUm5qDouo3d3NNj38qXwqTXWvGT7GK/0/cover256x256-5bd860c5e4144edeb507058bc68ab29f.jpg">
-                                </ion-item>
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-20px;background-color : transparent;margin-top:-17px;border-top: 0px;">
-                                    <img src="https://pbs.twimg.com/profile_images/620072913698328577/gOT7Sc6U.jpg">
-                                </ion-item>
-
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-23px;background-color : transparent;margin-top:-17px;border-top: 0px;">
-                                    <img src="https://pbs.twimg.com/profile_images/738742694525210624/qrdHX75X.jpg">
-                                </ion-item>
-
-
-
-                                <p style="font-size:13px;text-align:center;font-weight: bold;">INTERESTED IN</p>
-                                <br>
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:11px;background-color: transparent;margin-top:-23px;border-top: 0px;">
-
-                                    <img src="http://icons.iconarchive.com/icons/icons-land/points-of-interest/128/Restaurant-Blue-icon.png">
-
-                                </ion-item>
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-20px;background-color: transparent;margin-top:-23px;border-top: 0px;">
-                                    <img src="http://png.clipart.me/graphics/thumbs/112/illustration-of-a-lcd-tv-with-a-blue-screen-and-silver-surround_11286145.jpg">
-                                </ion-item>
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-20px;background-color: transparent;margin-top:-23px;border-top: 0px;">
-                                    <img src="http://wapkaimage.com/400714/400714804_88ac6931cd.png">
-                                </ion-item>
-
-                                <ion-item class="item-avatar" style="border-bottom: 0px;float:left;margin-left:-23px;background-color: transparent;margin-top:-23px;border-top: 0px;">
-                                    <img src="https://dyzmn8020x6cd.cloudfront.net/sys-master/products/h25/h9c/8964111958046/SCT03XXZBK-Product-H116-Front_SMALLER">
-                                </ion-item>
-
-                                <p style="float:left; padding-left:30px; font-size:11px;">FOOD</p>
-                                <p style="float:left; padding-left:13px;font-size:11px;">TECHNOLOGY</p>
-                                <p style="float:left; padding-left:11px;font-size:11px;">GAME</p>
-                                <p style="float:left; padding-left:21px;font-size:11px;">FASHION</p>
-
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item item-body">
-                    <div style="margin-top:0px;color:#000000;">
-                        <button class="button button-assertive button-outline" style="margin-left:30px;">
-                            SKIP
-                        </button>
-
-                        <button class="button button-assertive button-outline " style="margin-left:47px;color:#248f24;border-color:#248f24;">
-                            FOLLOW
-                        </button>
-                    </div>
-                </div>
-            </div>
+            
         </div>
-        <div class="spacer" style="height: 100px;"></div>
+        
     </ion-content>
 </ion-view>

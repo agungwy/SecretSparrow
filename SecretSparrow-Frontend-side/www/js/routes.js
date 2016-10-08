@@ -77,6 +77,17 @@ angular.module('starter.routes', [])
 
  	})
 
+  // child of menu, dashboard
+  .state('menu.dashboard', {
+    url: '/menu.dashboard',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/dashboard.html',
+        controller: 'DashboardCtrl'
+      }
+    } 
+  })
+
   // child of menu, crowdie working linkage
    .state('menu.crowdieWorking', {
     url: '/menu.crowdieWorking',
@@ -84,6 +95,17 @@ angular.module('starter.routes', [])
       'menuContent': {
         templateUrl: 'templates/crowdieWorking.html',
         controller: 'CrowdieWorkingCtrl'
+      }
+    } 
+  })
+
+   // child of menu, explore more companies (explore.html)
+   .state('menu.explore', {
+    url: 'menu.explore',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/explore.html',
+        controller: 'ExploreCtrl'
       }
     } 
   })
