@@ -406,14 +406,16 @@ app.controller('LoginCtrl', function ($scope,$http, $ionicLoading, $stateParams,
 
         // localStorage.setItem("email",response.data.username);
         if(data.scope=="crowdies"){
-          $scope.hide($ionicLoading);
+          
           $state.go('menu.crowdieHome');
+          $scope.hide($ionicLoading);
         }
         else{
           console.log('redirect');
-          $scope.hide($ionicLoading);
+          
           // $state.transitionTo('menu.boHome', null, {'reload':true});
           $state.go('menu.boHome');
+          $scope.hide($ionicLoading);
         }
         
       });
@@ -821,6 +823,7 @@ app.controller('BoHomeCtrl', function($scope, $http, $state, $ionicLoading){
       $scope.name=(response.data[0]).handle;
       $scope.listOfCrowdies = (response.data[0]).crowdies; 
       console.log('updated');
+      console.log(response);
       localStorage.setItem("twitter_id",(response.data[0]).twitter_id);
       localStorage.setItem("handle",(response.data[0]).handle);
       $http.get("https://incognito.uqcloud.net/api/twitter?handle="+localStorage.getItem("handle"))
@@ -834,11 +837,11 @@ app.controller('BoHomeCtrl', function($scope, $http, $state, $ionicLoading){
       
     }, function(error){
       $scope.hide($ionicLoading);
-    console.log('motherfucker failed');
+    console.log('failed');
   });
   }), function(error){
     $scope.hide($ionicLoading);
-    console.log('motherfucker');
+    console.log('error');
   };
 
 
@@ -1228,13 +1231,32 @@ app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state, $http, $
 
 
   }
-                  
-  
-  
-
-
-  
-  
   
 });
 
+// controller for menu.html
+app.controller('DashboardCtrl', function($scope, $state,$http){
+
+  // $http.get("https://incognito.uqcloud.net/api/twitter?handle="+$stateParams.hndl)
+  //   .then(function(response){
+  //     console.log(response.data);
+    
+  // }), function(error){
+  //   console.error(error);
+  // }
+  $scope.chartLabels = ["Follow Back","Not Follow Back"];
+  $scope.chartData = [300,200];
+  var x = (300/500)*100;
+  console.log('test');
+  $scope.chartColors = ["#ED5456", "#FFFFFF"];
+  $scope.chartOptions = {
+    cutoutPercentage: 80,
+    innerTitle: "test"
+  };
+
+
+  // (function (ChartJsProvider) {
+  // ChartJsProvider.setOptions({ colors : [ "#ED5456", "#FFFFFF"] });
+  // })
+
+});

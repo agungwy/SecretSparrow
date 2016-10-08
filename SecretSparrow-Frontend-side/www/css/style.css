@@ -393,4 +393,23 @@ padding-top:5px;
 
 /* end of explore */
 
+/* style for dashboard.html */
+
+#chartTextDiv {
+   position : absolute;
+   top:30%;
+   left:35%;
+}
+
+#chartText{
+	font-size: 50px;
+	color: #ED5356;
+}
+
+.buttonDashboard{
+	width: 49%;
+	height: inherit;
+}
+
+
 

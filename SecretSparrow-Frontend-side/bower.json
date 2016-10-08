@@ -8,7 +8,8 @@
     "ngCordova": "^0.1.27-alpha",
     "angular-resource": "^1.5.8",
     "ng-cordova-oauth": "^0.2.10",
-    "jsSHA": "1.6.0"
+    "jsSHA": "1.6.0",
+    "angular-chart.js": "^1.0.3"
   },
   "resolutions": {
     "angular": ">= 1.0.8"
