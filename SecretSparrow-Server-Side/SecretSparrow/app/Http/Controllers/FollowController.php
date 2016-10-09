@@ -48,4 +48,44 @@ class FollowController extends Controller
       }
       return $counter;
     }
+
+    public function crowdiesAll($bo) {
+
+      $crowdie = SentFollowingRequestModel::where('handle',$bo);
+
+      $temp=array();
+      foreach($crowdie->get() as $crowdies) {
+        $crowdies_id=$crowdies->crowdies_id;
+        array_push($temp,$crowdies_id);
+      }
+      $temp2=array();
+      foreach($temp as $t){
+          $temp3=array();
+          $temp3[$t]=$this->getCrowdieAll($bo,$t);
+          if(!in_array($temp3, $temp2)) {
+            array_push($temp2,$temp3);
+        }
+      }
+      return $temp2;
+    }
+
+    public function crowdiesFollowed($bo) {
+
+      $crowdie = SentFollowingRequestModel::where('followed_back',true)
+                                           ->where('handle',$bo);
+      $temp=array();
+      foreach($crowdie->get() as $crowdies) {
+        $crowdies_id=$crowdies->crowdies_id;
+        array_push($temp,$crowdies_id);
+      }
+      $temp2=array();
+      foreach($temp as $t){
+          $temp3=array();
+          $temp3[$t]=$this->getCrowdieFollowed($bo,$t);
+          if(!in_array($temp3, $temp2)) {
+            array_push($temp2,$temp3);
+        }
+      }
+      return $temp2;
+    }
 }

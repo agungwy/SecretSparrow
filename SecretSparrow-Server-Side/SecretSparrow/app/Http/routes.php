@@ -42,8 +42,8 @@ Route::post('/api/categories', 'CategoryController@selectCategory');
 
 Route::get('/api/follow/total_all/{bo}', 'FollowController@getTotalAll');
 Route::get('/api/follow/total_followed/{bo}', 'FollowController@getTotalFollowed');
-Route::get('/api/follow/crowdie_all/{bo}/{cr}', 'FollowController@getCrowdieAll');
-Route::get('/api/follow/crowdie_followed/{bo}/{cr}', 'FollowController@getCrowdieFollowed');
+Route::get('/api/follow/crowdie_all/{bo}', 'FollowController@crowdiesAll');
+Route::get('/api/follow/crowdie_followed/{bo}', 'FollowController@crowdiesFollowed');
 
 //this bind the singleton object to the service (Register oauth2 to the Laravel service)
 App::singleton('oauth2', function() {
