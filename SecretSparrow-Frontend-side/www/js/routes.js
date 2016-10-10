@@ -71,6 +71,7 @@ angular.module('starter.routes', [])
  	.state('menu', {
  		url: '/menu',
  		abstract: true,
+    cache: false,
  		templateUrl: 'templates/menu.html',
     controller: 'MenuCtrl'
  		
@@ -172,10 +173,10 @@ angular.module('starter.routes', [])
     
   })
 
-  .state('boCrowdieList', {
-    url: '/boCrowdieList',
+  .state('menu.boCrowdieList', {
+    url: '/menu.boCrowdieList',
     views: {
-      'dashboardView': {
+      'menuContent': {
         templateUrl: 'templates/boCrowdieList.html',
         controller: 'BoCrowdieListCtrl'
 

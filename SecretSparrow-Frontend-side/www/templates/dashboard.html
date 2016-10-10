@@ -3,6 +3,7 @@
     
     <ion-content padding="true" class="has-header">
 
+
         <div id="chartDiv" class ="centerDiv">
             <canvas height="300" id="doughnut" class="chart chart-doughnut" chart-data="chartData" chart-labels="chartLabels" chart-colors="chartColors" chart-options="chartOptions"> 
             </canvas> 
@@ -17,15 +18,29 @@
             </lable>
            
         </div>
-        
-        <div class="bar bar-footer bar-assertive">
-           <button class="button buttonDashboard">Summary</button>
-           <button class="button buttonDashboard" ui-serf="menu.boCrowdieList">Crowdies Performance</button>
-           <button class="button buttonDashboard">Summary Data</button>
-           <button class="button buttonDashboard">Weekly Data</button>
-           <button class="button buttonDashboard">Crowdies Data</button>
+        <div class="tabs-striped tabs-background-assertive tabs-color-light">
+          <div class="tabs">
+            <a class="tab-item active" ui-sref="menu.dashboard">
+              
+              Summary
+              
+            </a>
+            <a class="tab-item" ui-sref="menu.boCrowdieList">
+              
+              Crowdies Performance
+              
+            </a>
+            
+          </div>
         </div>
+       <!--  <div class="bar bar-footer bar-assertive">
+           <button class="button buttonDashboard" ui-serf="menu.dashboard">Summary</button>
+           <button class="button buttonDashboard" ui-serf="menu.boCrowdieList">Crowdies Performance</button>
+           
+        </div> -->
 
         
     </ion-content>
 </ion-view>
+
+

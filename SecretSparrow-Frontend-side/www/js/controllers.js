@@ -281,18 +281,18 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
             $scope.hide($ionicLoading);
 
 
-        }), function(error){
+        }, function(error){
           $scope.hide($ionicLoading);
           console.log(error);
-        }
+        });
 
 
 
-    }), function(error){
+    }, function(error){
         
         console.log(error);
         $scope.hide($ionicLoading);
-      }
+      });
   };
   $scope.follow = function follow(screen_name, $index){
       
@@ -309,10 +309,10 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
           console.log($index);
           $scope.accounts.splice($index, 1);
           $scope.hide($ionicLoading);
-      }), function(error){
+      }, function(error){
           console.error(error);
           $scope.hide($ionicLoading);
-      }
+      });
   }
   $http.get("https://incognito.uqcloud.net/api/friends?screen_name="+handle+"&handle="+handle, config)
   .then(function(response){
@@ -336,18 +336,18 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
           $scope.hide($ionicLoading);
 
 
-      }), function(error){
+      }, function(error){
         $scope.hide($ionicLoading);
         console.log(error);
-      }
+      });
 
 
 
-  }), function(error){
+  }, function(error){
       
       console.log(error);
       $scope.hide($ionicLoading);
-    }
+    });
 
 });
 
@@ -841,25 +841,85 @@ app.controller('BoHomeCtrl', function($scope, $http, $state, $ionicLoading){
       $scope.hide($ionicLoading);
     console.log('failed');
   });
-  }), function(error){
+  }, function(error){
     $scope.hide($ionicLoading);
     console.log('error');
-  };
+  });
 
 
 });
 
 // controller for boCrowdieList.html
 app.controller('BoCrowdieListCtrl', function($scope,$state,$http){
-    $http.get("http://private-251c0-secretsparrow.apiary-mock.com/api/follow/total_all/bo")
-     .then(function(response){
-       console.log(response.data);
-       $scope.crowdieList=response.data;
-       for (var i=0; i < response.data.length; i++){
-        $scope.crowdieList[i]['percent'] = ($scope.crowdieList[i].followed_back/$scope.crowdieList[i].following)*100;
-       }
+  var handle = localStorage.getItem('handle');
 
+  $scope.removeCrowdie = function removeCrowdie(crowdies_id, $index){
+    var data = {
+      "handle": handle,
+      "crowdies": {
+        "crowdies_id":crowdies_id
+      }
+    };
+    $http({
+      method:'DELETE',
+      url: 'https://incognito.uqcloud.net/api/work/delete/crowdies',
+      data: {
+      "handle": handle,
+      "crowdies": {
+        "crowdies_id":crowdies_id
+      }
+    }
+    }).success(function(data, status, headers,config){
+      console.log(data);
+      $scope.crowdieList.splice($index, i);
+    
+      
+    }).error(function(data,status,headers,config){
+      console.log(data);
+      
+
+    });
+  //   $http.delete("https://incognito.uqcloud.net/api/work/delete/crowdies", data)
+  //   .then(function(response){
+  //       console.log(response.data);
+  //       $scope.crowdieList.splice($index, i);
+      
+  // }, function(error){
+  //   console.error(error);
+  // });
+
+  }
+  
+  $http.get("https://incognito.uqcloud.net/api/follow/total_all/"+handle)
+    .then(function(response){
+      console.log(response.data);
+      
+      $scope.crowdieList = response.data;
+      for (var i=0; i < response.data.length; i++){
+
+        if ($scope.crowdieList[i].following == 0 || $scope.crowdieList[i].followed_back== 0){
+          $scope.crowdieList[i]['percent'] = 0;
+        }
+        else{
+          $scope.crowdieList[i]['percent'] = (($scope.crowdieList[i].followed_back/$scope.crowdieList[i].following)*100).toFixed(2);
+        }
+        
+       }
+    
+     
+    
+  }, function(error){
+    console.error(error);
   });
+  //   $http.get("http://private-251c0-secretsparrow.apiary-mock.com/api/follow/total_all/bo")
+  //    .then(function(response){
+  //      console.log(response.data);
+  //      $scope.crowdieList=response.data;
+  //      for (var i=0; i < response.data.length; i++){
+  //       $scope.crowdieList[i]['percent'] = ($scope.crowdieList[i].followed_back/$scope.crowdieList[i].following)*100;
+  //      }
+
+  // });
 
 });
 // controller for companyProfile.html
@@ -917,19 +977,19 @@ app.controller('CompanyProfileCtrl', function($scope, $state, $ionicLoading, $st
         $scope.hide($ionicLoading);
         // $scope
 
-      }), function(error){
+      }, function(error){
         $scope.hide($ionicLoading);
         console.log(error);
-      };
+      });
       
 
-    }), function(error){
+    }, function(error){
       $scope.hide($ionicLoading);
       console.log(error);
-    }
-  }), function(error){
+    });
+  }, function(error){
 	  console.error(error);
-  }
+  });
   
   $scope.applyJob = function(){
     $scope.show($ionicLoading);
@@ -1308,17 +1368,17 @@ app.controller("TwitterAccountCtrl", function($scope,$http) {
       console.log(response.data);
       $scope.records = response.data;
 
-    }), function(error){
+    }, function(error){
           console.error(error);
-    };
+    });
 
       $scope.removeTwitterAccount = function removeTwitterAccount($index,screen_name,handle){
           $http.post("https://incognito.uqcloud.net/api/unfollow?handle=sunnyhotelbne&user_id="+localStorage.getItem("user_id")+"&screen_name="+screen_name+"&handle="+handle)
           .then(function(response2){
             $scope.records.splice($index, 1);
-          }),function(error2){
+          },function(error2){
             console.log(error2);
-          }
+          });
           
       }
     
@@ -1466,31 +1526,32 @@ app.controller('DashboardCtrl', function($scope, $state,$http){
   $http.get("https://incognito.uqcloud.net/api/follow/total_all/"+handle)
     .then(function(response){
       console.log(response.data);
-
-      $http.get("https://incognito.uqcloud.net/api/follow/total_followed/"+handle)
-        .then(function(response2){
-          console.log(response2.data);
-          $scope.chartLabels = ["Follow Back","Not Follow Back"];
-          var total = response.data.all;
-          console.log(total);
-          var follow = response2.data.followed_count;
-          var not_follow = total - follow;
-          $scope.chartData = [follow,not_follow];
-          $scope.percentage = ((follow/total)*100).toFixed(2);
-          console.log('test');
-          $scope.chartColors = ["#ED5456", "#D8D8D8"];
-          $scope.chartOptions = {
-            cutoutPercentage: 80,
-            innerTitle: "test"
-          };
-        
-      }), function(error2){
-        console.error(error2);
+      var total = 0;
+      var follow = 0;
+      var list = response.data;
+      
+      for (var i=0; i < list.length; i++){
+        total += list[i].following;
+        follow += list[i].followed_back;
       }
+      $scope.chartLabels = ["Follow Back","Not Follow Back"];
+      
+      console.log(total);
+      var not_follow = total - follow;
+      $scope.chartData = [follow,not_follow];
+      $scope.percentage = ((follow/total)*100).toFixed(2);
+      console.log('test');
+      $scope.chartColors = ["#ED5456", "#D8D8D8"];
+      $scope.chartOptions = {
+        cutoutPercentage: 80,
+        innerTitle: "test"
+      };
+
+     
     
-  }), function(error){
+  }, function(error){
     console.error(error);
-  }
+  });
   
 
 
