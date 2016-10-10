@@ -20,16 +20,12 @@
     <ion-content padding="false" class="side-menu-left has-header">
       <ion-list>
         <ion-item id="home_Crowdie" ng-show="crowdie_Role" ui-sref="menu.crowdieHome" menu-close>Home</ion-item>
-        <ion-item id="twitterAccount" ng-show="crowdie_Role" ui-sref="menu.twitterAccount" menu-close>View Twitter Account</ion-item>
-        <ion-item ng-show="bo_Role" id="home_BO" ui-sref="menu.boHome" menu-close>Home</ion-item>
-        <ion-item ng-show="bo_Role" id="dashboard" ui-sref="menu.dashboard" menu-close>Dashboard</ion-item>
-
-        <ion-item menu-close ui-sref="starter" id="logoutMenu">
-          Log Out
-        </ion-item>
-        <!-- <ion-item menu-close href="#/app/register">
-          Playlists
-        </ion-item> -->
+       <ion-item id="twitterAccount" ng-show="crowdie_Role" ui-sref="menu.twitterAccount" menu-close>View Twitter Account</ion-item>
+       <ion-item ng-show="bo_Role" id="home_BO" ui-sref="menu.boHome" menu-close>Home</ion-item>
+       <ion-item ng-show="bo_Role" id="dashboard" ui-sref="menu.dashboard" menu-close>Dashboard</ion-item>
+       <ion-item menu-close ui-sref="starter" id="logoutMenu">
+         Log Out
+       </ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>

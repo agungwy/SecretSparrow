@@ -1,4 +1,5 @@
 
+
 angular.module('starter.routes', [])
 /* this file is for linkage between page */
 .config(function($stateProvider, $urlRouterProvider) {
@@ -102,7 +103,7 @@ angular.module('starter.routes', [])
 
    // child of menu, explore more companies (explore.html)
    .state('menu.explore', {
-    url: 'menu.explore',
+    url: '/menu.explore',
     views: {
       'menuContent': {
         templateUrl: 'templates/explore.html',

@@ -1036,28 +1036,15 @@ app.controller('MenuCtrl', function($scope, $state){
 });
 
 // explore more companies controller (explore.html)
-
-
-app.controller('ExploreCtrl', function($scope) {
-  
-  $scope.items = [
-    { imgurl: "http://www.queenslandleaders.com.au/media/website_posts/328/workingmouseNEW.jpg",
-          id: "WORKING MOUSE" , following: "364", follower: "5.37K", position: "50"},
-    { imgurl: "https://lh6.ggpht.com/4XCF6-CyKE-mEkZXF0vWWi3pjhPc3VgeRRQJg1JeuhnUzFte9yD8dshDF9GYjB1NIik=w300",
-          id: "COMMONWEALTH BANK", following: "400", follower: "44K", position: "45"},
-    { imgurl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Hungry_Jack's.svg/2000px-Hungry_Jack's.svg.png",
-          id: "HUNGRY JACK'S", following: "907", follower: "468", position: "30"},
-    { imgurl: "http://myfonts-wtf.s3.amazonaws.com/63/63d9062d94f3a5f31f66d42ddb33cb69.539939.png",
-          id: "K MART", following: "652", follower: "576", position: "53"},
-    { imgurl: "https://upload.wikimedia.org/wikipedia/commons/2/28/Coles_logo.svg",
-          id: "COLES", following: "459", follower: "7K", position: "58"},
-    { imgurl: "https://www.karrinyupcentre.com.au/Karrinyup/media/contents/04_Stores/01_Store_Logos/Logo_David_Jones_1.jpg?width=640&height=350&ext=.jpg",
-          id: "DAVID JONES", following: "558", follower: "1.3M", position: "80"},
-    { imgurl: "https://upload.wikimedia.org/wikipedia/en/thumb/7/7d/Woolworths_logo_2014.svg/1122px-Woolworths_logo_2014.svg.png",
-          id: "WOOLWORTHS", following: "848", follower: "4.37K", position: "30"}
-  ];
-  
-});
+app.controller('ExploreCtrl', function($scope, $http) {
+  $http.get("https://incognito.uqcloud.net/api/recommended?user_id="+localStorage.getItem("user_id"))
+    .then(function(response){
+        console.log(response.data);
+        $scope.items=response.data;
+        }), function(error){
+          console.log(error);
+        }
+    })
 
 // controller for registerSuggestedCrowdie.html
 
