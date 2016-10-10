@@ -9,7 +9,7 @@
             <div style="background-color:#D8D8D8">
                 <div class="companyProfilePictureDiv">
                     
-                    <img id="companyProfilePicture" class = "img-circle center" src={{companyData.profile_image_url}} >
+                    <img id="companyProfilePicture" class = "img-circle center" src={{companyData.avatar}} >
                 
                 </div>
                 <div >
@@ -23,12 +23,12 @@
                         </div>
 
                         <div class="col">
-                            <p style="font-size:18px; color:#ED5356;text-align:center;">{{companyData.friends_count}}</p>
+                            <p style="font-size:18px; color:#ED5356;text-align:center;">{{companyData.following}}</p>
                             <p style="font-size:13px; text-align:center ">FOLLOWING</p>
                         </div>
 
                         <div class="col">
-                            <p style="font-size:18px; color:#ED5356;text-align:center;">{{companyData.followers_count}}</p>
+                            <p style="font-size:18px; color:#ED5356;text-align:center;">{{companyData.follower}}</p>
                             <p style="font-size:13px; text-align:center ">FOLLOWERS</p>
                         </div>
                     </div>
@@ -39,8 +39,8 @@
 
                 
             <div ng-show="applyWork" class="divButton top20">
-                <!-- <p class="centerH2RedBig">40</p>
-                <p class="centerH2Black">POSITIONS AVAILABLE</p> -->
+                <p class="centerH2RedBig">{{position}}</p>
+                <p class="centerH2Black">POSITIONS AVAILABLE</p>
                 <button class="button button-assertive  button-block roundButton" ng-click="applyJob()" id="applyButtonCompany">APPLY NOW</button>
             </div>
             <div ng-show="work" class="row">
@@ -59,47 +59,19 @@
 
 
             <div class="row">
-                <div class="col">
+                <div class="col" ng-repeat="selectedInterest in selectedInterests">
                     <div class="row">
-                        <img class="img-circle center" src="https://lh6.ggpht.com/6yMSxzN389OKRG6iyAn58fZylJdWVxNLchTN-M4hf7xO4lATQgWMyA-Xj5aiA9OcOCc=w300" style="max-height: 50px;">
+                            <a class="center ">
+<!--                        <div class="">-->
+                            <i class="fa {{selectedInterest.class}} fa-3x {{selectedInterest.color}} img-circle interested_icon"></i>
+<!--                        </div>-->
+                            </a>
                     </div>
-                     <p style="text-align:center; font-size:13px;">HUNGRY JACK</p>
+                     <p style="text-align:center; font-size:13px;">{{selectedInterest.category_name}}</p>
                 </div>
-                <div class="col">
-                    <div class="row">
-                        
-                        <img class="img-circle center" src="https://lh6.googleusercontent.com/-LW9djoK42mc/AAAAAAAAAAI/AAAAAAAAAB8/fxvkQ2_GSdI/s0-c-k-no-ns/photo.jpg" style="max-height: 50px; ">
-                    </div>
-                     <p style="text-align:center; font-size:13px;">EVENT CINEMAS</p>
-                    
-                </div>
-                <div class="col">
-                    <div class="row imageSuggestionCrowdie">
-                        
-                        <img class="img-circle center" src="http://www.newsroomdigital.com.au/wp-content/uploads/2016/05/default-600x400.jpg" style="max-height: 50px;">
-                    </div>
-                     <p style="text-align:center; font-size:13px;">McDONALD</p>
-                    
-                </div>
-            </div>
             
 
-            <!-- <div style="width:33%; float: left;margin-top:-3%;">
-                <ion-item class="item item-avatar-center" style="border-bottom: 0px;border-left: 0px;border-right: 0px; border-top: 0px; float:left; background-color: transparent;padding-left:28%;margin-bottom:-15%;">
-                    <img src="http://vignette4.wikia.nocookie.net/logopedia/images/5/5c/McDonald's_Philippines_logo_2011.svg/revision/latest?cb=20141005133559" style="max-height: 50px;">
-                </ion-item>
-
-                <p style="text-align:center; font-size:13px;">FOOD</p>
             </div>
-
-            <div style="width:33%; float: left;margin-top:-3%;">
-                <ion-item class="item item-avatar-center" style="border-bottom: 0px;border-left: 0px;border-right: 0px; border-top: 0px; float:left; background-color: transparent;padding-left:28%;margin-bottom:-15%;">
-                    <img src="http://vignette4.wikia.nocookie.net/logopedia/images/5/5c/McDonald's_Philippines_logo_2011.svg/revision/latest?cb=20141005133559" style="max-height: 50px;">
-                </ion-item>
-
-                <p style="text-align:center; font-size:13px;">FOOD</p>
-            </div> -->
-
 
         </div>
     </ion-content>

@@ -1,9 +1,9 @@
 <!-- page for crowdie to working -->
 <ion-view title="DASHBOARD" >
     
-    <ion-content padding="true" class="has-header">
+    <ion-content padding="false" class="has-header">
 
-
+    <div>
         <div id="chartDiv" class ="centerDiv">
             <canvas height="300" id="doughnut" class="chart chart-doughnut" chart-data="chartData" chart-labels="chartLabels" chart-colors="chartColors" chart-options="chartOptions"> 
             </canvas> 
@@ -18,29 +18,40 @@
             </lable>
            
         </div>
-        <div class="tabs-striped tabs-background-assertive tabs-color-light">
-          <div class="tabs">
-            <a class="tab-item active" ui-sref="menu.dashboard">
-              
-              Summary
-              
-            </a>
-            <a class="tab-item" ui-sref="menu.boCrowdieList">
-              
-              Crowdies Performance
-              
-            </a>
+        <!-- <ion-tabs class="tabs tabs-assertive">
+
+          <ion-tab title="Summary" ui-sref="menu.dashboard">
+           
+          </ion-tab>
+
+          <ion-tab title="Crowdies Performance" ui-sref="menu.boCrowdieList">
             
-          </div>
-        </div>
+        </ion-tab> -->
+        
        <!--  <div class="bar bar-footer bar-assertive">
            <button class="button buttonDashboard" ui-serf="menu.dashboard">Summary</button>
            <button class="button buttonDashboard" ui-serf="menu.boCrowdieList">Crowdies Performance</button>
            
         </div> -->
 
+
         
     </ion-content>
+    <div class="tabs-striped tabs-background-assertive tabs-color-light">
+      <div class="tabs">
+        <a class="tab-item active" ui-sref="menu.dashboard">
+          
+          Summary
+          
+        </a>
+        <a class="tab-item" ui-sref="menu.boCrowdieList">
+          
+          Crowdies Performance
+          
+        </a>
+        
+      </div>
+    </div>
 </ion-view>
 
 

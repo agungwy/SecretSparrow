@@ -8,6 +8,7 @@
         on-refresh="refresh()">
     </ion-refresher>
         <div>
+            <p class="centerH2" id="error-message">{{nill}}</p>
             <div class="list card" ng-repeat="account in accounts">
                 
                 <img class="img-circle center" src={{account.profile_image_url}} >

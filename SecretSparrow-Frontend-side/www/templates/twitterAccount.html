@@ -2,13 +2,16 @@
   <ion-content padding="false" class="has-header">
       <div class ="list" id="listTwitterAccount">
         <div ng-repeat="x in records">
-          <div class="item item-avatar item-button-right">
-            <img ng-src="{{x.profile_image_url}}">      
+          <div class="item item-avatar item-icon-right">
+            <img ng-src="{{x.profile_image_url}}"> 
+            <a ng-click="removeTwitterAccount($index,x.screen_name,x.handle)">
+                  <i class="fa fa-trash-o fa-2x" id="removeButton" >
+                  </i>
+                </a>     
             <h2>{{x.name}}</h2>
                 <p id="description">Has not followed back in {{x.days}} days</p>
-              <button class="button button-outline button-positive" id="removeButton" ng-click="removeTwitterAccount($index,x.screen_name,x.handle)">
-              Remove
-            </button>
+                
+              
             </div>
         </div>
       </div>

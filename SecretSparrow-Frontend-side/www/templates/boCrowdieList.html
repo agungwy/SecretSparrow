@@ -2,11 +2,11 @@
   <ion-nav-title>
     <img class="title-image" src="img/logo.png">    
   </ion-nav-title>
-  <ion-content class="stable-bg" scroll="false">
-   <ion-content padding="false" scroll="false" class="has-header">    
-   <h4 id="secretSparrow2-heading3" class="centerH2">{{number}} Crowdies are working for you</h4>
-   <ion-list>
-            <div>
+  
+   <ion-content padding="false" class="has-header">    
+   <h4 id="secretSparrow2-heading3" class="centerH2 top20">{{number}} Crowdies are working for you</h4>
+   <ion-list id="bot20">
+            <div >
                 <ion-item class="item item-avatar item-icon-right assertive" ng-repeat="c in crowdieList">
 
                     <img ng-src="img/logo.png">
@@ -24,21 +24,24 @@
             </div>
 
         </ion-list>
-        <div class="tabs-striped tabs-background-assertive tabs-color-light">
-          <div class="tabs">
-            <a class="tab-item" ui-sref="menu.dashboard">
-              
-              Summary
-              
-            </a>
-            <a class="tab-item active" ui-sref="menu.boCrowdieList">
-              
-              Crowdies Performance
-              
-            </a>
-            
-          </div>
+
+        <div style="height: 10%">
         </div>
+        <!-- <ion-tabs class="tabs tabs-assertive">
+
+          <ion-tab title="Summary" ui-sref="menu.dashboard">
+           
+          </ion-tab>
+
+          <ion-tab title="Crowdies Performance" ui-sref="menu.boCrowdieList">
+            
+        </ion-tab> -->
+
+          
+      <!-- </ion-tabs> -->
+       
+
+
 
 
    <!--ion-slide-box on-slide-changed="slideHasChanged($index)">
@@ -59,5 +62,16 @@
     </ion-slide>
     </ion-slide-box-->
   </ion-content>
+   <div class="tabs-striped tabs-background-assertive tabs-color-light footer">
+      <div class="tabs">
+        <a class="tab-item" ui-sref="menu.dashboard">
+          Summary
+        </a>
+        <a class="tab-item active" ui-sref="menu.boCrowdieList">
+          Crowdies Performance
+        </a>
+        
+      </div>
+    </div>
 
 </ion-view>

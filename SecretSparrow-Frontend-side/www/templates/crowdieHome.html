@@ -10,13 +10,13 @@
             <div id="content">
                 <div class="box">
                     <h3 style="color:#000000;margin:0;font-size:15px;text-align:center;">YOU ARE A</h3>
-                    <h3 style="color:#FFC300;margin:0;font-size:20px;text-align:center;">NEWBIE</h3>
+                    <h3 style="margin:0;font-size:20px;text-align:center;" class="{{gradeColor}}">{{grade}}</h3>
 
-                    <hr>
+                    <progress id="progressbar" class="{{gradeBg}}" max="{{progress}}" value="{{points}}"> </progress>
                 </div>
 
                 <div class="utility">
-                    <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">125/2000 points</h2>
+                    <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">{{points}}{{max}} points</h2>
                 </div>
             </div>
 

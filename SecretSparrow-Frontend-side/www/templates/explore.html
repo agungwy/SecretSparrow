@@ -1,5 +1,5 @@
 <ion-view id="explore" title="EXPLORE">
-	<ion-nav-title>
+	<!-- <ion-nav-title>
 		<a ng-click="" id="exploresearch">
             <i class="fa fa-search fa-1x" aria-hidden="true"></i>
             
@@ -8,11 +8,11 @@
         	<h4 id="exploretitle">EXPLORE</h4>
         </center>
 	</ion-nav-title>
-
+ -->
 	<ion-content>
-		<div class="list">
-			<a class="item item-avatar" ng-repeat="item in items" href="#/item/{{item.id}}">
-				<img ng-src="{{ item.avatar }}" id="profileimage">
+		<div class="list" ng-repeat="item in items">
+			<a class="item item-avatar"  ng-click="viewCompany(item.handle)">
+				<img src="{{ item.avatar }}" id="profileimage">
 				<h2 id="companyname">{{ item.name }}</h2>
  				<p class="companyfollowing">{{ item.following }} FOLLOWING &nbsp·&nbsp {{ item.follower }} FOLLOWERS</p>
 				<p class="companyposition">{{ item.position }} POSITIONS AVAILABLE</p>

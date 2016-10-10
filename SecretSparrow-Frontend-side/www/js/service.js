@@ -116,5 +116,3 @@ app.factory('TwitterService', function($cordovaOauth, $cordovaOauthUtility, $htt
     };
 });
 
-
-
