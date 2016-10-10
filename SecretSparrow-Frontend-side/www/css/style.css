@@ -396,11 +396,12 @@ padding-top:5px;
 }
 
 /* explore */
+/* explore */
 #profileimage {
-  max-height:60px;
-  max-width:60px; 
+  max-height:90px;
+  max-width:90px; 
   margin-left:1%;
-  margin-top:2%;
+  margin-top:0.25%;
 }
 
 .companyfollowing, 
@@ -411,7 +412,6 @@ padding-top:5px;
 
 #companyname {
   margin-left: 7%; 
-  margin-top: 1%;
   font-weight: bold;
 }
 
