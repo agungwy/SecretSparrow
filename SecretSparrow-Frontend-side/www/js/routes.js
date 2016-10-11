@@ -82,6 +82,7 @@ angular.module('starter.routes', [])
   // child of menu, dashboard
   .state('menu.dashboard', {
     url: '/menu.dashboard',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/dashboard.html',
@@ -93,6 +94,7 @@ angular.module('starter.routes', [])
   // child of menu, crowdie working linkage
    .state('menu.crowdieWorking', {
     url: '/menu.crowdieWorking',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/crowdieWorking.html',
@@ -104,6 +106,7 @@ angular.module('starter.routes', [])
    // child of menu, explore more companies (explore.html)
    .state('menu.explore', {
     url: '/menu.explore',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/explore.html',
@@ -162,6 +165,7 @@ angular.module('starter.routes', [])
   // child of menu, business owner home linkage
   .state('menu.twitterAccount', {
     url: '/menu.twitterAccount',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/twitterAccount.html',
@@ -176,6 +180,7 @@ angular.module('starter.routes', [])
 
   .state('menu.boCrowdieList', {
     url: '/menu.boCrowdieList',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/boCrowdieList.html',
