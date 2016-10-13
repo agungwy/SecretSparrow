@@ -158,6 +158,11 @@
     color:#ffffff;
 }
 
+.pumpkin{
+	background-color: #f39c12;
+    color:#ffffff;
+}
+
 .concrete{
     background-color: #95a5a6;
     color:#ffffff;
@@ -206,6 +211,7 @@
 	background: #D8D8D8;
 	margin-top: 40px;
 	margin-bottom: 40px;
+	width: 100%;
 }
 #backgroundLoginForm h2{
 	text-align: center;
@@ -327,7 +333,9 @@
 	margin-top: 40px;
 }
 
-
+.noShowTitle{
+	margin-top: 30%;
+}
 
 
 .fa-5x{
@@ -485,7 +493,7 @@ padding-top:5px;
 .companyfollowing, 
 .companyposition {
   margin-left: 7%; 
-  margin-top: 1%;
+  
 }
 
 #companyname {
@@ -496,7 +504,7 @@ padding-top:5px;
 #exploretitle {
 	float: center; 
 	color: white; 
-	margin-top: 4%; 
+	
 	margin-left:-3%;
 }
 
@@ -550,5 +558,6 @@ padding-top:5px;
 	color: #ED5356;
 	font-size: 12px;
 }
+
 
 

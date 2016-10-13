@@ -1,5 +1,5 @@
 <!-- login page -->
-<ion-modal-view name="login" id="login">
+<ion-view name="login" id="login">
   
   
   <ion-content>
@@ -27,7 +27,7 @@
         <button class="button button-block button-assertive roundButton"  ng-click="login()" type="submit">SUBMIT</button>
       </div>
       <div class="divButton" id="forgotPassword">
-        <button class="button button-clear button-assertive" type="submit">FORGOT PASSWORD</button> 
+        <button class="button button-clear button-assertive" type="submit" ui-sref="forgetPassword">FORGET PASSWORD?</button> 
       </div>
       
 
@@ -40,4 +40,4 @@
     </div>
 
   </ion-content>
-</ion-modal-view>
+</ion-view>

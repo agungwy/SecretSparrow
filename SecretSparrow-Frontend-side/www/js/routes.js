@@ -8,6 +8,7 @@ angular.module('starter.routes', [])
   /*linkage of the first menu */
   .state('starter', {
     url: '/starter',
+    cache:false,
     templateUrl: 'templates/starter.html',
     controller: 'AppCtrl'
 
@@ -27,6 +28,7 @@ angular.module('starter.routes', [])
   // choose role in registration linkage
   .state('registerRole', {
     url: '/registerRole',
+    cache:false,
     templateUrl: 'templates/registerRole.html',
     controller: 'RegisterRoleCtrl'
      
@@ -34,11 +36,20 @@ angular.module('starter.routes', [])
   // choose categories in registration linkage
   .state('chooseCategories', {
     url: '/chooseCategories',
+    cache:false,
     templateUrl: 'templates/chooseCategories.html',
     controller: 'ChooseCategoriesCtrl'  
   })
 
- 
+ // forget password, forgetPassword.html
+  .state('forgetPassword', {
+    url: '/forgetPassword',
+    cache:false,
+    templateUrl: 'templates/forgetPassword.html',
+    controller: 'ForgetPasswordCtrl'
+
+  })
+
 
  
     
@@ -62,8 +73,15 @@ angular.module('starter.routes', [])
   // business owner connect to twitter linkage
   .state('connectToTwitter', {
     url: '/connectToTwitter',
+    cache:false,
     templateUrl: 'templates/connectToTwitter.html',
     controller: 'ConnectToTwitterCtrl'
+  })
+
+  .state('editProfile', {
+    url: '/editProfile',
+    templateUrl: 'templates/editProfile.html',
+    controller: 'EditProfileCtrl'
   })
   
     

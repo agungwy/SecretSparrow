@@ -8,7 +8,7 @@
         on-refresh="refresh()">
     </ion-refresher>
         <div>
-            <p class="centerH2" id="error-message">{{nill}}</p>
+            <p class="centerH2 noShowTitle" id="error-message" ng-show="showTitleWork">{{nill}}</p>
             <div class="list card" ng-repeat="account in accounts">
                 
                 <img class="img-circle center" src={{account.profile_image_url}} >
@@ -35,6 +35,22 @@
 
                     </div>
                     <hr class="top20">
+                
+
+                </div>
+                <p style="font-size:16px; text-align:center;color:#ED5356;margin-top:20px;">INTERESTED IN</p>
+
+                <div class="row">
+                    <div class="col" >
+                        <div class="row">
+                                <a class="center ">
+    <!--                        <div class="">-->
+                                <i class="fa {{account.class}} fa-3x {{account.color}} img-circle interested_icon"></i>
+    <!--                        </div>-->
+                                </a>
+                        </div>
+                         <p style="text-align:center; font-size:13px;">{{account.category_name}}</p>
+                    </div>
                 
 
                 </div>

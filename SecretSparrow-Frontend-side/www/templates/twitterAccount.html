@@ -1,6 +1,7 @@
 <ion-view title="Followed Twitter Account">
   <ion-content padding="false" class="has-header">
-      <div class ="list" id="listTwitterAccount">
+      
+      <div class ="list" class="listTwitterAccount" ng-show="showTwitterAccount">
         <div ng-repeat="x in records">
           <div class="item item-avatar item-icon-right">
             <img ng-src="{{x.profile_image_url}}"> 
@@ -15,57 +16,6 @@
             </div>
         </div>
       </div>
+      <h1 class="noShowTitle centerH2" ng-show="hideTwitterAccount">You Have Not Follow Someone Yet</h1>
   </ion-content>
 </ion-view>
-
-
-<!-- <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Secret Sparrow</title>
-   
-    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
-
-<link href="style.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
-    <script src="script.js"></script>
-    <script src="js/app.js"></script>
-
-    <style>
-    .list {
-    overflow-y: scroll;
-    height: 92.5%;
-    }
-
-    #description{
-      color:red;
-    }
-
-
-    </style>
-  </head>
-
-  <body ng-app="myApp">
-<div class="bar bar-header bar-assertive">
-<a class="button icon-left ion-chevron-left button-clear button-white"></a>
-      <h1 class="title">Followed Twitter Accounts</h1>
-  </div>
-  <div class="content has-header ionic-pseudo">
-<div class ="list" ng-controller="myCtrl">
-<div ng-repeat="x in records">
-  <div class="item item-avatar item-button-right">
-    <img ng-src="img/{{x.Image}}.png">      
-    <h2>{{x.Name}}</h2>
-        <p id="description">{{x.Description}}</p>
-      <button class="button button-outline button-positive">
-      Remove
-    </button>
-    </div>
-</div>
-</div>
-</div>
-
-</body>
-</html> -->

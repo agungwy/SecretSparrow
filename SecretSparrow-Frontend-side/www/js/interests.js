@@ -29,9 +29,13 @@ var interests=[{
 },{
     "category_name":"Technology",
     "class":"fa fa-laptop",
-    "color":"concrete"
+    "color":"pumpkin"
 },{
     "category_name":"Travel",
-    "class":"fa fa-fighter-jet",
+    "class":"fa fa-plane",
     "color":"orange"
+},{
+    "category_name":"Other",
+    "class":"fa fa-asterisk",
+    "color":"concrete"
 }]

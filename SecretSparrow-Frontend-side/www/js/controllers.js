@@ -23,7 +23,7 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
 
 //controller for chooseCategories.html
 
-app.controller('ChooseCategoriesCtrl', function($scope, $http, $state, RegisterService) {
+app.controller('ChooseCategoriesCtrl', function($scope, $http, $state, $ionicLoading, $ionicPopup) {
   // code for changing the color of the icon by click
   $scope.iconColor1={"color":"black"};
   $scope.iconColor2={"color":"black"};
@@ -34,6 +34,17 @@ app.controller('ChooseCategoriesCtrl', function($scope, $http, $state, RegisterS
   $scope.iconColor7={"color":"black"};
   $scope.iconColor8={"color":"black"};
   $scope.iconColor9={"color":"black"};
+
+  $scope.show = function() {
+    $ionicLoading.show({
+      templateUrl: 'templates/loading.html'
+    });
+  };
+  
+  $scope.hide = function(){
+        $ionicLoading.hide();
+  };
+
 
   var userId = localStorage.getItem("user_id");
 
@@ -201,8 +212,21 @@ app.controller('ChooseCategoriesCtrl', function($scope, $http, $state, RegisterS
   // code to go to the different page depend on role
 
   $scope.submit = function() {
-    var role = RegisterService.getRole();
-    console.log(RegisterService.getRole());
+    $scope.show($ionicLoading);
+    var role = localStorage.getItem('scope');
+    console.log(localStorage.getItem('scope'));
+    if (list.length == 0){
+      list.push({"user_id":userId,"category_name":"Arts"});
+      list.push({"user_id":userId,"category_name":"Cars"});
+      list.push({"user_id":userId,"category_name":"Fashion"});
+      list.push({"user_id":userId,"category_name":"Finance"});
+      list.push({"user_id":userId,"category_name":"Food"});
+      list.push({"user_id":userId,"category_name":"Leisure"});
+      list.push({"user_id":userId,"category_name":"Sports"});
+      list.push({"user_id":userId,"category_name":"Technology"});
+      list.push({"user_id":userId,"category_name":"Travel"});
+      
+    }
     console.log(list);
     $http({
       method:'POST',
@@ -211,20 +235,24 @@ app.controller('ChooseCategoriesCtrl', function($scope, $http, $state, RegisterS
     }).success(function(data, status, headers,config){
       console.log(data);
       if(role=="crowdies"){
-        console.log(RegisterService.getRole());
+        
         $state.go('registerSuggestedCrowdie');
+        $scope.hide($ionicLoading);
       }
       else{
-        console.log(RegisterService.getRole());
+        
         $state.go('menu.boHome');
+        $scope.hide($ionicLoading);
     }
       
     }).error(function(data,status,headers,config){
       console.log(data);
+      $scope.hide($ionicLoading);
       var popup = $ionicPopup.alert({
       title: 'There are some mistake please retry',
       okType: 'button-assertive'
       });
+
 
     });
     
@@ -250,6 +278,7 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
           $ionicLoading.hide();
     };
   $scope.accounts = [];
+  $scope.showTitleWork=false;
   $scope.title_name = "";
   var config={
   headers:{
@@ -314,10 +343,11 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
           $scope.hide($ionicLoading);
       });
   }
+  $scope.show($ionicLoading);
   $http.get("https://incognito.uqcloud.net/api/friends?screen_name="+handle+"&handle="+handle, config)
   .then(function(response){
       console.log(response.data);
-      $scope.show($ionicLoading);
+      
       if(response.data.users.length>0){
 
           $scope.title_name = handle;
@@ -330,12 +360,46 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
               console.log(response2.data);
               var users = response2.data.users;
               console.log(users);
-
+              var strings = [];
               for (var i=0; i < users.length; i++){
                 // users[i]["number"]=i;
-                $scope.accounts.push(users[i]);
 
+                $scope.accounts.push(users[i]);
+                strings.push(users[i].description);
+                if (users[i].description == ""){
+                  $scope.accounts[i]['category_name'] = interests[9].category_name;
+                  $scope.accounts[i]['color'] = interests[9].color;
+                  $scope.accounts[i]['class'] = interests[9].class;
+                }
               }
+              var data = {
+                "description": strings
+              }
+              console.log(strings);
+              $http.post("https://incognito.uqcloud.net/api/classifier", data)
+              .then(function(response3){
+                console.log(response3.data);
+                var list = response3.data;
+                console.log(interests);
+                for (var i=0; i < list.length; i++){
+                  
+                  for (var j=0; j < interests.length; j++){
+                    
+                    if (list[i][0].label == interests[j].category_name){
+                      $scope.accounts[list[i][0].index]["category_name"]= interests[j].category_name;
+                      $scope.accounts[list[i][0].index]["color"]=interests[j].color;
+                      $scope.accounts[list[i][0].index]["class"]=interests[j].class;
+                      
+                    }
+                  }
+                }
+                
+                $scope.hide($ionicLoading);
+
+              }, function(error){
+                console.log(error);
+                $scope.hide($ionicLoading);
+              });
               $scope.hide($ionicLoading);
 
 
@@ -346,6 +410,7 @@ app.controller('CrowdieWorkingCtrl', function ($scope, $ionicHistory, $statePara
 
       }else{
           $scope.hide($ionicLoading);
+          $scope.showTitleWork=true;
           $scope.nill="No Suggestions for this account";
       }
 
@@ -433,7 +498,7 @@ app.controller('LoginCtrl', function ($scope,$http, $ionicLoading, $stateParams,
       console.log(data);
       $scope.hide($ionicLoading);
       var popup = $ionicPopup.alert({
-      title: 'The data is incorrect please retry',
+      title: data.error_description,
       okType: 'button-assertive'
       });
 
@@ -448,7 +513,7 @@ app.controller('LoginCtrl', function ($scope,$http, $ionicLoading, $stateParams,
 
 //controller for register.html
 
-app.controller('RegisterCtrl', function($scope,$http, $state, $ionicPopup, RegisterService) {
+app.controller('RegisterCtrl', function($scope,$http, $state, $ionicPopup, $ionicLoading) {
   // make a variable for the Register Data
   $scope.registerData = {
     fullName:"",
@@ -456,6 +521,16 @@ app.controller('RegisterCtrl', function($scope,$http, $state, $ionicPopup, Regis
     confirmPassword:"",
     password:""
 
+  };
+
+  $scope.show = function() {
+    $ionicLoading.show({
+      templateUrl: 'templates/loading.html'
+    });
+  };
+  
+  $scope.hide = function(){
+        $ionicLoading.hide();
   };
 
   
@@ -466,7 +541,7 @@ app.controller('RegisterCtrl', function($scope,$http, $state, $ionicPopup, Regis
     console.log($scope.registerData.fullName);
     console.log($scope.registerData.password);
     console.log($scope.registerData.confirmPassword);
-
+    $scope.show($ionicLoading);
     
     $http({
       method:'POST',
@@ -504,6 +579,7 @@ app.controller('RegisterCtrl', function($scope,$http, $state, $ionicPopup, Regis
           console.log(response);
           localStorage.setItem("user_id",response.data.user_id);
           $state.go('registerRole');
+          $scope.hide($ionicLoading);
         });
         // $http({
         //   method:'GET',
@@ -523,10 +599,32 @@ app.controller('RegisterCtrl', function($scope,$http, $state, $ionicPopup, Regis
     }).error(function(data,status,headers,config){
       // console.log(data.email);
       console.log(data);
-      var popup = $ionicPopup.alert({
-      title: 'The data is incorrect please retry',
-      okType: 'button-assertive'
-      });
+      if (data.name != null){
+        $scope.hide($ionicLoading);
+        var popup = $ionicPopup.alert({
+        title: data.name,
+        okType: 'button-assertive'
+
+        });
+        
+      }
+      else if (data.email != null){
+        $scope.hide($ionicLoading);
+        var popup = $ionicPopup.alert({
+          title: data.email,
+          okType: 'button-assertive'
+        });
+        
+      } 
+      else{
+        $scope.hide($ionicLoading);
+        var popup = $ionicPopup.alert({
+          title: data.password[0],
+          okType: 'button-assertive'
+        });
+
+      }
+     
     });
     
 
@@ -536,7 +634,7 @@ app.controller('RegisterCtrl', function($scope,$http, $state, $ionicPopup, Regis
 
 });
 // controller for registerRole.html
-app.controller('RegisterRoleCtrl', function($scope, $state, $http, RegisterService) {
+app.controller('RegisterRoleCtrl', function($scope, $state, $http, $ionicLoading) {
   // function for choosing whether user crowdie or business owner
   console.log(localStorage.getItem("user_id"));
   console.log(localStorage.getItem("access_token"));
@@ -544,7 +642,15 @@ app.controller('RegisterRoleCtrl', function($scope, $state, $http, RegisterServi
   var userId = localStorage.getItem("user_id");
   var token = localStorage.getItem('access_token');
 
-
+  $scope.show = function() {
+    $ionicLoading.show({
+      templateUrl: 'templates/loading.html'
+    });
+  };
+  
+  $scope.hide = function(){
+        $ionicLoading.hide();
+  };
 
   var configs={
     headers:{
@@ -554,6 +660,7 @@ app.controller('RegisterRoleCtrl', function($scope, $state, $http, RegisterServi
 
   $scope.chooseCrowdie = function() {
     console.log('pass choose role');
+    $scope.show($ionicLoading);
     var data= {
       'user_id': userId,
       'role': 'crowdies'
@@ -561,15 +668,33 @@ app.controller('RegisterRoleCtrl', function($scope, $state, $http, RegisterServi
     $http.put('https://incognito.uqcloud.net/api/role',data, configs)
     .then(function(response){
       console.log(data);
-      RegisterService.changeRole('crowdies');
+      
       localStorage.setItem('scope', 'crowdies');
-      $state.go('chooseCategories');
+      $http({
+        method:'POST',
+        url:'https://incognito.uqcloud.net/oauth/token',
+        data: { 
+        
+          'refresh_token': localStorage.getItem('refresh_token'),
+          'grant_type': 'refresh_token',
+          'client_id': 'testclient',
+          'client_secret': 'testpass'
+        }
+      }).success(function(data2,status,headers,config){
+        console.log(data2);
+        localStorage.setItem('access_token', data2.access_token);
+        
+        localStorage.setItem('scope', data2.scope);
+        $state.go('chooseCategories');
+        $scope.hide($ionicLoading);
+      });
     });
     
   };
 
   $scope.chooseBO = function() {
     console.log('pass choose role');
+    $scope.show($ionicLoading);
     var data= {
       'user_id': userId,
       'role': 'business owner'
@@ -577,9 +702,25 @@ app.controller('RegisterRoleCtrl', function($scope, $state, $http, RegisterServi
     $http.put('https://incognito.uqcloud.net/api/role',data, configs)
     .then(function(response){
       console.log(data);
-      RegisterService.changeRole('business owner');
+      
       localStorage.setItem('scope', 'bo');
-      $state.go('connectToTwitter');
+      $http({
+        method:'POST',
+        url:'https://incognito.uqcloud.net/oauth/token',
+        data: { 
+        
+          'refresh_token': localStorage.getItem('refresh_token'),
+          'grant_type': 'refresh_token',
+          'client_id': 'testclient',
+          'client_secret': 'testpass'
+        }
+      }).success(function(data2,status,headers,config){
+        console.log(data2);
+        localStorage.setItem('access_token', data2.access_token);
+        localStorage.setItem('scope', data2.scope);
+        $state.go('connectToTwitter');
+        $scope.hide($ionicLoading);
+      });
     });
     
   };
@@ -684,31 +825,7 @@ app.controller('ConnectToTwitterCtrl', function($scope, $http, $cordovaOauth,$io
         }
     });
     
-    // // TwitterService.testTwitter();
-    // var api_key = "9uWtO2uAnwxzFhY3TafHF91M0"; //Enter your Consumer Key (API Key)
-    // var api_secret = "IRHZ5fawFHUkgrlkrBnBETDMNqgXxbhwN8di7BwXNnOiVPAY52"; // Enter your Consumer Secret (API Secret)
-    // console.log("twitterlogin function got called");
-    // $scope.show($ionicLoading);
-    // $cordovaOauth.twitter(api_key, api_secret).then(function(result) {
-    //   // var popup = $ionicPopup.alert({
-    //   // title: 'We already Synchronize your Twitter Account',
-    //   // okType: 'button-assertive'
-    //   // });
-    //   TwitterService.storeUserToken(result)
-    //   console.log(result); //ini hasilnya yg mana? denger suara gue? ga gw ga pake speaker
-    //   $scope.hide($ionicLoading);
-    //   $state.go("chooseCategories");
-      
-    // }, function(error) {
-    //   console.log(error);
-    //   $scope.hide($ionicLoading);
-    //   var popup = $ionicPopup.alert({
-    //   title: error,
-    //   template: "Please retry again",
-    //   okType: 'button-assertive'
-    //   });
-       
-    // });
+    
 
 
   };
@@ -869,13 +986,13 @@ app.controller('BoHomeCtrl', function($scope, $http, $state, $ionicLoading){
               
               var crowdies = [];
               var crowdies2 = [];
-              var data = response.data.data;
+              var data = response.data;
               for (i=0; i<3; i++){
                 if (data.length == 0){
                   break;
                 }
                 else{
-                  crowdies.push(data.pop());
+                  crowdies.push(data.shift());
                 }
                 
                 
@@ -886,7 +1003,7 @@ app.controller('BoHomeCtrl', function($scope, $http, $state, $ionicLoading){
                   break;
                 }
                 else{
-                  crowdies2.push(data.pop());
+                  crowdies2.push(data.shift());
                 }
                 
                 
@@ -940,7 +1057,7 @@ app.controller('BoCrowdieListCtrl', function($scope,$state,$http, $ionicLoading)
     $scope.hide = function(){
           $ionicLoading.hide();
     };
-
+  $scope.showListTitle=false;
   $scope.show($ionicLoading);
   var handle = localStorage.getItem('handle');
 
@@ -975,22 +1092,30 @@ app.controller('BoCrowdieListCtrl', function($scope,$state,$http, $ionicLoading)
   $http.get("https://incognito.uqcloud.net/api/follow/total_all/"+handle)
     .then(function(response){
       console.log(response.data);
-      
-      $scope.crowdieList = response.data;
-      for (var i=0; i < response.data.length; i++){
-
-        if ($scope.crowdieList[i].following == 0 || $scope.crowdieList[i].followed_back== 0){
-
-          $scope.crowdieList[i]['percent'] = 0;
-
-        }
-        else{
-          $scope.crowdieList[i]['percent'] = (($scope.crowdieList[i].followed_back/$scope.crowdieList[i].following)*100).toFixed(2);
-        }
+      if (response.data.length == 0){
+        $scope.showListTitle=true;
+        $scope.crowdieError = "You Do Not Have Crowdie Yet";
         $scope.hide($ionicLoading);
-        
-       }
-    
+      }
+      else{
+        $scope.crowdieList = response.data;
+
+          for (var i=0; i < response.data.length; i++){
+
+            if ($scope.crowdieList[i].following == 0 || $scope.crowdieList[i].followed_back== 0){
+
+              $scope.crowdieList[i]['percent'] = 0;
+
+            }
+            else{
+              $scope.crowdieList[i]['percent'] = (($scope.crowdieList[i].followed_back/$scope.crowdieList[i].following)*100).toFixed(2);
+            }
+            
+            
+           }
+        $scope.hide($ionicLoading);
+      }
+      
      
     
   }, function(error){
@@ -1006,6 +1131,7 @@ app.controller('BoCrowdieListCtrl', function($scope,$state,$http, $ionicLoading)
   //      }
 
   // });
+
 
 });
 // controller for companyProfile.html
@@ -1310,7 +1436,7 @@ app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state, $http, $
       $scope.list1 = true;
       $scope.list2 = true;
       $scope.list3 = true;
-      $scope.list4 = false;
+      $scope.list4 = true;
       $scope.list5 = false;
       $scope.list6 = false;
     }
@@ -1545,7 +1671,14 @@ app.controller("TwitterAccountCtrl", function($scope,$http, $ionicLoading) {
       console.log(response.data);
       $scope.hide($ionicLoading);
       $scope.records = response.data;
-
+      if (response.data.message != null){
+        $scope.hideTwitterAccount = true;
+        $scope.showTwitterAccount = false;
+      }
+      else{
+        $scope.hideTwitterAccount = false;
+        $scope.showTwitterAccount = true;
+      }
     }, function(error){
       $scope.hide($ionicLoading);
       console.error(error);
@@ -1564,142 +1697,6 @@ app.controller("TwitterAccountCtrl", function($scope,$http, $ionicLoading) {
         
     }
     
-
-  // $scope.records = [
-  //   {
-  //     "Image": "https://pbs.twimg.com/profile_images/685334484661616640/ytU4pnkW.png",
-  //     "Name" : "Jack",
-  //     "Description" : "Has not followed back in",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   },
-  //   {
-  //     "Image": "cover.jpg",
-  //     "Name" : "Twitter Name",
-  //     "Description" : "Description",
-  //     "NumOfDays" : "8",
-  //     "Days"  : "days"
-  //   }
-  // ]
 });
 
 // controller for dashboard.html
@@ -1728,9 +1725,17 @@ app.controller('DashboardCtrl', function($scope, $state,$http, $ionicLoading){
       $scope.chartLabels = ["Follow Back","Not Follow Back"];
       
       console.log(total);
+      $scope.follow = total;
+      $scope.follow_back = follow;
       var not_follow = total - follow;
       $scope.chartData = [follow,not_follow];
-      $scope.percentage = ((follow/total)*100).toFixed(2);
+      if (total == 0){
+        $scope.percentage = 0;
+      }
+      else{
+        $scope.percentage = ((follow/total)*100).toFixed(2);
+      }
+      
       console.log('test');
       $scope.chartColors = ["#ED5456", "#D8D8D8"];
       $scope.chartOptions = {
@@ -1754,3 +1759,94 @@ app.controller('DashboardCtrl', function($scope, $state,$http, $ionicLoading){
   // })
 
 });
+
+// controller for forgetPassword.html
+app.controller('ForgetPasswordCtrl', function($scope, $state,$http, $ionicLoading, $ionicPopup){
+  $scope.show = function() {
+    $ionicLoading.show({
+      templateUrl: 'templates/loading.html'
+    });
+    };
+    $scope.hide = function(){
+      $ionicLoading.hide();
+    };
+    $scope.forgotData = {
+      email:""
+    }
+    
+
+    $scope.submitEmail = function(){
+      
+      console.log($scope.forgotData.email);
+      var data = {
+        'email': $scope.forgotData.email
+      }
+      if ($scope.forgotData.email == undefined){
+        var popup = $ionicPopup.alert({
+          title: "Email Format is Wrong",
+          okType: 'button-assertive'
+          });
+      }
+      else{
+        $http.post("https://incognito.uqcloud.net/password/email", JSON.stringify(data))
+          .then(function(response){
+            console.log(response.data);
+            var popup = $ionicPopup.alert({
+              title: response.data.status,
+              okType: 'button-assertive'
+              });
+            $state.go('starter');
+          
+      
+        }, function(error){
+          console.error(error.data);
+           var popup = $ionicPopup.alert({
+            title: error.data.email[0],
+            okType: 'button-assertive'
+            });
+        });
+      }
+    }
+
+
+    
+  
+  
+
+
+  // (function (ChartJsProvider) {
+  // ChartJsProvider.setOptions({ colors : [ "#ED5456", "#FFFFFF"] });
+  // })
+
+});
+
+// explore more companies controller (explore.html)
+app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,$cordovaCamera, $ionicActionSheet ) {
+  $scope.show = function() {
+    $ionicLoading.show({
+      templateUrl: 'templates/loading.html'
+    });
+    };
+    $scope.hide = function(){
+          $ionicLoading.hide();
+    };
+    $scope.takePic = function() {
+        var options =   {
+            quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: 0,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+            encodingType: 0     // 0=JPG 1=PNG
+        }
+        navigator.camera.getPicture(onSuccess,onFail,options);
+    }
+    var onSuccess = function(FILE_URI) {
+        console.log(FILE_URI);
+        
+        $scope.$apply();
+    };
+    var onFail = function(e) {
+        console.log("On fail " + e);
+    }
+  
+});
+
