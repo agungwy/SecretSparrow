@@ -13,6 +13,12 @@
           <h4 class="centerH2">NAME</h4>
           <input type="text" class="inputCenter" ng-model="editProfile.name">
         </label>
+        <label class="item item-input item-stacked-label top20 bot20" ng-show="showedBO">
+          <h4 class="centerH2">AVAILABLE POSITION</h4>
+          <input type="tel" class="inputCenter" ng-model="editProfile.position" onkeypress='return (event.charCode >= 48 && event.charCode <= 57)'>
+           
+            
+        </label>
 
         
         

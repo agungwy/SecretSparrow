@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use App\CrowdiesModel;
+use App\TwitterAuthModel;
 
 class AuthController extends Controller
 {
@@ -161,6 +162,15 @@ class AuthController extends Controller
                     $todos->name=$request->input('name');
                     $todos->save();
                 }
+                if($request->has('position')){
+                    if($todos["role"]=="business owner"){
+                        $position=$request->input('position');
+                        $account= TwitterAuthModel::where('user_id',$user_id)
+                                                  ->update(['position'=>$position]);
+                    }
+                    
+                }
+
                 return response()->json(["message"=>"Profile Edited"],201);
             }
         }else{
@@ -171,7 +181,9 @@ class AuthController extends Controller
     }
     protected function validatorEditProfile(array $data){
         return Validator::make($data, [
-            'name' => 'required|max:255'
+            'name' => 'required|max:255',
+            'position'=>'required_if:role,bo|numeric',
+            'role'=> 'required'
         ]);
     }
     protected function validatorChangePassword(array $data){
@@ -222,6 +234,9 @@ class AuthController extends Controller
             ],404);
         }
     }
+
+
+    
     
    
 }

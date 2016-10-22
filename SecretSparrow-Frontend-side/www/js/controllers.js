@@ -1999,9 +1999,12 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
   $scope.$on('$ionicView.enter',function(event,data){
       var role=localStorage.getItem("scope");
       $scope.showed=true;
+      $scope.showedBO=false;
       if(role!=="crowdies"){
           $scope.showed=false;
+          $scope.showedBO=true;
       }
+      
       $scope.imgSrc="img/logo.png";
       $scope.show = function() {
         $ionicLoading.show({
@@ -2065,7 +2068,7 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
         }         
       };
       var profile_image_url="";
-
+      var position=null;
       $http.get("https://incognito.uqcloud.net/api/user/detail/"+localStorage.getItem("user_id"),config)
       .then(function(response){
           console.log(response.data);
@@ -2082,6 +2085,9 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
                       $scope.imgSrc=profile_image_url;
                   }
               }
+          }else{
+              $scope.editProfile.position=response.data.bo.position;
+              position=response.data.bo.position;
           }
           $scope.hide($ionicLoading);
 
@@ -2100,7 +2106,8 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
               if($scope.imgSrc!="img/logo.png" && $scope.imgSrc!=profile_image_url){
                 var data={
                     "name":$scope.editProfile.name,
-                    "user_id":localStorage.getItem("user_id")
+                    "user_id":localStorage.getItem("user_id"),
+                    "role":role
                 }
                 var options={
                     fileKey:"photo",
@@ -2139,30 +2146,54 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
                     }
                 });
               } else{
+                  
                   var data={
                       "user_id":localStorage.getItem("user_id"),
-                      "name":$scope.editProfile.name
+                      "name":$scope.editProfile.name,
+                      "role":role
                   }
-                  $http.post('https://incognito.uqcloud.net/api/user/edit',data,authHeader())
-                  .then(function(response){
-                      $scope.hide($ionicLoading);
-                      $ionicPopup.alert({
-                          title: response.data.message,
-                          okType: 'button-assertive'
+                  
+                  if(role!=="crowdies"){
+                      if($scope.editProfile.position>=0 && $scope.editProfile.position<=100){
+                          data.position=$scope.editProfile.position;
+                          update();
+                      }else{
+                          data.position=position;
+                          $scope.hide($ionicLoading);
+                          $ionicPopup.alert({
+                              title: "Position should between 0 and 100",
+                              okType: 'button-assertive'
+                          });
+                      }
+                      
+                  }else{
+                      //if crowdies
+                      update();
+                  }
+                  
+                  function update(){
+                      $http.post('https://incognito.uqcloud.net/api/user/edit',data,authHeader())
+                      .then(function(response){
+                          $scope.hide($ionicLoading);
+                          $ionicPopup.alert({
+                              title: response.data.message,
+                              okType: 'button-assertive'
+                          });
+                      },function(error){
+                          console.log("error2");
+                          console.error(Object.keys(error));
+                          console.error(error.data);
+                          console.error(error.status);
+                          $scope.hide($ionicLoading);
+                          $ionicPopup.alert({
+                              title: error.data.name[0],
+                              okType: 'button-assertive'
+                          });
                       });
-                  },function(error){
-                      console.log("error2");
-                      console.error(Object.keys(error));
-                      console.error(error.data);
-                      console.error(error.status);
-                      $scope.hide($ionicLoading);
-                      $ionicPopup.alert({
-                          title: error.data.name[0],
-                          okType: 'button-assertive'
-                      });
-                  })
+                  }
               }
-
+              
+              
           });
       };
 
