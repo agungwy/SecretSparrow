@@ -31,6 +31,9 @@
 	height:75px;
 	width:75px;
 }
+.form-spacing{
+    margin-top: 10%;
+}
 
 .footer{
 	position: absolute;
@@ -99,6 +102,12 @@
 	margin-left: 25%;
 	margin-right: 25%;
 	width: 50%;
+}
+
+.divButton-wide{
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 100%;
 }
 
 .roundButton{
@@ -451,8 +460,18 @@ padding-top:5px;
 #trashcan{
 	color:#ED5456;
     float:right;
-    
+    padding-left:  5%;
+}
 
+.row-crowdies{
+    padding-left: 0px !important;
+    padding-bottom: 0px !important;
+    padding-right: 0px !important;
+}
+.col-crowdies{
+    padding-bottom: 0px !important;
+    padding-left: 0px !important;
+    padding-top: 0px !important;
 }
 
 #efficiency{
@@ -551,6 +570,14 @@ padding-top:5px;
 	color: #ED5356;
 }
 
+.remove-crowdies-bo{
+	margin-top: 1%;
+	margin-bottom: 1%;
+	float: right;
+	color: #ED5356;
+}
+
+
 #twitterAvatar{
 	float:left;
 }
@@ -559,5 +586,7 @@ padding-top:5px;
 	font-size: 12px;
 }
 
-
+#dashboard-padding{
+    margin-top: 6%;
+}
 

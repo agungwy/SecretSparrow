@@ -1,7 +1,7 @@
 <!-- register page -->
-<ion-view id="register">
+<ion-view id="register" can-swipe-back="false">
     <ion-content>
-        <h1 id="registerTitle" class="centerTitle">REGISTER</h1>
+        <h2 id="registerTitle" class="centerTitle">REGISTER</h2>
         
             
 
@@ -41,9 +41,10 @@
         <div class="divButton">
             <button class="button button-assertive  button-block roundButton" ng-click="register()">SUBMIT</button>
         </div>
-
-        <div class="divButton" id="haveAccount" >
-            <button class="button button-clear button-assertive" ui-sref="login">HAVE ACCOUNT?</button>
+        <br>
+        <p id="dontHaveAccount">Already have an account?</p>
+        <div class="divButton" id="haveAccount">
+            <button class="button button-block roundButton button-assertive" ui-sref="login">LOGIN</button>
         </div>
         
     </ion-content>

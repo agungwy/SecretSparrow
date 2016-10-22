@@ -9,7 +9,12 @@ angular.module('starter', ['ionic', 'ngResource', 'ngCordovaOauth', 'chart.js', 
     $ionicConfigProvider.tabs.position('bottom');
 })
 .run(function($ionicPlatform) {
+    
   $ionicPlatform.ready(function() {
+    console.log('sadalkl');
+    console.log(window.StatusBar==null);
+    console.log(Object.keys(window.StatusBar));
+    console.log('sadalkl2');
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -20,8 +25,11 @@ angular.module('starter', ['ionic', 'ngResource', 'ngCordovaOauth', 'chart.js', 
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
+      window.StatusBar.overlaysWebView(false);
+//      window.StatusBar.backgroundColorByHexString("#ffffff");
+//      console.log(StatusBar);
     }
   });
-})
+});
 
 

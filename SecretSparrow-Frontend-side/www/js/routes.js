@@ -8,7 +8,7 @@ angular.module('starter.routes', [])
   /*linkage of the first menu */
   .state('starter', {
     url: '/starter',
-    cache:false,
+//    cache:false,
     templateUrl: 'templates/starter.html',
     controller: 'AppCtrl'
 
@@ -49,8 +49,6 @@ angular.module('starter.routes', [])
     controller: 'ForgetPasswordCtrl'
 
   })
-
-
  
     
   // login linkage
@@ -78,11 +76,7 @@ angular.module('starter.routes', [])
     controller: 'ConnectToTwitterCtrl'
   })
 
-  .state('editProfile', {
-    url: '/editProfile',
-    templateUrl: 'templates/editProfile.html',
-    controller: 'EditProfileCtrl'
-  })
+  
   
     
 
@@ -100,6 +94,7 @@ angular.module('starter.routes', [])
   // child of menu, dashboard
   .state('menu.dashboard', {
     url: '/menu.dashboard',
+//    abstract: true,
     cache: false,
     views: {
       'menuContent': {
@@ -124,7 +119,7 @@ angular.module('starter.routes', [])
    // child of menu, explore more companies (explore.html)
    .state('menu.explore', {
     url: '/menu.explore',
-    cache: false,
+//    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/explore.html',
@@ -132,11 +127,22 @@ angular.module('starter.routes', [])
       }
     } 
   })
+  
+  .state('menu.editProfile', {
+    url: '/menu.editProfile',
+//    cache:false,
+    views:{
+        'menuContent':{
+            templateUrl: 'templates/editProfile.html',
+            controller: 'EditProfileCtrl'
+        }
+    }
+  })
 
    // child of menu, company profile in crowdie side linkage
     .state('menu.companyProfile', {
     url: '/menu.companyProfile',
-    cache: false,
+//    cache: false,
     params: {
       hndl: ""
     },
@@ -146,7 +152,33 @@ angular.module('starter.routes', [])
       controller: 'CompanyProfileCtrl',
       
       }   
-    },
+    }
+
+  })
+  
+  .state('menu.changePassword', {
+    url: '/menu.changePassword',
+//    cache: false,
+    views: {
+      'menuContent':{
+      templateUrl: 'templates/changePassword.html',
+      controller: 'ChangePasswordCtrl',
+      
+      }   
+    }
+
+  })
+  
+  .state('menu.moreCompanies', {
+    url: '/menu.moreCompanies',
+//    cache: false,
+    views: {
+      'menuContent':{
+      templateUrl: 'templates/moreCompanies.html',
+      controller: 'MoreCompaniesCtrl',
+      
+      }   
+    }
 
   })
 
@@ -154,7 +186,7 @@ angular.module('starter.routes', [])
   // child of menu, crowdie home linkage
   .state('menu.crowdieHome', {
     url: '/menu.crowdieHome',
-    cache: false,
+//    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/crowdieHome.html',
@@ -196,11 +228,12 @@ angular.module('starter.routes', [])
     
   })
 
-  .state('menu.boCrowdieList', {
-    url: '/menu.boCrowdieList',
-    cache: false,
+  .state('boCrowdieList', {
+    url: '/boCrowdieList',
+    parent:'menu.dashboard',
+//    cache: false,
     views: {
-      'menuContent': {
+      "tab-bo-crowdie-list": {
         templateUrl: 'templates/boCrowdieList.html',
         controller: 'BoCrowdieListCtrl'
 

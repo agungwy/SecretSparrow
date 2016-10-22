@@ -1,13 +1,31 @@
 <!-- login page -->
-<ion-view name="editProfile" id="editProfile">
+<ion-view name="editProfile" id="editProfile" title="Edit Profile">
   
   
-  <ion-content>
+  <ion-content class="has-header">
     
-      <div class="divButton loginSignUpButton">
-        <button class="button button-block button-assertive roundButton" type="submit" ng-click="takePic()">REGISTER</button>
+    <form class="form-spacing">
+      <img ng-src="{{imgSrc}}" class="center img-circle" ng-click="takePic()" ng-show="showed"/>
+      <div class="list" id="backgroundLoginForm">
+        
+        
+        <label class="item item-input item-stacked-label top20 bot20">
+          <h4 class="centerH2">NAME</h4>
+          <input type="text" class="inputCenter" ng-model="editProfile.name">
+        </label>
+
+        
+        
       </div>
-    </div>
+    </form>
+      <div class="divButton" id="forgotPassword">
+        <button class="button button-clear button-assertive" type="submit" ui-sref="menu.changePassword">Change Password</button>
+      </div>
+      <div class="divButton loginSignUpButton">
+        <button class="button button-block button-assertive roundButton" type="submit" ng-click="save()" >SAVE</button>
+      </div>
+      
+    
 
   </ion-content>
 </ion-view>
