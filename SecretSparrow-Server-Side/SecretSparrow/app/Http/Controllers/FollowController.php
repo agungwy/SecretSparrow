@@ -6,16 +6,36 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\SentFollowingRequestModel;
+use App\TwitterAuthModel;
+use App\WorkModel;
 
 class FollowController extends Controller
 {
     public function getTotalAll($bo) {
-      $handle = SentFollowingRequestModel::where('handle',$bo)->get();
-      $counter = 0;
-      foreach($handle as $handles) {
-        $counter++;
+      $crowdiesOn=WorkModel::where('handle',$bo)->get();
+      
+      foreach($crowdiesOn as $crowdieOn){
+        $crowdieOn->crowdies_profile->user;
+        $handle = SentFollowingRequestModel::where('handle',$bo)
+                                            ->where('crowdies_id',$crowdieOn->crowdies_id)
+                                            ->get();
+        $crowdieOn->following=count($handle);
+        $crowdieOn->followed_back=$this->getCrowdieFollowed($bo,$crowdieOn->crowdies_id)["followed_count"];
+        if(count($handle)!==0){
+          $crowdieOn->efficiency=(($this->getCrowdieFollowed($bo,$crowdieOn->crowdies_id)["followed_count"]/count($handle))*100);
+        }else{
+          $crowdieOn->efficiency=0;
+        }
+        
+
+        
       }
-      return $counter;
+      
+      // $counter = 0;
+      // foreach($handle as $handles) {
+      //   $counter++;
+      // }
+      return $crowdiesOn;
     }
 
     public function getTotalFollowed($bo) {
@@ -25,7 +45,7 @@ class FollowController extends Controller
       foreach($follback as $follbacks){
         $counter++;
       }
-      return $counter;
+      return ["followed_count"=>$counter];
     }
 
     public function getCrowdieAll($bo,$cr) {
@@ -35,7 +55,7 @@ class FollowController extends Controller
       foreach($crowdie as $crowdies) {
         $counter++;
       }
-      return $counter;
+      return ["all"=>$counter];
     }
 
     public function getCrowdieFollowed($bo,$cr) {
@@ -46,9 +66,8 @@ class FollowController extends Controller
       foreach($follback as $follbacks) {
         $counter++;
       }
-      return $counter;
+      return ["followed_count"=>$counter];
     }
-
     public function crowdiesAll($bo) {
 
       $crowdie = SentFollowingRequestModel::where('handle',$bo);
@@ -71,8 +90,7 @@ class FollowController extends Controller
 
     public function crowdiesFollowed($bo) {
 
-      $crowdie = SentFollowingRequestModel::where('followed_back',true)
-                                           ->where('handle',$bo);
+      $crowdie = SentFollowingRequestModel::where('handle',$bo);
       $temp=array();
       foreach($crowdie->get() as $crowdies) {
         $crowdies_id=$crowdies->crowdies_id;

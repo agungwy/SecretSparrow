@@ -6,19 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class SentFollowingRequestModel extends Model
 {
-    // This model describes sent_following_request table from database
+    //
     protected $appends=["days"];
     protected $table='sent_following_request';
     public $incrementing= false;
     protected $fillable=["twitter_id","twitter_id_str","handle","created_at","name","updated_at","followed_back","friends_count","followers_count","profile_image_url","profile_image_url_https","crowdies_id",'screen_name'];
 
-    // This function is to set the days
     public function setDaysAttribute($value)
     {
         $this->attributes['days'] = $value;
     }
-
-    // This function is to get the days
+    
     public function getDaysAttribute()
     {
 //        print_r($this->attributes);
@@ -26,11 +24,11 @@ class SentFollowingRequestModel extends Model
             return $this->attributes['days'];
         }
     }
-
-    // This function is to get following data
     public function followings(){
-    	return $this->belongsTo('App\TwitterModel','handle');
+        return $this->belongsTo('App\TwitterModel','handle');
     }
+    
+    
 
 
 }
