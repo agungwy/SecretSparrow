@@ -1,0 +1,140 @@
+<!-- page for crowdies and Business owner choose their categories -->
+<ion-modal-view view-title="ChooseCategories" can-swipe-back="false">
+  <ion-content class="bgGrey">
+	<h2 class="centerH2" id="titleChooseCategories">WHAT ARE YOU INTERESTED IN</h2>
+	<div id="bodyChooseCategories">
+		<div class="row ">
+			<div class="col">
+				<div class="row">
+
+					<a class="center" ng-click="iconColorChange1()">
+						<i class="fa fa-paint-brush fa-5x" ng-style="iconColor1" aria-hidden="true"></i>
+						
+					</a>
+				</div>
+				<div class="row">	
+					<p class="center">ARTS</p>
+				</div>
+					
+					
+			</div>
+			<div class="col left10 right10">
+				<div class="row">
+
+					<a class="center" ng-click="iconColorChange2()">
+						<i class="fa fa-car fa-5x" ng-style="iconColor2" aria-hidden="true"></i>
+					</a>
+				</div>
+				<div class="row">	
+					<p class="center">CARS</p>
+				</div>
+
+			</div>
+
+			<div class="col">
+				
+				<div class="row">
+
+					<a class="center" ng-click="iconColorChange3()">
+						<i class="fa fa-female fa-5x" ng-style="iconColor3" aria-hidden="true"></i>
+					</a>
+				</div>
+				<div class="row">	
+					<p class="center">FASHION</p>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col">
+				
+				<div class="row">
+
+					<a class="center" ng-click="iconColorChange4()">
+						<i class="fa fa-money fa-5x" ng-style="iconColor4" aria-hidden="true"></i>
+					</a>
+				</div>
+				<div class="row">	
+					<p class="center">FINANCE</p>
+				</div>
+
+			</div>
+			<div class="col  left10 right10">
+				
+				<div class="row">
+
+					<a class="center" ng-click="iconColorChange5()">
+						<i class="fa fa-cutlery fa-5x" ng-style="iconColor5" aria-hidden="true"></i>
+					</a>
+				</div>
+				<div class="row">	
+					<p class="center" class="center">FOOD</p>
+				</div>
+
+			</div>
+
+			<div class="col">
+				<div class="row">
+
+					<a class="center" ng-click="iconColorChange6()">
+						<i class="fa fa-glass fa-5x" ng-style="iconColor6" aria-hidden="true"></i>
+					</a>
+				</div>
+				<div class="row">	
+					<p class="center">LEISURE</p>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col">
+				<div class="row">
+
+					<a class="center" ng-click="iconColorChange7()">
+						<i class="fa fa-futbol-o fa-5x" ng-style="iconColor7" aria-hidden="true"></i>
+					</a>
+				</div>
+				<div class="row">	
+					<p class="center">SPORTS</p>
+				</div>
+
+			</div>
+			<div class="col  left10 right10">
+				<div class="row">
+
+					<a class="center" ng-click="iconColorChange8()">
+						<i class="fa fa-laptop fa-5x" ng-style="iconColor8" aria-hidden="true"></i>
+					</a>
+				</div>
+				<div class="row">	
+					<p class="center">TECHNOLOGY</p>
+				</div>
+
+			</div>
+
+			<div class="col">
+				<div class="row">
+
+					<a class="center" ng-click="iconColorChange9()">
+						<i class="fa fa-plane fa-5x" ng-style="iconColor9" aria-hidden="true"></i>
+					</a>
+				</div>
+				<div class="row">	
+					<p class="center">TRAVEL</p>
+				</div>
+
+			</div>
+		</div>
+		
+		<div class="row divButton"> 
+
+	  	<button class="button button-block button-assertive roundButton" type="submit" ng-click="submit()" id="chooseCategoriesSubmit">SUBMIT</button>
+	</div>
+	</div>	
+
+	</ion-content>
+</ion-modal-view>

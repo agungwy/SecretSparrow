@@ -1,0 +1,78 @@
+<!-- page the company profile in crowdies side  -->
+<ion-view id="">
+    <ion-nav-title>
+        <img class="title-image" src="img/logo.png">    
+    </ion-nav-title>
+    <ion-content>
+        <div ng-model="companyData">
+            <h1 class="centerTitle" id="companyProfileTitle">Company Profile</h1>
+            <div style="background-color:#D8D8D8">
+                <div class="companyProfilePictureDiv">
+                    
+                    <img id="companyProfilePicture" class = "img-circle center" src={{companyData.avatar}} >
+                
+                </div>
+                <div >
+                    <div>
+                        <p id="companyProfileName">{{companyData.name}}</p>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p style="font-size:18px; color:#ED5356;text-align:center;">{{listOfCrowdies}}</p>
+                            <p style="font-size:13px; text-align:center">CROWDIES</p>
+                        </div>
+
+                        <div class="col">
+                            <p style="font-size:18px; color:#ED5356;text-align:center;">{{companyData.following}}</p>
+                            <p style="font-size:13px; text-align:center ">FOLLOWING</p>
+                        </div>
+
+                        <div class="col">
+                            <p style="font-size:18px; color:#ED5356;text-align:center;">{{companyData.follower}}</p>
+                            <p style="font-size:13px; text-align:center ">FOLLOWERS</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+                
+            <div ng-show="applyWork" class="divButton top20">
+                <p class="centerH2RedBig">{{position}}</p>
+                <p class="centerH2Black">POSITIONS AVAILABLE</p>
+                <button class="button button-assertive  button-block roundButton" ng-click="applyJob()" id="applyButtonCompany">APPLY NOW</button>
+            </div>
+            <div ng-show="work" class="row">
+                <div class="col">
+                    <button class="button button-block button-positive roundButton" ui-sref="menu.crowdieWorking">WORK</button>
+                </div>
+                    
+                <div class="col">
+                    <button class="button button-block button-assertive roundButton" ng-click="quitJob()">QUIT JOB</button>
+                </div>
+            </div>
+
+            <hr width="70%" style="margin-top:30px;">
+
+            <p style="font-size:16px; text-align:center;color:#ED5356;margin-top:20px;">INTERESTED IN</p>
+
+
+            <div class="row">
+                <div class="col" ng-repeat="selectedInterest in selectedInterests">
+                    <div class="row">
+                            <a class="center ">
+<!--                        <div class="">-->
+                            <i class="fa {{selectedInterest.class}} fa-3x {{selectedInterest.color}} img-circle interested_icon"></i>
+<!--                        </div>-->
+                            </a>
+                    </div>
+                     <p style="text-align:center; font-size:13px;">{{selectedInterest.category_name}}</p>
+                </div>
+            
+
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

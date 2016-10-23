@@ -1,0 +1,80 @@
+<!-- page for crowdie to working -->
+<ion-view title={{title_name}} >
+    
+    <ion-content padding="true" class="has-header">
+
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="refresh()">
+    </ion-refresher>
+        <div>
+            <p class="centerH2 noShowTitle" id="error-message" ng-show="showTitleWork">{{nill}}</p>
+            <div class="list card" ng-repeat="account in accounts">
+                
+                <img class="img-circle center" src={{account.profile_image_url}} >
+                
+
+                
+
+                <h4 class="centerH2Black">{{account.name}}</h4>
+
+                <div class="greyBgBody">
+
+                    <div class="row centerDiv">
+                        
+                        <div class="col">
+
+                            <p style="font-size:18px; color:#ED5356">{{account.friends_count}}</p>
+                            <p style="font-size:13px ">FOLLOWING</p>
+                            
+                        </div>
+                        <div class="col">
+                            <p style="font-size:18px; color:#ED5356;">{{account.followers_count}}</p>
+                            <p style="font-size:13px">FOLLOWERS</p>
+                        </div>
+
+                    </div>
+                    <hr class="top20">
+                
+
+                </div>
+                <p style="font-size:16px; text-align:center;color:#ED5356;margin-top:20px;">INTERESTED IN</p>
+
+                <div class="row">
+                    <div class="col" >
+                        <div class="row">
+                                <a class="center ">
+    <!--                        <div class="">-->
+                                <i class="fa {{account.class}} fa-3x {{account.color}} img-circle interested_icon"></i>
+    <!--                        </div>-->
+                                </a>
+                        </div>
+                         <p style="text-align:center; font-size:13px;">{{account.category_name}}</p>
+                    </div>
+                
+
+                </div>
+                      
+                
+                <div class="row centerDiv">
+                    <!-- <div class="col">
+                    
+                        <button class="button button-assertive button-outline" >
+                            SKIP
+                        </button>
+                    </div> -->
+
+                    <div class="col">
+
+                        <button class="button button-balanced button-outline" ng-click="follow(account.screen_name, $index)" >
+                            FOLLOW
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    </ion-content>
+</ion-view>

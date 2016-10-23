@@ -1,0 +1,88 @@
+<!-- Page for business Owner Home menu -->
+<ion-view id="menu.boHome">
+    <!-- SecretSparrow Logo -->
+    <ion-nav-title>
+        <img class="title-image" src="img/logo.png">    
+    </ion-nav-title>
+    <ion-content padding="false" class="has-header">
+        <div>
+            <h3 style="color:#000000;text-align:center;padding-top:6px;">@{{name}}</h3>
+        </div>
+        <div ng-model="boData">
+            <div class="item item-body" style="border:none;">
+                <div id="content">
+                    <div class="section">
+                        <div class="box">
+                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">{{boData.following}}</h2>
+                            <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">FOLLOWING</h2>
+                            <hr>
+                        </div>
+
+                        <div class="utility">
+                            <h2 style="color:#ED5356;margin:0;font-size:30px;text-align:center;">{{listOfCrowdies}}</h2>
+                            <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">Crowdies are
+                                <br>working for you</h2>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="topRightContent">
+                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">{{boData.follower}}</h2>
+                            <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">FOLLOWERS</h2>
+                            <hr>
+                        </div>
+                        
+
+                        <div class="bottomRightContent">
+                            <h2 style="color:#ED5356;margin:0;font-size:30px;text-align:center;">{{followedBack}}</h2>
+                            <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">Accounts followed you</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div>
+            <div style="background-color:#4D4D4D; overflow: auto;" class="list card manual-card-fullwidth">
+                <h4 style="color:#FFFFFF;text-align:center;">YOUR TOP CROWDIES</h4>
+                <div class="centerDiv" >
+                    <div class="row">
+                        <div class="col" ng-repeat="crowdie in crowdiesWork">
+                            <a >
+                                <img class="img-circle center" ng-src="{{checkImage(crowdie.crowdies_profile.profile_picture_url)}}">
+                            </a>
+
+                            <p style="font-size:14px;">
+                                <font color="white">{{crowdie.crowdies_profile.user.name}}
+                                    <br>{{crowdie.followed_back}}</font>
+                                
+                                
+                            </p>
+                            
+
+                        </div>
+                    </div>
+                       
+                    <div class="row">
+                        <div class="col " ng-repeat="crowdie in crowdiesWork2">
+                            <a >
+                                <img class="center img-circle" ng-src="{{checkImage(crowdie.crowdies_profile.profile_picture_url)}}">
+                            </a>
+                            <p style="font-size:14px">
+                                <font color="white">{{crowdie.crowdies_profile.user.name}}
+                                    <br>{{crowdie.followed_back}}</font>
+                            </p>
+                            
+
+                        </div>
+
+                        
+                    </div>
+                
+                
+                </div>
+
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1177,6 +1177,7 @@ app.controller('BoCrowdieListCtrl', function($scope,$state,$http, $ionicLoading)
           $ionicLoading.hide();
     };
   $scope.showListTitle=false;
+  $scope.crowdieList = [];
   $scope.checkImage=function(imgSrc){
       var c=Math.floor((Math.random() * 3) + 1);
       var imageSource="img/logo.png";
@@ -1194,7 +1195,9 @@ app.controller('BoCrowdieListCtrl', function($scope,$state,$http, $ionicLoading)
     .then(function(response){
       var data= response.data;
       console.log(data);
+      console.log($index);
       $scope.crowdieList.splice($index, 1);
+      console.log($scope.crowdieList);
       $scope.hide($ionicLoading);
     
       
