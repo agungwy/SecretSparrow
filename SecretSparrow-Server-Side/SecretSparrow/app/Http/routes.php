@@ -36,10 +36,10 @@ Route::get('api/followers','TwitterAPIController@getFollowers')->middleware('cro
 Route::get('api/friends',['uses'=>'TwitterAPIController@getFollowing','middleware'=>'crowdies']);
 Route::post('api/register','Auth\AuthController@postRegister');
 Route::put('api/role',['uses'=>'Auth\AuthController@role','middleware'=>'oauth']);
-Route::get('api/twitter',['uses'=>'TwitterAPIController@user']);
+Route::get('api/twitter',['uses'=>'TwitterAPIController@user','middleware'=>'oauth']);
 Route::get('api/user/twitter',['uses'=>'TwitterAuthController@getTwitterDetail'])->middleware('oauth');
 //Route::get('api/access_token','Auth\RegisterController@getPersonalAccessToken');
-Route::get('api/categories', 'CategoryController@getCategory')->middleware('oauth');
+// Route::get('api/categories', 'CategoryController@getCategory')->middleware('oauth');
 Route::post('api/categories', 'CategoryController@selectCategory')->middleware('oauth');
 Route::get('api/recommended', 'CategoryController@recommendedBOs')->middleware('crowdies');
 

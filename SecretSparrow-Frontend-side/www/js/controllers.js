@@ -2082,8 +2082,8 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
           };
           if(role=='crowdies'){
               if(response.data.crowdies.profile_picture_url!==""){
-                  var c=Math.floor((Math.random() * 3) + 1);
-                  profile_image_url="https://incognito.uqcloud.net"+response.data.crowdies.profile_picture_url+"?code="+c;
+                  // var c=Math.floor((Math.random() * 3) + 1);
+                  profile_image_url="https://incognito.uqcloud.net"+response.data.crowdies.profile_picture_url+"?code="+Date.now();
                   if(profile_image_url!==""){
                       $scope.imgSrc=profile_image_url;
                   }
