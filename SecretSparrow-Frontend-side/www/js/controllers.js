@@ -1593,7 +1593,7 @@ app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state, $http, $
       $scope.list5 = true;
       $scope.list6 = false;
     }
-    else if (x == 6){
+    else if (x >= 6){
       $scope.list1 = true;
       $scope.list2 = true;
       $scope.list3 = true;
