@@ -65,14 +65,14 @@ class ExampleTest extends TestCase
         $response = $this->call('GET', '/api/requests/sent?user_id=william.hidayat@gmail.com57d2b3bb031944');
         $this->assertEquals(404, $response->status());
     }
-    // public function test8(){
-    //     $response=$this->call('PUT','/api/requests/update',[
-    //         [
-    //             "ids"=>"39538010",
-    //             "handle"=>"williamhenry_94"   
-    //         ]
-    //     ]);
-    // }
+    public function test8(){
+        $response=$this->call('PUT','/api/requests/update',[
+            [
+                "ids"=>"39538010",
+                "handle"=>"williamhenry_94"   
+            ]
+        ]);
+    }
     public function test9(){
         $response=$this->call('POST','/api/follow',[
           "handle"=>"williamhenry_94",
@@ -145,15 +145,15 @@ class ExampleTest extends TestCase
         $response = $this->call('GET', '/api/followers?crowdies_id=william.hidayat@gmail.com57d2b3bb031944.08580997');
         $this->assertEquals(500, $response->status());
     }
-    // public function test24(){
-    //     $response=$this->call('POST','/api/register',[
-    //       "name"=>"qwerty",
-    //       "email"=>"abc@xyz.com",
-    //       "password"=>"123456",
-    //       "password_confirmation"=>"123456"
-    //     ]);
-    //     $this->assertEquals(201, $response->status());
-    // }
+    public function test24(){
+        $response=$this->call('POST','/api/register',[
+          "name"=>"qwerty",
+          "email"=>"abc@xyz.com",
+          "password"=>"123456",
+          "password_confirmation"=>"123456"
+        ]);
+        $this->assertEquals(201, $response->status());
+    }
     public function test25(){
         $response=$this->call('POST','/api/register',[
           "name"=>"qwerty",
@@ -214,13 +214,7 @@ class ExampleTest extends TestCase
         $this->assertEquals(400, $response->status());
     }
 
-    // public function test32(){
-    //     $response=$this->call('PUT','/api/role',[
-    //       "user_id"=>"abc@xyz.com580b3f08c925a5.45500800",
-    //       "role"=>"crowdies"
-    //     ]);
-    //     $this->assertEquals(201, $response->status());
-    // }
+   
     public function test33(){
         $response=$this->call('PUT','/api/role',[
           "user_id"=>"abc@xyz.com580b3f08c925a5",
@@ -268,15 +262,15 @@ class ExampleTest extends TestCase
         $response = $this->call('GET', '/api/user/twitter');
         $this->assertEquals(400, $response->status());
     }
-    // public function test43(){
-    //    $response=$this->call('POST','/api/categories',[
-    //       [
-    //           "user_id"=>"bshaffer@gmail.com57d378aa784614.03958496",
-    //           "category_name"=>"Cars"
-    //       ]
-    //     ]);
-    //     $this->assertEquals(201, $response->status());
-    // }
+    public function test43(){
+       $response=$this->call('POST','/api/categories',[
+          [
+              "user_id"=>"bshaffer@gmail.com57d378aa784614.03958496",
+              "category_name"=>"Cars"
+          ]
+        ]);
+        $this->assertEquals(201, $response->status());
+    }
     public function test44(){
        $response=$this->call('POST','/api/categories',[
           [
