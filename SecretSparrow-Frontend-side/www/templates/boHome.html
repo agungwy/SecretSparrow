@@ -13,7 +13,7 @@
                 <div id="content">
                     <div class="section">
                         <div class="box">
-                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">{{boData.friends_count}}</h2>
+                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">{{boData.following}}</h2>
                             <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">FOLLOWING</h2>
                             <hr>
                         </div>
@@ -26,15 +26,15 @@
                     </div>
                     <div class="section">
                         <div class="topRightContent">
-                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">{{boData.followers_count}}</h2>
+                            <h2 style="color:#ED5356;margin:0;font-size:27px;text-align:center;">{{boData.follower}}</h2>
                             <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">FOLLOWERS</h2>
                             <hr>
                         </div>
                         
 
                         <div class="bottomRightContent">
-                            <h2 style="color:#ED5356;margin:0;font-size:30px;text-align:center;">0</h2>
-                            <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">Accounts followed you this week</h2>
+                            <h2 style="color:#ED5356;margin:0;font-size:30px;text-align:center;">{{followedBack}}</h2>
+                            <h2 style="color:#000000;margin:0;font-size:15px;text-align:center;">Accounts followed you</h2>
                         </div>
                     </div>
                 </div>
@@ -77,9 +77,37 @@
                                 <br>80</font>
                         </p>
 
+=======
+                    <div class="row">
+                        <div class="col" ng-repeat="crowdie in crowdiesWork">
+                            <a ui-sref="boCrowdieList">
+                                <img class="img-circle center" ng-src="{{::checkImage(crowdie.crowdies_profile.profile_picture_url)}}">
+                            </a>
 
+                            <p style="font-size:14px;">
+                                <font color="white">{{crowdie.crowdies_profile.user.name}}
+                                    <br>{{crowdie.followed_back}}</font>
+                                
+                                
+                            </p>
+                            
+>>>>>>> development
+
+                        </div>
                     </div>
+                       
+                    <div class="row">
+                        <div class="col " ng-repeat="crowdie in crowdiesWork2">
+                            <a >
+                                <img class="center img-circle" ng-src="{{::checkImage(crowdie.crowdies_profile.profile_picture_url)}}">
+                            </a>
+                            <p style="font-size:14px">
+                                <font color="white">{{crowdie.crowdies_profile.user.name}}
+                                    <br>{{crowdie.followed_back}}</font>
+                            </p>
+                            
 
+<<<<<<< HEAD
                     <div class="col">
 <<<<<<< HEAD
                         <a href="#">

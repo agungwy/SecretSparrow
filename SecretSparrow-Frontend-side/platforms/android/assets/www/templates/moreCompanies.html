@@ -1,0 +1,31 @@
+<ion-view id="moreCompanies" title="Currently Working">
+	<!-- <ion-nav-title>
+		<a ng-click="" id="exploresearch">
+            <i class="fa fa-search fa-1x" aria-hidden="true"></i>
+            
+        </a>		
+        <center>
+        	<h4 id="exploretitle">EXPLORE</h4>
+        </center>
+	</ion-nav-title>
+ -->
+	<ion-content>
+		<ion-list>
+			<div ng-repeat="item in items">
+				<a class="item item-avatar"  ng-click="viewCompany(item.handle)">
+					<img ng-src="{{ item.bo_profile.avatar }}" id="profileimage">
+					<h2 id="companyname">{{ item.bo_profile.name }}</h2>
+	 				<p class="companyfollowing">@{{ item.handle }}</p>
+					<p class="companyposition">{{ item.bo_profile.position }} POSITIONS AVAILABLE</p>
+				</a>
+			</div>
+        </ion-list>
+        <ion-infinite-scroll
+          immediate-check="false"
+          on-infinite="loadMore()"
+          ng-if="!moredata"               
+          distance="2%">
+        </ion-infinite-scroll>
+	</ion-content>
+    
+</ion-view>

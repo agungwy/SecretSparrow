@@ -1,0 +1,95 @@
+<ion-view id="boCrowdieList">
+  <ion-nav-title>
+    <img class="title-image" src="img/logo.png">    
+  </ion-nav-title>
+  
+   <ion-content padding="false" class="has-header"> 
+       <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="load()">
+       </ion-refresher>
+       <h4 id="secretSparrow2-heading3" class="centerH2 top20">{{number}} Crowdies are working for you</h4>
+       <h1 class="centerH2 noShowTitle" ng-show="showListTitle">{{crowdieError}}</h1>
+       <ion-list id="bot20">
+                <div >
+                    <ion-item class="item item-avatar item-icon-right assertive" ng-repeat="c in crowdieList">
+
+                        <img ng-src="{{::checkImage(c.crowdies_profile.profile_picture_url)}}">
+
+    <!--                    <h2assertive>-->
+                            <div class="row row-crowdies">
+                                <div class="col col-crowdies">
+                                    <h2assertive>{{c.crowdies_profile.user.name}}</h2assertive>
+                                    <ul id="nav2">
+                                        <li ><a id="followback">{{c.following}} Following</a></li>
+                                        <li><a id="followback">{{c.followed_back}} Followed Back</a></li>
+                                    </ul>
+                                    <span id="efficiency">{{c.percent}}% Efficiency</span>
+                                </div>
+                                <div class="col">
+                                    <a ng-click="removeCrowdie(c.crowdies_profile.crowdies_id, $index)" id="trashcan">
+                                        <i class="fa fa-trash-o fa-2x remove-crowdies-bo">
+                                        </i>
+                                    </a>
+                                </div>
+                            </div>
+
+    <!--                    </h2assertive>-->
+
+                    </ion-item>
+                </div>
+
+        </ion-list>
+
+        <div style="height: 10%">
+        </div>
+        <!-- <ion-tabs class="tabs tabs-assertive">
+
+          <ion-tab title="Summary" ui-sref="menu.dashboard">
+           
+          </ion-tab>
+
+          <ion-tab title="Crowdies Performance" ui-sref="menu.boCrowdieList">
+            
+        </ion-tab> -->
+
+          
+      <!-- </ion-tabs> -->
+       
+
+
+
+
+   <!--ion-slide-box on-slide-changed="slideHasChanged($index)">
+  <ion-slide>
+  <div>
+  <div style="background-color:#4D4D4D; overflow: auto;" class="list card manual-card-fullwidth">
+    <div class="row flex-wrap list-crowdies padding-top">
+      <div class="col-33 text-center" ng-repeat="crowdie in crowdies">
+        <a href="#statistic">
+          <img src="{{ crowdies.face }}" alt="" class="circle"/>
+          <h5 class="dark">{{ crowdies.name }}</h5><br>
+          <h5 class="dark">{{ crowdies.score}}</h5>
+        </a>
+      </div>
+    </div>
+    </div>
+    </div>
+    </ion-slide>
+    </ion-slide-box-->
+  </ion-content>
+<!--
+   <div class="tabs-striped tabs-background-assertive tabs-color-light footer">
+      <div class="tabs">
+        <a class="tab-item" ui-sref="menu.dashboard">
+          Summary
+        </a>
+        <a class="tab-item active" ui-sref="menu.boCrowdieList">
+          Crowdies Performance
+        </a>
+        
+      </div>
+    </div>
+-->
+
+</ion-view>

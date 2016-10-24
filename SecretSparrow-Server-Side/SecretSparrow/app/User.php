@@ -11,23 +11,26 @@ class User extends Authenticatable
      *
      * @var array
      */
-    // This user model describes OAuth user table from database.
-    protected $table='oauth_users';
-    protected $primaryKey='user_id';
-    public $incrementing=false;
-
-    // This attribute can be filled by the user
+    protected $table="oauth_users";
+    protected $primaryKey="user_id";
     protected $fillable = [
-        'name', 'email', 'password','user_id','role','created_at','updated_at'
+        'name', 'username', 'password','role','user_id',"created_at","updated_at","email"
     ];
+    public $incrementing=false;
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    // this part is hidden and cannot be seen by user
     protected $hidden = [
-        'password',
+        'password', 'remember_token',"email"
     ];
+    public function crowdies(){
+        return $this->hasOne('App\CrowdiesModel',"crowdies_id");
+    }
+    public function bo(){
+        return $this->hasOne('App\TwitterAuthModel');
+    }
+
 }

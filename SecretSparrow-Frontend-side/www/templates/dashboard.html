@@ -1,0 +1,135 @@
+<!-- page for crowdie to working -->
+<ion-view title="Dashboard" >
+    
+    
+    <ion-tabs class="tabs-striped tabs-background-assertive tabs-color-light">
+        
+      <ion-tab title="Summary">
+          <ion-nav-view name="tab-dashboard" cache-view="false">
+              <ion-content id="dashboard-padding" padding="false" class="has-header">
+                <ion-refresher
+                    pulling-text="Pull to refresh..."
+                    on-refresh="load()">
+                </ion-refresher>
+                <div>
+                    <div id="chartDiv" class ="centerDiv">
+                        <canvas height="300" id="doughnut" class="chart chart-doughnut" chart-data="chartData" chart-labels="chartLabels" chart-colors="chartColors" chart-options="chartOptions"> 
+                        </canvas> 
+
+                        <!-- <div id="chartTextDiv" >
+                            <h1 id="chartText">{{percentage}}%</h1>
+                            <h2 class="centerH2">Followed Back</h2>
+                        </div> -->
+                        <lable id="chartTextDiv">
+                            <h1 id="chartText">{{percentage}}%</h1>
+                            <h2 class="centerH2">Followed You Back</h2>
+                        </lable>
+
+                    </div>
+
+
+                    <h1 class="centerH2">Account You Followed : {{follow}}</h1>
+
+                    <h1 class="centerH2">Account Followed back : {{follow_back}}</h1>
+
+                    <!-- <ion-tabs class="tabs tabs-assertive">
+
+                      <ion-tab title="Summary" ui-sref="menu.dashboard">
+
+                      </ion-tab>
+
+                      <ion-tab title="Crowdies Performance" ui-sref="menu.boCrowdieList">
+
+                    </ion-tab> -->
+
+                   <!--  <div class="bar bar-footer bar-assertive">
+                       <button class="button buttonDashboard" ui-serf="menu.dashboard">Summary</button>
+                       <button class="button buttonDashboard" ui-serf="menu.boCrowdieList">Crowdies Performance</button>
+
+                    </div> -->
+
+
+
+                </div>
+
+            </ion-content>
+<!--
+        <a class="tab-item active" ui-sref="menu.dashboard">
+          
+          Summary
+          
+        </a>
+-->
+        
+        </ion-nav-view>
+      </ion-tab>
+         
+      <ion-tab title="Crowdies Performance" ui-sref="boCrowdieList" >
+          <ion-nav-view name="tab-bo-crowdie-list" cache-view="false"></ion-nav-view>
+<!--        <ion-content padding="false" class="has-header">-->
+
+<!--
+                <div>
+                    <div id="chartDiv" class ="centerDiv">
+                        <canvas height="300" id="doughnut" class="chart chart-doughnut" chart-data="chartData" chart-labels="chartLabels" chart-colors="chartColors" chart-options="chartOptions"> 
+                        </canvas> 
+
+                         <div id="chartTextDiv" >
+                            <h1 id="chartText">{{percentage}}%</h1>
+                            <h2 class="centerH2">Followed Back</h2>
+                        </div> 
+                        <lable id="chartTextDiv">
+                            <h1 id="chartText">{{percentage}}%</h1>
+                            <h2 class="centerH2">Followed You Back</h2>
+                        </lable>
+
+                    </div>
+
+
+                    <h1 class="centerH2">Account You Followed : {{follow}}</h1>
+
+                    <h1 class="centerH2">Account Followed back : {{follow_back}}</h1>
+
+                     <ion-tabs class="tabs tabs-assertive">
+
+                      <ion-tab title="Summary" ui-sref="menu.dashboard">
+
+                      </ion-tab>
+
+                      <ion-tab title="Crowdies Performance" ui-sref="menu.boCrowdieList">
+
+                    </ion-tab> 
+
+                     <div class="bar bar-footer bar-assertive">
+                       <button class="button buttonDashboard" ui-serf="menu.dashboard">Summary</button>
+                       <button class="button buttonDashboard" ui-serf="menu.boCrowdieList">Crowdies Performance</button>
+
+                    </div> 
+
+
+
+                </div>
+-->
+<!--            </ion-content>-->
+<!--
+        <a class="tab-item active" ui-sref="menu.dashboard">
+          
+          Summary
+          
+        </a>
+-->
+        
+        
+      </ion-tab>
+<!--
+      <a class="tab-item" ui-sref="menu.boCrowdieList">
+          
+          Crowdies Performance
+          
+        </a>
+-->
+        
+    </ion-tabs>
+</ion-view>
+
+
