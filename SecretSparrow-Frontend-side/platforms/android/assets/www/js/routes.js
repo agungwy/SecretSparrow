@@ -241,19 +241,7 @@ angular.module('starter.routes', [])
     }
     
   })
-  
-  .state('menu.statistic', {
-    url: '/menu.statistic',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/statistic.html',
-        controller: 'StatisticCtrl'
-
-      }
-    }
     
-  })
-  
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/starter');
 });

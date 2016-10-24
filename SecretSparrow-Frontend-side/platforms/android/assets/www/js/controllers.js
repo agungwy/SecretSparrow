@@ -1177,7 +1177,7 @@ app.controller('BoCrowdieListCtrl', function($scope,$state,$http, $ionicLoading)
           $ionicLoading.hide();
     };
   $scope.showListTitle=false;
-  $scope.crowdieList = [];
+  $scope.imageSource="img/logo.png";
   $scope.checkImage=function(imgSrc){
       var c=Math.floor((Math.random() * 3) + 1);
       var imageSource="img/logo.png";
@@ -1195,9 +1195,7 @@ app.controller('BoCrowdieListCtrl', function($scope,$state,$http, $ionicLoading)
     .then(function(response){
       var data= response.data;
       console.log(data);
-      console.log($index);
       $scope.crowdieList.splice($index, 1);
-      console.log($scope.crowdieList);
       $scope.hide($ionicLoading);
     
       
@@ -1595,7 +1593,7 @@ app.controller('RegisterSuggestedCrowdieCtrl', function($scope, $state, $http, $
       $scope.list5 = true;
       $scope.list6 = false;
     }
-    else if (x == 6){
+    else if (x >= 6){
       $scope.list1 = true;
       $scope.list2 = true;
       $scope.list3 = true;
@@ -2082,7 +2080,7 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
           };
           if(role=='crowdies'){
               if(response.data.crowdies.profile_picture_url!==""){
-                  // var c=Math.floor((Math.random() * 3) + 1);
+                  var c=Math.floor((Math.random() * 3) + 1);
                   profile_image_url="https://incognito.uqcloud.net"+response.data.crowdies.profile_picture_url+"?code="+Date.now();
                   if(profile_image_url!==""){
                       $scope.imgSrc=profile_image_url;
