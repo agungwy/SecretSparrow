@@ -676,16 +676,6 @@ app.controller('RegisterCtrl', function($scope,$http, $state, $ionicPopup, $ioni
     }).error(function(data,status,headers,config){
       // console.log(data.email);
       console.log(data);
-<<<<<<< HEAD
-      var popup = $ionicPopup.alert({
-<<<<<<< HEAD
-      title: 'The data is incorrect please retry',
-=======
-      title: data.email,
->>>>>>> 861ab3c2f7cab6a5283354e767ec5b4688b6df25
-      okType: 'button-assertive'
-      });
-=======
       if (data.name != null){
         $scope.hide($ionicLoading);
         var popup = $ionicPopup.alert({
@@ -712,7 +702,6 @@ app.controller('RegisterCtrl', function($scope,$http, $state, $ionicPopup, $ioni
 
       }
      
->>>>>>> development
     });
     
 
@@ -1188,7 +1177,7 @@ app.controller('BoCrowdieListCtrl', function($scope,$state,$http, $ionicLoading)
           $ionicLoading.hide();
     };
   $scope.showListTitle=false;
-  $scope.crowdieList = [];
+  $scope.imageSource="img/logo.png";
   $scope.checkImage=function(imgSrc){
       var c=Math.floor((Math.random() * 3) + 1);
       var imageSource="img/logo.png";
@@ -1206,9 +1195,7 @@ app.controller('BoCrowdieListCtrl', function($scope,$state,$http, $ionicLoading)
     .then(function(response){
       var data= response.data;
       console.log(data);
-      console.log($index);
       $scope.crowdieList.splice($index, 1);
-      console.log($scope.crowdieList);
       $scope.hide($ionicLoading);
     
       
@@ -1462,11 +1449,7 @@ app.controller('MenuCtrl', function($scope, $state){
   console.log('connect');
 
   var role = localStorage.getItem('scope');
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> 861ab3c2f7cab6a5283354e767ec5b4688b6df25
   if (role =="crowdies"){
     $scope.crowdie_Role = true;
     $scope.bo_Role = false;
@@ -2097,7 +2080,7 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
           };
           if(role=='crowdies'){
               if(response.data.crowdies.profile_picture_url!==""){
-                  // var c=Math.floor((Math.random() * 3) + 1);
+                  var c=Math.floor((Math.random() * 3) + 1);
                   profile_image_url="https://incognito.uqcloud.net"+response.data.crowdies.profile_picture_url+"?code="+Date.now();
                   if(profile_image_url!==""){
                       $scope.imgSrc=profile_image_url;
