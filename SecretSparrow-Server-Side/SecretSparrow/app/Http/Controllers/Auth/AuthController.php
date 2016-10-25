@@ -59,6 +59,11 @@ class AuthController extends Controller
         ]);
     }
 
+    /*
+        This method handles the role registration os newly registered
+        users
+    */
+
     public function role(Request $request){
         $data=$request->all();
         $todos=User::find($data['user_id']);
@@ -73,6 +78,11 @@ class AuthController extends Controller
             return response()->json(['message'=>'Not Found'],404);
         }
     }
+
+    /*
+        This method will be invoked when the newly registered user 
+        wants to be a crowdies. It is called by the role method.
+    */
 
     private function registerCrowdies($data){
         return CrowdiesModel::create([
@@ -100,6 +110,13 @@ class AuthController extends Controller
             'email'=> $data["email"],
         ]);
     }
+
+    /*
+        This method handles the registration of new user.
+        Every input to this method should be validated. 
+        It'll call the validator function.
+    */
+
     public function postRegister(Request $request)
     {
         $validator = $this->validator($request->all());
@@ -112,6 +129,11 @@ class AuthController extends Controller
         }
     }
 
+    /*
+        This function is designed to retrieve the detailed information of a user. 
+        Then, we checked to the database what role is the user. 
+        BO detailed information will be different from crowdies information.
+    */
     public function getUserDetail($user_id){
         $todos=User::find($user_id);
         if(count($todos)>0){
@@ -126,6 +148,11 @@ class AuthController extends Controller
         }
     
     }
+    /*
+        This function is designed to retrieve the detailed information of a user. 
+        However, the information returned isn't as sepcific on the returned value from 
+        getUserDetail function.
+    */
     public function getUserProfile(Request $request){
         $data=$request->all();
         $todos=User::find($data['user_id']);
@@ -135,7 +162,11 @@ class AuthController extends Controller
             return response()->json(['message'=>'Not Found'],404);
         }
     }
-
+     /*
+        This function is called when the user (crowdies or bo) want to edit their profile. 
+        Crowdies can change profile image meanwhile the bo can't do that. 
+        BO can edit available position but crowdies can't.
+    */
     public function editProfile(Request $request){
         $user_id=$request->input('user_id');
         $todos=User::find($user_id);
@@ -179,6 +210,9 @@ class AuthController extends Controller
         
        
     }
+    /*
+        This is the validator for edit profile functionality.
+    */
     protected function validatorEditProfile(array $data){
         return Validator::make($data, [
             'name' => 'required|max:255',
@@ -186,12 +220,17 @@ class AuthController extends Controller
             'role'=> 'required'
         ]);
     }
+    /*
+        This is the validator for change password functionality.
+    */
     protected function validatorChangePassword(array $data){
         return Validator::make($data, [
             'password' => 'required|min:6|confirmed'
         ]);
     }
-
+    /*
+        This function is called when to load the profile image. 
+    */
     public function showProfilePicture($id){
         $segments = explode('/', $id);
         $todos=User::find($segments[0]);
@@ -215,7 +254,10 @@ class AuthController extends Controller
             ],404);
         }
     }
-
+    /*
+        This function is called when the user (crowdies or bo) want to edit their password. 
+        Both role can do the functionality.
+    */
     public function changePassword(Request $request){
         $data=$request->all();
         $todos=User::find($data["user_id"]);

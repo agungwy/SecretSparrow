@@ -72,6 +72,10 @@ class TwitterAuthController extends Controller
 //             "auth_data"=>$authUser
 //         ];
 //     }
+
+    /*
+        Check if the connected Twitter account has been used or a new account (never been used before).
+    */
     private function findOrCreateUser($twitterUser)
     {
         $authUser = TwitterAuthModel::where('twitter_id', $twitterUser['twitter']['user_id'])->first();
@@ -81,7 +85,7 @@ class TwitterAuthController extends Controller
             return $authUser;
         }
         $user=$this->user($twitterUser['twitter']['screen_name'], $twitterUser['twitter']['oauth_token'],$twitterUser['twitter']['oauth_token_secret']);
-
+        // store the data to database and return the object value
         return TwitterAuthModel::create([
             'user_id' => $twitterUser['ss_user_id'],
             'name' => $user['name'],
@@ -90,6 +94,9 @@ class TwitterAuthController extends Controller
             'avatar' => $user['profile_image_url_https']
         ]);
     }
+    /*
+        It handles the Twitter authentication procedures
+    */
     private function settings($accessToken, $accessTokenSecret){
         /** Set access tokens here - see: https://dev.twitter.com/apps/ **/
         $settings = array(
@@ -100,6 +107,10 @@ class TwitterAuthController extends Controller
         );
         return $settings;
     }
+    /*
+        This function handles the retrieval of the necessary information about the Twitter account
+        for a specific business owner
+    */
     private function user($handle,$accessToken,$accessTokenSecret){
        
         $url = 'https://api.twitter.com/1.1/users/show.json';
@@ -115,7 +126,10 @@ class TwitterAuthController extends Controller
         return $results;  
 
     }
-
+    /*
+        This function is called when the newly registered business owner 
+        link their twiiter account to the app's account
+    */
     public function registerTwitter(Request $request){
         $data=$request->all();
         $todos=User::find($data['ss_user_id']);
@@ -152,6 +166,10 @@ class TwitterAuthController extends Controller
             return response()->json(['messages'=>'Not Found'],404);
         }
     }
+    /*
+        This function will retrieve the detailed information about the business owner.
+    */
+
     public function getTwitterDetail(Request $request){
         $data=$request->all();
         if(array_key_exists("user_id", $data)){
@@ -160,6 +178,7 @@ class TwitterAuthController extends Controller
                 $numCrowdies=WorkModel::where('handle',$todos->handle)->get();
                 $todos->crowdies=count($numCrowdies);
                 $todos->interestedIn;
+                // it needs the information about number of followers and following
                 $app=app('App\Http\Controllers\TwitterAPIController')->user(new Request(["handle"=>$todos->handle]));
 				$todos->following=$app["friends_count"];
               	$todos->follower=$app["followers_count"];
@@ -173,6 +192,7 @@ class TwitterAuthController extends Controller
                 $numCrowdies=WorkModel::where('handle',$data['handle'])->get();
                 $todos->crowdies=count($numCrowdies);
                 $todos->interestedIn;
+                // it needs the information about number of followers and following
                 $app=app('App\Http\Controllers\TwitterAPIController')->user(new Request(["handle"=>$todos->handle]));
 				$todos->following=$app["friends_count"];
               	$todos->follower=$app["followers_count"];

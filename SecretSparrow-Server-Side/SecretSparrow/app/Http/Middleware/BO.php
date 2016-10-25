@@ -20,7 +20,7 @@ class BO
 //        return $next($request);
         $bridgedRequest  = Request::createFromRequest($request);
         $bridgedResponse = new Response();
-	    $scopeRequired="bo"; //business owner role only
+	    $scopeRequired="bo"; //business owner role only can access the specified endpoint
         if (App::make('oauth2')->verifyResourceRequest($bridgedRequest, $bridgedResponse, $scopeRequired)) {
             return $next($request);
         }

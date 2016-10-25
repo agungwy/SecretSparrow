@@ -11,6 +11,9 @@ use App\WorkModel;
 
 class FollowController extends Controller
 {
+    /*
+      This method is used to give the detail analysis of crowdies performance that currently working with a business owner.
+    */
     public function getTotalAll($bo) {
       $crowdiesOn=WorkModel::where('handle',$bo)->get();
       
@@ -37,7 +40,9 @@ class FollowController extends Controller
       // }
       return $crowdiesOn;
     }
-
+    /*
+      This method handles the counting of the number of followed back from a business owner
+    */
     public function getTotalFollowed($bo) {
       $follback = SentFollowingRequestModel::where('followed_back',true)
                                            ->where('handle',$bo)->get();
@@ -47,7 +52,10 @@ class FollowController extends Controller
       }
       return ["followed_count"=>$counter];
     }
-
+    /*
+      This method is used to give the total number of work done by a crowdies 
+      for a specific business owner 
+    */
     public function getCrowdieAll($bo,$cr) {
       $crowdie = SentFollowingRequestModel::where('handle',$bo)
                                           ->where('crowdies_id',$cr)->get();
@@ -57,7 +65,9 @@ class FollowController extends Controller
       }
       return ["all"=>$counter];
     }
-
+    /*
+      This method is used to return the number of successful works done by a crowdie for a specific business owner.
+    */
     public function getCrowdieFollowed($bo,$cr) {
       $follback = SentFollowingRequestModel::where('followed_back',true)
                                            ->where('handle',$bo)
@@ -68,6 +78,10 @@ class FollowController extends Controller
       }
       return ["followed_count"=>$counter];
     }
+    /*
+      This method will return a list of JSON object. 
+      The object contains a number of work has been done by all crowdies in a business owner.
+    */
     public function crowdiesAll($bo) {
 
       $crowdie = SentFollowingRequestModel::where('handle',$bo);
@@ -87,7 +101,10 @@ class FollowController extends Controller
       }
       return $temp2;
     }
-
+   /*
+      This method will return a list of JSON object. 
+      The object contains a number of successful workw caried by all crowdies in a business owner.
+    */
     public function crowdiesFollowed($bo) {
 
       $crowdie = SentFollowingRequestModel::where('handle',$bo);

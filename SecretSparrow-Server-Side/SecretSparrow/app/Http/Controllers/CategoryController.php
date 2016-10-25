@@ -30,9 +30,13 @@ class CategoryController extends Controller
     }
     return response()->json(['message'=>'success'],201);
   }
-
+  /*
+    The function returned the recommended business owner
+    based on the crowdies selected interests. 
+  */
   public function recommendedBOs (Request $request){
     $data=$request->all();
+    // need to find the interest of the specific crowdies
     $todos=CategoryUserModel::where('user_id',$data['user_id']);
     $array=array();
     if(count($todos->get())>0){
@@ -40,13 +44,14 @@ class CategoryController extends Controller
         $category_name=$todo->category_name;
         // $todo->category_name;
         // echo($category_name);
-
+        // search for the interests based on the crowdies' interests and get the business owner's user_id
         $todos2=CategoryUserModel::where('category_name',$category_name);
         foreach($todos2->get() as $todo2){
           $user_id=$todo2->user_id;
           // echo($user_id);
           if($user_id!==$data['user_id']){
             // echo($user_id);
+            // get the detailed information of the business owner.
             $todos3=TwitterAuthModel::where('user_id',$user_id)->first();
             //don't show company that doesn't have any position available
             if(count($todos3)>0 && $todos3->position>0){

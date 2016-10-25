@@ -18,7 +18,9 @@ use App\CrowdiesModel;
 
 class TwitterAPIController extends Controller
 {
-    //
+    /*
+        It handles the Twitter authentication procedures
+    */
     private function settings($accessToken, $accessTokenSecret){
         /** Set access tokens here - see: https://dev.twitter.com/apps/ **/
         $settings = array(
@@ -29,18 +31,25 @@ class TwitterAPIController extends Controller
         );
         return $settings;
     }
-
+    /*
+        Check if a cursor from Twitter is being used by a crowdie.
+        If not, return empty list.
+    */
     private function isUsed($handle, $screen_name, $cursor){
         $todos= CursorModel::where('handle',$handle)
                             ->where('screen_name',$screen_name)
                             ->where('cursor',$cursor);
         return $todos;
     }
-
+    /*
+        Get the list of followers from a specified high-profiler account.
+    */
     private function callTwitter($screen_name,$handle,$cursor,$twitter,$requestMethod){
+        // cache enging
         $redis = Redis::connection();
         $key=$screen_name.':'.$cursor;
-
+        // check if the data exists in the memory
+        // if not call Twitter
         if(is_null($redis->get($key))){
             $url = 'https://api.twitter.com/1.1/followers/list.json';
             $getfield = '?screen_name='.$screen_name.'&skip_status=1&count=100&cursor='.$cursor;
@@ -53,6 +62,7 @@ class TwitterAPIController extends Controller
             return $results;
 
         }else{
+            // if yes, just get it from memory
             $results=json_decode($redis->get($key),true);
             // print_r($results);
             return $results;
@@ -63,8 +73,9 @@ class TwitterAPIController extends Controller
     }
 
     private function checkRelationship($data,$results,$twitter,$requestMethod){
+        // cache engine
         $redis=Redis::connection();
-
+        // data should be in comma-separated string
         $screen_names='';
         for ($i=0; $i<count($results['users']);$i++){
             $screen_name=$results['users'][$i]['screen_name'];
@@ -76,6 +87,7 @@ class TwitterAPIController extends Controller
         }
         $key=$data["handle"].':'.$screen_names;
         $resultsLookup;
+        // if the data doesn't exist in the cache, call twitter
         if(is_null($redis->get($key))){
         
             $urlLookup = 'https://api.twitter.com/1.1/friendships/lookup.json';
@@ -86,6 +98,7 @@ class TwitterAPIController extends Controller
             $redis->set($key,json_encode($resultsLookup));
             $redis->expire($key,240);
         }else{
+            // if exist, grab the data from cache
             $resultsLookup=json_decode($redis->get($key),true);
         }
 
@@ -107,9 +120,12 @@ class TwitterAPIController extends Controller
         $temp=array();
         $temp1=array();
         foreach($results['users'] as $result){
+            //check in the crowdies working table ('SentFollowingRequest').
             $sentFollowingRequest=SentFollowingRequestModel::where('handle',$data["handle"])
                                                            ->where('screen_name',$result['screen_name'])
                                                            ->get();
+            // check if the account hasn't been followed by any crowdies for a specific business owner
+            // and the account shouldn't have any relations with the business owner account
             if($result['following']==false && $result['follow_request_sent']==false 
                 && $result['blocked_by']==false && $result['blocking']==false 
                 && $result['screen_name']!==$data['handle'] 
@@ -126,6 +142,9 @@ class TwitterAPIController extends Controller
         return $temp;
     }
 
+    /*
+        Retrieve list of recommended account for crowdies to follow
+    */
     
     
     public function getFollowers(Request $request){
@@ -240,12 +259,18 @@ class TwitterAPIController extends Controller
         
         return $checked;  
     }
+    /*
+        To give a suggested high-profilers account that has connection with business owner
+    */
     public function getFollowing(Request $request){
 //        for getting the list of specfic user's friends (declared as screen_name)
         $data= $request->all();
+        // cache engine
         $redis= Redis::connection();
         $key=$data["screen_name"].':';
         $results;
+        // check if the data exists in cache or not
+        // if not, call twitter
         if(is_null($redis->get($key))){
 
             $url = 'https://api.twitter.com/1.1/friends/list.json';
@@ -262,6 +287,7 @@ class TwitterAPIController extends Controller
             $redis->expire($key,240);
             
         }else{
+            // if yes, grab the data from cache
             $results=json_decode($redis->get($key),true);
         }
         $temp=array();
@@ -274,6 +300,9 @@ class TwitterAPIController extends Controller
         $temp['users']=$temp1; 
         return $temp;  
     }
+    /*
+        Crowdies can follow recommended accounts for a busienss owner
+    */
     public function follow(Request $request){
 //        for getting the list of specfic user's friends (declared as screen_name)
         $data= $request->all();
@@ -295,6 +324,7 @@ class TwitterAPIController extends Controller
             $results = $twitter->buildOauth($url, $requestMethod)
                            ->setPostfields($postfields)
                            ->performRequest(); 
+            // record the data in the SentFollowingRequest table
             SentFollowingRequestModel::create([
                 'crowdies_id'=>$data['user_id'],
                 'handle'=>$data['handle'],
@@ -315,6 +345,9 @@ class TwitterAPIController extends Controller
         
         
     }
+    /*
+        Crowdies can unfollow accounts that have been followed for a busienss owner
+    */
     public function unfollow(Request $request){
 //        for getting the list of specfic user's friends (declared as screen_name)
         $data= $request->all();
@@ -336,6 +369,12 @@ class TwitterAPIController extends Controller
         $todos->delete();
         return $results;
     }
+
+    /*
+        Retrieve the list of sent following twitter accounts and check the status.
+        if they have followed back, update the data in the SentFollowingRequest table. 
+        if not, count the date and show the accounts. 
+    */
     public function getFriendshipsStatus(Request $request){
 //        for getting the list of followers for specfic user (declared as screen_name)
         $data= $request->all();
@@ -346,6 +385,7 @@ class TwitterAPIController extends Controller
         $screen_names='';
         $todo=$todos2->get();
         $handles=array();
+        // data should be in the form of comma-separated string
         for($i=0; $i<count($todo) ;$i++){
 
             if($i!==(count($todo)-1)){
@@ -362,6 +402,7 @@ class TwitterAPIController extends Controller
         // echo($screen_names);
         //retrieve screen_name relations (hoping for followed_by)
         if($screen_names!==''){
+            // call the twitter for the latest updates
             $url = 'https://api.twitter.com/1.1/friendships/lookup.json';
             $getfield = '?screen_name='.$screen_names;
             $requestMethod = 'GET';
@@ -379,12 +420,14 @@ class TwitterAPIController extends Controller
                     foreach($connections as $connection){
                         // echo $connection;
                         if($connection==="followed_by"){
+                            // update the data in SentFollowingRequest table
                             SentFollowingRequestModel::where('crowdies_id',$data['user_id'])
                                                      ->where('handle',$handle)
                                                      ->where('screen_name',$result['screen_name'])
                                                      ->update(['followed_back'=>true]);
 
                             $crowdie=CrowdiesModel::find($data['user_id']);
+                            // reward the crowdie
                             $crowdie->points=10+$crowdie["points"];
                             // echo($crowdie["points"]);
                             $crowdie->save();
@@ -412,21 +455,28 @@ class TwitterAPIController extends Controller
         }
             
     }
+    /*
+        Called when it is required to check if the account has followed back the business owner. 
+        All data are stored in SentFollowingRequest table. It will return every data in that table
+        with false status in the followed_back column.
+    */
     public function refreshStatus(Request $request){
 //        for getting the list of followers for specfic user (declared as screen_name)
         $data= $request->all();
         $url = 'https://api.twitter.com/1.1/followers/ids.json';
         
         $requestMethod = 'GET';
-
+        // get the un-followed_back twitter account
         $getBOInWorks=SentFollowingRequestModel::where('followed_back',false)->get();
 
         $tmp=array();
 //        $num=0;
         foreach($getBOInWorks as $getBOInWork){
             // print_r($getBOInWork);
+            // get the screen_name of the accounts
             array_push($tmp,strtolower($getBOInWork->handle));
         }
+        // make them unique
         $newTmp=array_unique($tmp);
       
         // print_r($newTmp);
@@ -436,9 +486,12 @@ class TwitterAPIController extends Controller
             
             $temp1=array();
             // $x='williamhenry_94';
+            // get the API Key of the specified business owner's Twitter account 
             $todos= TwitterModel::find($x);
             $getfield = '?screen_name='.$x.'&skip_status=1&count=20';
         //     // echo $todos['access_token'];
+
+            // call twitter to get the list of followers of business owner.
             $twitter = new TwitterAPIExchange($this->settings($todos['access_token'],$todos['access_token_secret']));
             $results = $twitter->setGetfield($getfield)
                                ->buildOauth($url, $requestMethod)
@@ -448,6 +501,9 @@ class TwitterAPIController extends Controller
             foreach($ids as $id){
                 // echo($id);
                 $temp=array();
+                // search if the retrieved twitter account's id has a match with the accounts 
+                // from a business owner sent following request table
+                // and followed_back status is false
                 $todos2=SentFollowingRequestModel::where('handle',$x)
                                                  ->where('twitter_id',$id)
                                                  ->where('followed_back',false)
@@ -455,10 +511,14 @@ class TwitterAPIController extends Controller
                 if(count($todos2)>0){
                     // array_push($temp,$id);
                     $unique=$x.",".$id.",".($todos2->pluck('created_at')[0]);
+                    // need to create a unique id based on business owner's screen_name, retrieved followers' twitter_id and the timestamp
+                    // of created_at
+                    // returned data should be in the form of JSON object
                     $temp1['id']=hash('crc32',$unique);
                     $temp1['handle']=strtolower($x);
                     $temp1['ids']=$id;
                     $temp1['following_at']=$todos2->pluck('created_at')[0]; 
+                    // wrap the data as a JSON arrat
                     array_push($temp2,$temp1);
 //                    $num++;
                 }
@@ -471,6 +531,10 @@ class TwitterAPIController extends Controller
         return $temp2;  
   
     }
+    /*
+        It's called when there's a new followed back data in business owner's account. 
+        It should edit the data in the database
+    */
     public function refreshDatabase(Request $request){
         $datas=$request->all();
         foreach($datas as $data){
@@ -479,12 +543,14 @@ class TwitterAPIController extends Controller
                                             ->where('followed_back',false);
 //                                            ->where('created_at',$data['following_at']);
             if(count($todos->get())>0){
+                // update the data in the table
                 $todos->update(['followed_back'=>true]);
                 $savedData=SentFollowingRequestModel::where('handle',$data['handle'])
                                                     ->where('twitter_id',$data['ids'])
                                                     ->first();
 
                 $crowdie=CrowdiesModel::find($savedData->crowdies_id);
+                // reward the dedicated crowdies
                 $crowdie->points=10+$crowdie["points"];
                 // echo($crowdie["points"]);
                 $crowdie->save();
@@ -493,6 +559,8 @@ class TwitterAPIController extends Controller
         return response()->json(["message"=>"Update Received","users"=>$data],201);
 
     }
+    // get twitter detailed information regarding business owner
+    // directly from twitter
     public function user(Request $request){
         $data= $request->all();
         $url = 'https://api.twitter.com/1.1/users/show.json';
@@ -515,8 +583,10 @@ class TwitterAPIController extends Controller
         $temp=array();
         $descriptions=array();
         $counter=0;
+        // check if an element to learn is exist in the list
         if(count($data["description"])>0){
             for($i=0;$i<(count($data["description"]));$i++){
+                // if the data is not an empty string push to the temp array to be analysed
                 if($data["description"][$i]!==""){
                     array_push($descriptions,$data["description"][$i]);
                     $temp[$counter]=$i;
@@ -526,6 +596,7 @@ class TwitterAPIController extends Controller
             // if (($key = array_search('', $data["description"])) !== false) {
             //     unset($data["description"][$key]);
             // }
+            // connection to the provider 
             $ml = new MonkeyLearn\Client('a3909f9e4064a04fb00bbfd44c0e30fc415842b7');
             $text_list = $descriptions;
             $module_id = 'cl_98o77do3';
