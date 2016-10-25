@@ -1995,7 +1995,7 @@ app.controller('ForgetPasswordCtrl', function($scope, $state,$http, $ionicLoadin
 
 });
 
-// explore more companies controller (explore.html)
+// edit profile controller fo editProfile.html
 app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,$cordovaImagePicker, $ionicActionSheet,$ionicPlatform,$cordovaFileTransfer,$ionicPopup ) {
   $scope.$on('$ionicView.enter',function(event,data){
       var role=localStorage.getItem("scope");
@@ -2029,6 +2029,7 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
 
               };
         //    navigator.camera.getPicture(onSuccess,onFail,options);
+              // need to use this for opening image gallery
               $cordovaImagePicker.getPictures(options)
               .then(function (results) {
                   for (var i = 0; i < results.length; i++) {
@@ -2121,6 +2122,7 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
                     }
                 }
                 console.log(options);
+                // file transfering must use this. can't  be done by using AJAX
                 $cordovaFileTransfer.upload('https://incognito.uqcloud.net/api/user/edit',$scope.imgSrc,options)
                 .then(function(result){
 
@@ -2155,6 +2157,7 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
                   }
                   
                   if(role!=="crowdies"){
+                    // only bo have position
                       if($scope.editProfile.position>=0 && $scope.editProfile.position<=100){
                           data.position=$scope.editProfile.position;
                           update();
@@ -2203,7 +2206,7 @@ app.controller('EditProfileCtrl', function($scope, $http, $state, $ionicLoading,
   
 });
 
-// controller for companyProfile.html
+// controller for changePassword.html
 app.controller('ChangePasswordCtrl', function($scope, $state, $ionicLoading,$http,$ionicPopup){
   
   $scope.show = function() {
@@ -2263,7 +2266,7 @@ app.controller('ChangePasswordCtrl', function($scope, $state, $ionicLoading,$htt
 
 });
 
-// controller for companyProfile.html
+// controller for moreCompanies.html
 app.controller('MoreCompaniesCtrl', function($scope, $state, $ionicLoading,$http,$timeout){
   $scope.moredata = false;
   $scope.show = function() {
